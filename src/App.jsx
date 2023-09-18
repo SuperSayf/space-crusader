@@ -13,22 +13,22 @@ import { Howl, Howler } from 'howler'; // Import Howler
 import soundEffect from '/assets/audio/background.mp3'; // Replace with the path to your background music file
 
 function App() {
-  // Create an instance of the background music
-  const backgroundMusic = new Howl({
-    src: [soundEffect], 
-    loop: true, 
-  });
+  // // Create an instance of the background music
+  // const backgroundMusic = new Howl({
+  //   src: [soundEffect], 
+  //   loop: true, 
+  // });
 
-  //Start playing the background music when the component mounts
-  useEffect(() => {
-    backgroundMusic.volume(0.3); // Adjust the volume as needed
-    backgroundMusic.play();
+  // //Start playing the background music when the component mounts
+  // useEffect(() => {
+  //   backgroundMusic.volume(0.3); // Adjust the volume as needed
+  //   backgroundMusic.play();
 
-    // Clean up the audio when the component unmounts
-    return () => {
-      backgroundMusic.stop();
-    };
-  }, []);
+  //   // Clean up the audio when the component unmounts
+  //   return () => {
+  //     backgroundMusic.stop();
+  //   };
+  // }, []);
 
   return (
     <>
@@ -36,11 +36,12 @@ function App() {
       <Environment background={false} files={'assets/textures/space.hdr'} />
 
       <PerspectiveCamera makeDefault position={[0, 10, 10]} />
+      <OrbitControls target={[0, 0, 0]}/>
       <ambientLight intensity={0.5} />
-      <Landscape />
+      {/* <Landscape /> */}
       <Spaceship />
-      <Targets />
-      <Asteroid />
+      {/* <Targets />
+      <Asteroid /> */}
 
       <directionalLight
         castShadow
