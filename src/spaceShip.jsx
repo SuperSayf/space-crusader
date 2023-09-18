@@ -18,7 +18,7 @@ export const planePosition = new Vector3(0, 3, 7);
 const delayedRotMatrix = new Matrix4();
 const delayedQuaternion = new Quaternion();
 
-export function Airplane(props) {
+export function Spaceship(props) {
   // thanks to:
   // https://sketchfab.com/3d-models/vintage-toy-airplane-7de2ecbc0acb4b1886c3df3d196c366b
   const { nodes, materials } = useGLTF('assets/models/spaceShip.glb');

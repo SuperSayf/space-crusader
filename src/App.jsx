@@ -4,25 +4,24 @@ import { EffectComposer, HueSaturation } from '@react-three/postprocessing';
 import { BlendFunction } from 'postprocessing';
 import { Landscape } from './Landscape';
 import { SphereEnv } from './SphereEnv';
-import { Airplane } from './Airplane';
+import { Spaceship } from './spaceShip';
 import { Targets } from './Targets';
 import { MotionBlur } from './MotionBlur';
-import { Howl, Howler } from 'howler'; // Import Howler
+import { Asteroid } from './Asteroid';
 
+import { Howl, Howler } from 'howler'; // Import Howler
 import soundEffect from '/assets/audio/background.mp3'; // Replace with the path to your background music file
 
 function App() {
-  // Initialize Howler
-  Howler.volume(0.5); // Adjust the volume as needed
-
   // Create an instance of the background music
   const backgroundMusic = new Howl({
-    src: [soundEffect], // Replace with the path to your background music file
-    loop: true, // Loop the music continuously
+    src: [soundEffect], 
+    loop: true, 
   });
 
-  // Start playing the background music when the component mounts
+  //Start playing the background music when the component mounts
   useEffect(() => {
+    backgroundMusic.volume(0.3); // Adjust the volume as needed
     backgroundMusic.play();
 
     // Clean up the audio when the component unmounts
@@ -39,8 +38,9 @@ function App() {
       <PerspectiveCamera makeDefault position={[0, 10, 10]} />
       <ambientLight intensity={0.5} />
       <Landscape />
-      <Airplane />
+      <Spaceship />
       <Targets />
+      <Asteroid />
 
       <directionalLight
         castShadow
