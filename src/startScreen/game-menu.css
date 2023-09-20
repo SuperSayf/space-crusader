@@ -3,8 +3,8 @@ body {
 }
 
 .threeD-button-set {
-  --y:;
-  --x:;
+  --y: 0deg;
+  --x: 0deg;
   --distance: 1px;
   --theme: hsl(180 100% 50%);
   --theme-bg: hsl(180 100% 50% / 25%);
@@ -179,7 +179,7 @@ body {
 body {
   perspective: 40vw;
   /* Add the background image property */
-  background-image: url('public/assets/textures/planets-wallpaper-1920x1080.jpg'); 
+  background-image: url('../../assets/textures/planets-wallpaper-1920x1080.jpg'); 
   background-size: cover; /* This property ensures the image covers the entire background */
   background-repeat: no-repeat; /* This property prevents the image from repeating */
   margin: 0; /* Add this to remove default margin */

@@ -1,33 +1,33 @@
 <!doctype html>
 <html lang="en" dir="ltr">
-  <head>
-    <title>Game Menu | GUI Challenges</title>
-    <meta charset="utf-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="hsl(221 90% 98%)" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="Canvas" media="(prefers-color-scheme: dark)">
-    <meta name="description" content="🙂">
-    <link rel="stylesheet" href="/style.css">
-    <script type="module" src="/index.js"></script>
-  </head>
-  <body>
+<head>
+  <title>Space Crusaders | Game Menu</title>
+  <meta charset="utf-8">
 
-    <ul class="threeD-button-set">
-      <li><button id="newGameButton">New Game</button></li>
-      <li><button>Continue</button></li>
-      <li><button>Online</button></li>
-      <li><button>Settings</button></li>
-      <li><button>Quit</button></li>
-    </ul> 
-  </body>
-  <script>
-    document.getElementById("newGameButton").addEventListener("click", function() {
-      window.location.href = "new_game.html";
-      //print directory
-      console.log(window.location.href);    
-    });
-  </script>
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="hsl(221 90% 98%)" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="Canvas" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="🙂">
+  <link rel="stylesheet" href="./src/startScreen/style.css">
+  <script type="module" src="./src/startScreen/index.js"></script>
+</head>
+
+<body>
+
+  <ul class="threeD-button-set">
+    <li><button id="newGameButton">New Game</button></li>
+    <li><button>Continue</button></li>
+    <li><button>Online</button></li>
+    <li><button>Settings</button></li>
+    <li><button>Quit</button></li>
+  </ul>
+</body>
+<script>
+  document.getElementById("newGameButton").addEventListener("click", function () {
+    window.location.href = "game.html";
+  });
+</script>
+
 </html>
