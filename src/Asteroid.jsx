@@ -17,9 +17,9 @@ function randomPoint(scale) {
   ).multiply(scale || new Vector3(1, 1, 1));
 }
 
-const TARGET_RAD = 0.125;
-const SPAWN_DEPTH = -1; // Depth at which new asteroids are spawned
-const MAX_ASTEROIDS = 25; // Maximum number of asteroids
+const TARGET_RAD = 0.125*2;
+const SPAWN_DEPTH = -10; // Depth at which new asteroids are spawned
+const MAX_ASTEROIDS = 15; // Maximum number of asteroids
 
 export function Asteroid() {
   const [targets, setTargets] = useState(() => {
@@ -63,7 +63,7 @@ export function Asteroid() {
   useFrame(() => {
     // Move the asteroids downward in each frame
     targets.forEach((target, i) => {
-      target.center.y -= 0.01;
+      target.center.y -= 0.02;
 
       if (target.center.y < SPAWN_DEPTH) {
         // Remove asteroids that have reached the spawn depth

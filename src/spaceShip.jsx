@@ -57,17 +57,17 @@ export function Spaceship(props) {
     delayedRotMatrix.identity();
     delayedRotMatrix.makeRotationFromQuaternion(delayedQuaternion);
 
-    // const cameraMatrix = new Matrix4()
-    //   .multiply(new Matrix4().makeTranslation(planePosition.x, planePosition.y, planePosition.z))
-    //   .multiply(delayedRotMatrix)
-    //   .multiply(new Matrix4().makeRotationX(-0.2))
-    //   .multiply(
-    //     new Matrix4().makeTranslation(0, 0.015, 0.3)
-    //   );
+    const cameraMatrix = new Matrix4()
+      .multiply(new Matrix4().makeTranslation(planePosition.x, planePosition.y, planePosition.z))
+      .multiply(delayedRotMatrix)
+      .multiply(new Matrix4().makeRotationX(-0.2))
+      .multiply(
+        new Matrix4().makeTranslation(0, 0.015, 0.3)
+      );
 
-    // camera.matrixAutoUpdate = false;
-    // camera.matrix.copy(cameraMatrix);
-    // camera.matrixWorldNeedsUpdate = true;
+    camera.matrixAutoUpdate = false;
+    camera.matrix.copy(cameraMatrix);
+    camera.matrixWorldNeedsUpdate = true;
 
     // helixMeshRef.current.rotation.z -= 1.0;
   });
@@ -75,7 +75,7 @@ export function Spaceship(props) {
   return (
     <>
       <group ref={groupRef}>
-        <group {...props} dispose={null} scale={0.1} rotation-y={Math.PI}>
+        <group {...props} dispose={null} scale={0.01} rotation-y={Math.PI}>
           {/* <mesh geometry={nodes.supports.geometry} material={materials['Material.004']} />
           <mesh geometry={nodes.chassis.geometry} material={materials['Material.005']} />
           <mesh geometry={nodes.helix.geometry} material={materials['Material.005']} ref={helixMeshRef} /> */}

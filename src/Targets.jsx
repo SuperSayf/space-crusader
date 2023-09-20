@@ -12,7 +12,7 @@ function randomPoint(scale) {
   ).multiply(scale || new Vector3(1, 1, 1));
 }
 
-const TARGET_RAD = 0.125/2;
+const TARGET_RAD = 0.125;
 
 export function Targets() {
   const [targets, setTargets] = useState(() => {
