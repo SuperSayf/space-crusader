@@ -8,6 +8,7 @@ import { Spaceship } from './spaceShip';
 import { Targets } from './Targets';
 import { MotionBlur } from './MotionBlur';
 import { Asteroid } from './Asteroid';
+import { AnimatedSpaceship } from './animatedSpaceship';
 
 import { Howl, Howler } from 'howler'; // Import Howler
 import soundEffect from '/assets/audio/background.mp3'; // Replace with the path to your background music file
@@ -39,7 +40,8 @@ function App() {
       <OrbitControls target={[0, 0, 0]}/>
       <ambientLight intensity={0.5} />
       {/* <Landscape /> */}
-      <Spaceship />
+      {/* <Spaceship /> */}
+      <AnimatedSpaceship />
       {/* <Targets />
       <Asteroid /> */}
 
