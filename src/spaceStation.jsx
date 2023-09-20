@@ -22,7 +22,7 @@ export function SpaceStation(props) {
         receiveShadow
         geometry={nodes.group511033031.geometry}
         material={materials.mat22}
-      />http://localhost:5173/
+      />
       <mesh
         castShadow
         receiveShadow
