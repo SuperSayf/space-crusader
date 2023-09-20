@@ -1,13 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" dir="ltr">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flying with three js</title>
+    <title>Game Menu | GUI Challenges</title>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="hsl(221 90% 98%)" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="Canvas" media="(prefers-color-scheme: dark)">
+    <meta name="description" content="🙂">
+    <link rel="stylesheet" href="/style.css">
+    <script type="module" src="/index.js"></script>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+
+    <ul class="threeD-button-set">
+      <li><button id="newGameButton">New Game</button></li>
+      <li><button>Continue</button></li>
+      <li><button>Online</button></li>
+      <li><button>Settings</button></li>
+      <li><button>Quit</button></li>
+    </ul> 
   </body>
+  <script>
+    document.getElementById("newGameButton").addEventListener("click", function() {
+      window.location.href = "/src/new_game.html";
+      //print directory
+      console.log(window.location.href);    
+    });
+  </script>
+  
 </html>

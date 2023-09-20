@@ -4,10 +4,16 @@ import App from "./App.jsx";
 import { Canvas } from "@react-three/fiber";
 import "./index.css";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <Canvas shadows>
-    <Suspense fallback={null}>
-      <App />
-    </Suspense>
-  </Canvas>
-);
+const rootContainer = document.getElementById("root");
+
+if (rootContainer) {
+  ReactDOM.createRoot(rootContainer).render(
+    <Canvas shadows>
+      <Suspense fallback={null}>
+        <App />
+      </Suspense>
+    </Canvas>
+  );
+} else {
+  console.error("Root container element not found.");
+}
