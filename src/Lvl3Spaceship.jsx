@@ -15,6 +15,8 @@ import { externalBoost } from "./TargetsLvl3";
 import { buildStyles } from "react-circular-progressbar";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { externalShowSubtitles } from "./Lvl3";
+import TypeWriterEffect from "react-typewriter-effect";
 
 const x = new Vector3(1, 0, 0);
 const y = new Vector3(0, 1, 0);
@@ -33,6 +35,7 @@ export function AnimatedSpaceship(props) {
   const groupRef = useRef();
 
   const [boost, setBoost] = useState(100);
+  const [showSubtitles, setShowSubtitles] = useState(false);
 
   useEffect(() => {
     actions.Animation.play();
@@ -94,6 +97,7 @@ export function AnimatedSpaceship(props) {
     // helixMeshRef.current.rotation.z -= 1.0;
 
     setBoost(externalBoost);
+    setShowSubtitles(externalShowSubtitles);
   });
 
   return (
@@ -135,6 +139,24 @@ export function AnimatedSpaceship(props) {
             />
           </div>
         </Html>
+
+        {/* if showSubtitles */}
+        {showSubtitles && (
+          <Html position={[6.6, -9, 7]}>
+            <div className="subtitles" style={{ width: 500, height: 100 }}>
+              <TypeWriterEffect
+                textStyle={{
+                  fontFamily: "Copperplate",
+                  textAlign: "center",
+                }}
+                startDelay={50}
+                cursorColor="white"
+                text="This is your commander speaking...Let's see how long you can stay alive...Collect the fuel canisters to replinish your fuel"
+                typeSpeed={40}
+              />
+            </div>
+          </Html>
+        )}
 
         <group name="Sketchfab_Scene">
           <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>

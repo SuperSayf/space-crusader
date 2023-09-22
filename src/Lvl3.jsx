@@ -3,6 +3,7 @@ import {
   PerspectiveCamera,
   Environment,
   OrbitControls,
+  Html,
 } from "@react-three/drei";
 import { EffectComposer, HueSaturation } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
@@ -19,6 +20,8 @@ import { AnimatedSpaceship } from "./Lvl3Spaceship";
 import { Howl, Howler } from "howler"; // Import Howler
 import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file
 import commander from "/assets/audio/commander.mp3"; // Replace with the path to your background music file
+
+export let externalShowSubtitles = false;
 
 function Lvl3() {
   // Create an instance of the background music
@@ -40,10 +43,19 @@ function Lvl3() {
     secondAudio.volume(1.0); // Adjust the volume as needed
     secondAudio.play();
 
-    // Clean up the audio when the component unmounts
+    externalShowSubtitles = true;
+
+    // Add an event listener to the second audio to detect when it ends
+    secondAudio.on("end", () => {
+      externalShowSubtitles = false;
+    });
+
+    // Clean up the audio and event listener when the component unmounts
     return () => {
       backgroundMusic.stop();
       secondAudio.stop();
+      secondAudio.off("end"); // Remove the event listener to prevent memory leaks
+      externalShowSubtitles = false;
     };
   }, []);
 
