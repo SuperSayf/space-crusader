@@ -1,25 +1,29 @@
-import React, { useEffect } from 'react';
-import { PerspectiveCamera, Environment, OrbitControls } from '@react-three/drei';
-import { EffectComposer, HueSaturation } from '@react-three/postprocessing';
-import { BlendFunction } from 'postprocessing';
-import { Landscape } from './Landscape';
-import { SphereEnv } from './SphereEnv';
-import { Spaceship } from './spaceShip';
-import { Targets } from './Targets';
-import { MotionBlur } from './MotionBlur';
-import { Asteroid } from './Asteroid';
-import {SpaceStation} from './spaceStation';
-import {Sun} from './Sun';
-import { BlackHole } from './BlackHole';
-
-import { Howl, Howler } from 'howler'; // Import Howler
-import soundEffect from '/assets/audio/background.mp3'; // Replace with the path to your background music file
+import React, { useEffect } from "react";
+import {
+  PerspectiveCamera,
+  Environment,
+  OrbitControls,
+} from "@react-three/drei";
+import { EffectComposer, HueSaturation } from "@react-three/postprocessing";
+import { BlendFunction } from "postprocessing";
+import { Landscape } from "./Landscape";
+import { SphereEnv } from "./SphereEnv";
+// import { Spaceship } from './spaceShip';
+import { Targets } from "./TargetsLvl3";
+import { MotionBlur } from "./MotionBlur";
+import { Asteroid } from "./Asteroid";
+import { SpaceStation } from "./spaceStation";
+import { Sun } from "./Sun";
+import { BlackHole } from "./BlackHole";
+import { AnimatedSpaceship } from "./Lvl3Spaceship";
+import { Howl, Howler } from "howler"; // Import Howler
+import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file
 
 function Lvl3() {
   // Create an instance of the background music
   const backgroundMusic = new Howl({
-    src: [soundEffect], 
-    loop: true, 
+    src: [soundEffect],
+    loop: true,
   });
 
   //Start playing the background music when the component mounts
@@ -36,15 +40,15 @@ function Lvl3() {
   return (
     <>
       <SphereEnv />
-      <Environment background={false} files={'assets/textures/space.hdr'} />
+      <Environment background={false} files={"assets/textures/space.hdr"} />
 
       <PerspectiveCamera makeDefault position={[0, 10, 10]} />
-      <OrbitControls target={[0, 0, 0]}/>
+      <OrbitControls target={[0, 0, 0]} />
       <ambientLight intensity={0.5} />
       {/* <Landscape /> */}
       <SpaceStation />
       <Sun />
-      <Spaceship />
+      <AnimatedSpaceship />
       <BlackHole />
       <Targets />
       <Asteroid />

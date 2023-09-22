@@ -6,11 +6,15 @@ Source: https://sketchfab.com/3d-models/multi-universe-space-ship-3d-model-42a2c
 Title: Multi Universe Space Ship 3D Model
 */
 
-import React, { useRef, useEffect } from "react";
-import { useGLTF, useAnimations } from "@react-three/drei";
+import React, { useRef, useEffect, useState } from "react";
+import { useGLTF, useAnimations, Html } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Matrix4, Quaternion, Vector3 } from "three";
 import { updatePlaneAxis } from "./controls";
+import { externalBoost } from "./TargetsLvl3";
+import { buildStyles } from "react-circular-progressbar";
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 const x = new Vector3(1, 0, 0);
 const y = new Vector3(0, 1, 0);
@@ -27,6 +31,8 @@ export function AnimatedSpaceship(props) {
   );
   const { actions, mixer } = useAnimations(animations, group);
   const groupRef = useRef();
+
+  const [boost, setBoost] = useState(100);
 
   useEffect(() => {
     actions.Animation.play();
@@ -86,6 +92,8 @@ export function AnimatedSpaceship(props) {
     camera.matrixWorldNeedsUpdate = true;
 
     // helixMeshRef.current.rotation.z -= 1.0;
+
+    setBoost(externalBoost);
   });
 
   return (
@@ -97,6 +105,37 @@ export function AnimatedSpaceship(props) {
         scale={0.01}
         rotation={[0, Math.PI, 0]}
       >
+        <Html position={[6, 1, 7]}>
+          <div style={{ width: 100, height: 100 }}>
+            <CircularProgressbar
+              value={boost}
+              text={`${boost}%`}
+              styles={buildStyles({
+                // Rotation of path and trail, in number of turns (0-1)
+                rotation: 0.25,
+
+                // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
+                strokeLinecap: "butt",
+
+                // Text size
+                textSize: "16px",
+
+                // How long animation takes to go from one percentage to another, in seconds
+                pathTransitionDuration: 0.5,
+
+                // Can specify path transition in more detail, or remove it entirely
+                // pathTransition: 'none',
+
+                // Colors
+                pathColor: "#66ff00",
+                textColor: "#ffffff",
+                trailColor: "#d6d6d6",
+                backgroundColor: "#3e98c7",
+              })}
+            />
+          </div>
+        </Html>
+
         <group name="Sketchfab_Scene">
           <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
             <group name="root">
