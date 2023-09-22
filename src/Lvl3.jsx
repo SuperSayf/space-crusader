@@ -18,6 +18,7 @@ import { BlackHole } from "./BlackHole";
 import { AnimatedSpaceship } from "./Lvl3Spaceship";
 import { Howl, Howler } from "howler"; // Import Howler
 import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file
+import commander from "/assets/audio/commander.mp3"; // Replace with the path to your background music file
 
 function Lvl3() {
   // Create an instance of the background music
@@ -25,15 +26,24 @@ function Lvl3() {
     src: [soundEffect],
     loop: true,
   });
+  // Create an instance of the second audio
+  const secondAudio = new Howl({
+    src: [commander],
+    loop: false,
+  });
 
-  //Start playing the background music when the component mounts
+  // Start playing the background music and the second audio when the component mounts
   useEffect(() => {
     backgroundMusic.volume(0.3); // Adjust the volume as needed
     backgroundMusic.play();
 
+    secondAudio.volume(1.0); // Adjust the volume as needed
+    secondAudio.play();
+
     // Clean up the audio when the component unmounts
     return () => {
       backgroundMusic.stop();
+      secondAudio.stop();
     };
   }, []);
 
