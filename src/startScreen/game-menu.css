@@ -6,9 +6,9 @@ body {
   --y: 0deg;
   --x: 0deg;
   --distance: 1px;
-  --theme: hsl(180 100% 50%);
-  --theme-bg: hsl(180 100% 50% / 25%);
-  --theme-bg-hover: hsl(180 100% 50% / 40%);
+  --theme: hsl(262, 22%, 19%);
+  --theme-bg: hsla(161, 89%, 62%, 0.356);
+  --theme-bg-hover: hsla(143, 64%, 54%, 0.774);
   --theme-text: white;
   --theme-shadow: hsl(180 100% 10% / 25%);
 
@@ -179,7 +179,7 @@ body {
 body {
   perspective: 40vw;
   /* Add the background image property */
-  background-image: url('../../assets/textures/planets-wallpaper-1920x1080.jpg'); 
+  background-image: url('../../assets/textures/space.png'); 
   background-size: cover; /* This property ensures the image covers the entire background */
   background-repeat: no-repeat; /* This property prevents the image from repeating */
   margin: 0; /* Add this to remove default margin */
