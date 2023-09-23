@@ -1,17 +1,20 @@
-import React, { useEffect } from 'react';
-import { PerspectiveCamera, Environment, OrbitControls } from '@react-three/drei';
-import { EffectComposer, HueSaturation } from '@react-three/postprocessing';
-import { BlendFunction } from 'postprocessing';
-import { Landscape } from './Landscape';
-import { SphereEnv } from './SphereEnv';
-import { Spaceship } from './spaceShip';
-import { Targets } from './Targets';
-import { MotionBlur } from './MotionBlur';
-import { Asteroid } from './Asteroid';
-import { AnimatedSpaceship } from './animatedSpaceship';
+import React, { useEffect } from "react";
+import {
+  PerspectiveCamera,
+  Environment,
+  OrbitControls,
+} from "@react-three/drei";
+import { EffectComposer, HueSaturation } from "@react-three/postprocessing";
+import { BlendFunction } from "postprocessing";
+import { Landscape } from "./Landscape";
+import { SphereEnv } from "./SphereEnv";
+import { Spaceship } from "./spaceShip";
+import { MiniMap } from "./MiniMap";
+import { Targets } from "./Targets";
+import { MotionBlur } from "./MotionBlur";
+import { Asteroid } from "./Asteroid";
+import { AnimatedSpaceship } from "./animatedSpaceship";
 
-import { Howl, Howler } from "howler"; // Import Howler
-import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file
 import { Howl, Howler } from "howler"; // Import Howler
 import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file
 
