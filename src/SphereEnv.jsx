@@ -6,7 +6,7 @@ export function SphereEnv() {
 
   return (
     <mesh>
-      <sphereGeometry args={[60, 50, 50]} />
+      <sphereGeometry args={[170, 50, 50]} />
       <meshBasicMaterial side={BackSide} map={map} />
     </mesh>
   );

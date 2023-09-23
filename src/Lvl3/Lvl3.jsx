@@ -7,16 +7,16 @@ import {
 } from "@react-three/drei";
 import { EffectComposer, HueSaturation } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
-import { Landscape } from "./Landscape";
-import { SphereEnv } from "./SphereEnv";
+import { Landscape } from "../Landscape";
+import { SphereEnv } from "../SphereEnv";
 // import { Spaceship } from './spaceShip';
 import { Targets } from "./TargetsLvl3";
-import { MotionBlur } from "./MotionBlur";
-import { Asteroid } from "./Asteroid";
-import { SpaceStation } from "./spaceStation";
-import { MiniMap } from "./MiniMap";
-import { Sun } from "./Sun";
-import { BlackHole } from "./BlackHole";
+import { MotionBlur } from "../MotionBlur";
+import { Asteroid } from "../Asteroid";
+import { SpaceStation } from "../spaceStation";
+import { MiniMap } from "../MiniMap";
+import { Sun } from "../solarSystem/Sun";
+import { BlackHole } from "../BlackHole";
 import { AnimatedSpaceship } from "./Lvl3Spaceship";
 import { Howl, Howler } from "howler"; // Import Howler
 import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file

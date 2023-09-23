@@ -171,7 +171,7 @@ export function Asteroid() {
   });
 
   return (
-    <mesh geometry={geometry}>
+    <mesh geometry={geometry} castShadow receiveShadow>
       <meshStandardMaterial
         roughness={0.9}
         metalness={0.1}

@@ -1,11 +1,12 @@
 import React, { useRef } from "react";
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { MeshStandardMaterial, Vector3 } from "three";
-import { planePosition } from "./Lvl3Spaceship";
+import { planePosition } from "../Lvl3/Lvl3Spaceship";
 
 export function Sun(props) {
   const { nodes, materials } = useGLTF("assets/models/Sun.glb");
+  const [sunTexture] = useTexture(['/assets/textures/sun.jpg'])
 
   // Define the center and radius of the green sphere
   const sphereCenter = new Vector3(0, 0, 0);
@@ -29,12 +30,11 @@ export function Sun(props) {
     <group {...props} dispose={null}>
       {/* Render the sun from the gltf */}
       <mesh
-        castShadow
-        receiveShadow
         geometry={nodes.Object_4.geometry}
         material={materials["Scene_-_Root"]}
-        scale={2.633}
-      />
+        scale={2.633}>
+        <pointLight castShadow />
+        </mesh>
     </group>
   );
 }

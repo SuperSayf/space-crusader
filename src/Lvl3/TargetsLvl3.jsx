@@ -4,7 +4,7 @@ import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl3Spaceship"
 import { Html } from "@react-three/drei";
-import { FuelShield } from "./FuelShield";
+import { FuelShield } from "../FuelShield";
 
 function randomPoint(scale) {
   return new Vector3(
