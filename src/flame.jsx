@@ -11,7 +11,7 @@ export function Flame(props) {
   }, [mixer]);
 
   return (
-    <group ref={group} {...props} dispose={null} scale={0.1}>
+    <group ref={group} {...props} dispose={null} scale={1}>
       <group name="Scene">
         <group
           name="Sketchfab_model"
