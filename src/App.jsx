@@ -9,6 +9,7 @@ import { BlendFunction } from "postprocessing";
 import { Landscape } from "./Landscape";
 import { SphereEnv } from "./SphereEnv";
 import { Spaceship } from "./spaceShip";
+import { MiniMap } from "./MiniMap";
 import { Targets } from "./Targets";
 import { MotionBlur } from "./MotionBlur";
 import { Asteroid } from "./Asteroid";
@@ -39,7 +40,7 @@ function App() {
     <>
       <SphereEnv />
       <Environment background={false} files={"assets/textures/space.hdr"} />
-
+      
       <PerspectiveCamera makeDefault position={[0, 10, 10]} />
       <OrbitControls target={[0, 0, 0]} />
       <ambientLight intensity={0.5} />
@@ -48,6 +49,7 @@ function App() {
       <AnimatedSpaceship />
       {/* <Targets />
       <Asteroid /> */}
+      <MiniMap />
 
       <directionalLight
         castShadow
