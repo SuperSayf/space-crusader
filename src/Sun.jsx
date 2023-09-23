@@ -5,7 +5,7 @@ import { MeshStandardMaterial, Vector3 } from "three";
 import { planePosition } from "./Lvl3Spaceship";
 
 export function Sun(props) {
-  const { nodes, materials } = useGLTF("assets/models/sun.glb");
+  const { nodes, materials } = useGLTF("assets/models/Sun.glb");
 
   // Define the center and radius of the green sphere
   const sphereCenter = new Vector3(0, 0, 0);
@@ -21,7 +21,7 @@ export function Sun(props) {
 
     // Check if the plane is inside the sphere
     if (distance < sphereRadius) {
-
+      console.log("Collision detected!");
     }
   });
 
@@ -39,4 +39,4 @@ export function Sun(props) {
   );
 }
 
-useGLTF.preload("assets/models/sun.glb");
+useGLTF.preload("assets/models/Sun.glb");
