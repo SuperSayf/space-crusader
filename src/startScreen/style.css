@@ -12,7 +12,7 @@
 
 html {
   block-size: 100%;
-  background: conic-gradient(at -10% 50%, deeppink, cyan);
+  background: conic-gradient(at -10% 50%, deeppink, rgb(133, 184, 239));
 
   @media (--dark) {
     background: conic-gradient(at -10% 50%, #212529, 50%, #495057, #212529);    
