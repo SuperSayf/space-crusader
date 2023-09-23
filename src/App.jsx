@@ -47,8 +47,8 @@ function App() {
       {/* <Landscape /> */}
       {/* <Spaceship /> */}
       <AnimatedSpaceship />
-      {/* <Targets />
-      <Asteroid /> */}
+      <Targets />
+      <Asteroid />
       <MiniMap />
 
       <directionalLight

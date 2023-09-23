@@ -7,8 +7,61 @@ import {
 } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
-import { planePosition } from "./spaceShip";
+import { planePosition } from "./animatedSpaceship";
 
+
+
+
+//Display function to add Gameover pop up html (Currently not using this )
+function DisplayGameOver() {
+  const gameScreen = document.createElement('div');
+gameScreen.classList.add('game-screen');
+gameScreen.id = 'gameScreen';
+
+// Create the h2 element
+const h2 = document.createElement('h2');
+h2.textContent = 'Game Over!';
+gameScreen.appendChild(h2);
+
+
+// Create the restart button
+const restartButton = document.createElement('button');
+restartButton.id = 'restartButton';
+restartButton.textContent = 'Restart';
+gameScreen.appendChild(restartButton);
+
+// Create the menu button
+const menuButton = document.createElement('button');
+menuButton.id = 'menuButton';
+menuButton.textContent = 'Go to Main Menu';
+gameScreen.appendChild(menuButton);
+
+// Add event listeners to buttons (if needed)
+
+// Append the game screen to the body
+document.body.appendChild(gameScreen);
+
+// Create the style element
+const style = document.createElement('style');
+style.textContent = `
+  .game-screen {
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #333;
+    border: 4px solid #fff;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+  }
+`;
+document.head.appendChild(style);
+}
 function randomPoint(scale) {
   return new Vector3(
     Math.random() * 2 - 1,
@@ -37,9 +90,11 @@ export function Asteroid() {
     return arr;
   });
 
+  //Game Over State Component
+  const[gameOver , setGameOver] = useState(false);
+
   const textureLoader = new TextureLoader();
   const asteroidTexture = textureLoader.load("assets/textures/asteroid.jpg");
-
   const geometry = useMemo(() => {
     let geo;
 
@@ -63,7 +118,7 @@ export function Asteroid() {
   useFrame(() => {
     // Move the asteroids downward in each frame
     targets.forEach((target, i) => {
-      target.center.y -= 0.02;
+      target.center.y -= 0.02; 
 
       if (target.center.y < SPAWN_DEPTH) {
         // Remove asteroids that have reached the spawn depth
@@ -82,23 +137,38 @@ export function Asteroid() {
         .sub(target.direction.clone().multiplyScalar(dist));
 
       const hitDist = projected.distanceTo(target.center);
+
+      //if the ship hits the asteroid
       if (hitDist < TARGET_RAD) {
-        target.hit = true;
+        target.hit = true; //  muz
+        console.log("Game over");
+        setGameOver(true);
+        window.location.href = "GameOver.html";
+        // Create the main container div
+        // DisplayGameOver();
+
+        // document.getElementById("restartButton").addEventListener("click", function () {
+        //   window.location.href = "game.html";
+        // });
+        // document.getElementById("menuButton").addEventListener("click", function () {
+        //   window.location.href = "index.html";
+        // });
+
       }
     });
 
-    // Remove hit asteroids and add new ones at the top
-    const newTargets = targets.filter((target) => !target.hit);
-    if (newTargets.length < MAX_ASTEROIDS) {
-      newTargets.push({
-        center: randomPoint(new Vector3(4, 1, 4)).add(
-          new Vector3(0, 5, 0)
-        ),
-        direction: randomPoint().normalize(),
-        hit: false,
-      });
-    }
-    setTargets(newTargets);
+    // // Remove hit asteroids and add new ones at the top
+    // const newTargets = targets.filter((target) => !target.hit);
+    // if (newTargets.length < MAX_ASTEROIDS) {
+    //   newTargets.push({
+    //     center: randomPoint(new Vector3(4, 1, 4)).add(
+    //       new Vector3(0, 5, 0)
+    //     ),
+    //     direction: randomPoint().normalize(),
+    //     hit: false,
+    //   });
+    // }
+    // setTargets(newTargets);
   });
 
   return (
