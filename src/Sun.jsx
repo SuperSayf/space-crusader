@@ -21,7 +21,7 @@ export function Sun(props) {
 
     // Check if the plane is inside the sphere
     if (distance < sphereRadius) {
-      console.log("Collision detected");
+
     }
   });
 

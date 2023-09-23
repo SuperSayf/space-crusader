@@ -4,6 +4,7 @@ import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl3Spaceship"
 import { Html } from "@react-three/drei";
+import { FuelShield } from "./FuelShield";
 
 function randomPoint(scale) {
   return new Vector3(
@@ -18,7 +19,7 @@ const TARGET_RAD = 0.125;
 export let externalBoost = 100; // Export the boost value
 
 export function Targets() {
-  const TargetAmt = 10;
+  const TargetAmt = 2;
   const [targets, setTargets] = useState(() => {
     const arr = [];
     for (let i = 0; i < TargetAmt; i++) {
@@ -54,7 +55,7 @@ export function Targets() {
 
     targets.forEach((target) => {
       // Use a torus geometry to create a ring around the target
-      const torusGeo = new TorusGeometry(TARGET_RAD, TARGET_RAD / 4, 16, 32);
+      const torusGeo = new SphereGeometry(TARGET_RAD, 32, 32);
       torusGeo.applyQuaternion(
         new Quaternion().setFromUnitVectors(
           new Vector3(0, 0, 1),
@@ -96,13 +97,15 @@ export function Targets() {
     externalBoost = boost;
   });
 
-  return targets.length > 0 ? (
-    <mesh geometry={geometry}>
-      <meshStandardMaterial
-        roughness={0.5}
-        metalness={0.5}
-        emissive={"#00ff00"}
-      />
-    </mesh>
-  ) : null;  
+  return (
+    <>
+      {targets.map((target, index) => (
+        <FuelShield
+          key={index}
+          position={[target.center.x, target.center.y, target.center.z]}
+          scale = {0.001}
+        />
+      ))}
+    </>
+  );
 }
