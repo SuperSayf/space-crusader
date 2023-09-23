@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import { Quaternion, SphereGeometry, TorusGeometry, Vector3 } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
-import { planePosition } from "./animatedSpaceship";
+import { planePosition } from "./Lvl3Spaceship"
 import { Html } from "@react-three/drei";
 
 function randomPoint(scale) {
@@ -20,7 +20,7 @@ export let externalBoost = 100; // Export the boost value
 export function Targets() {
   const [targets, setTargets] = useState(() => {
     const arr = [];
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 2; i++) {
       arr.push({
         center: randomPoint(new Vector3(4, 1, 4)).add(
           new Vector3(0, 2 + Math.random() * 2, 0)
@@ -70,6 +70,11 @@ export function Targets() {
   }, [targets]);
 
   useFrame(() => {
+    //Print out the size of the targets array
+    if(targets.length === 0){
+      console.log("You win!");
+      return
+    }
     targets.forEach((target, i) => {
       const v = planePosition.clone().sub(target.center);
       const dist = target.direction.dot(v);
@@ -94,7 +99,7 @@ export function Targets() {
     externalBoost = boost;
   });
 
-  return (
+  return targets.length > 0 ? (
     <mesh geometry={geometry}>
       <meshStandardMaterial
         roughness={0.5}
@@ -102,5 +107,5 @@ export function Targets() {
         emissive={"#00ff00"}
       />
     </mesh>
-  );
+  ) : null;  
 }
