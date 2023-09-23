@@ -18,9 +18,10 @@ const TARGET_RAD = 0.125;
 export let externalBoost = 100; // Export the boost value
 
 export function Targets() {
+  const TargetAmt = 10;
   const [targets, setTargets] = useState(() => {
     const arr = [];
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < TargetAmt; i++) {
       arr.push({
         center: randomPoint(new Vector3(4, 1, 4)).add(
           new Vector3(0, 2 + Math.random() * 2, 0)
@@ -70,11 +71,7 @@ export function Targets() {
   }, [targets]);
 
   useFrame(() => {
-    //Print out the size of the targets array
-    if(targets.length === 0){
-      console.log("You win!");
-      return
-    }
+    
     targets.forEach((target, i) => {
       const v = planePosition.clone().sub(target.center);
       const dist = target.direction.dot(v);

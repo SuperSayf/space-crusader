@@ -1,42 +1,42 @@
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
-import { useFrame } from '@react-three/fiber';
+import { useFrame } from "@react-three/fiber";
+import { MeshStandardMaterial, Vector3 } from "three";
+import { planePosition } from "./Lvl3Spaceship";
 
 export function Sun(props) {
-  const groupRef = useRef();
-  const { nodes, materials } = useGLTF("assets/models/Sun.glb");
+  const { nodes, materials } = useGLTF("assets/models/sun.glb");
 
-  // Create a reference for the point light
-  const lightRef = useRef();
+  // Define the center and radius of the green sphere
+  const sphereCenter = new Vector3(0, 0, 0);
+  const sphereRadius = 2.62;
 
-  // Define a rotation speed (in radians per frame)
-  const rotationSpeed = 0.01;
+  // Create a reference to the mesh
+  const sphereRef = useRef();
 
-  // Use the useFrame hook to update the rotation
+  // Use useFrame for continuous collision detection
   useFrame(() => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y += rotationSpeed;
+    // Calculate the distance between the plane position and the sphere center
+    const distance = planePosition.distanceTo(sphereCenter);
+
+    // Check if the plane is inside the sphere
+    if (distance < sphereRadius) {
+      console.log("Collision detected");
     }
   });
 
   return (
-    <group {...props} ref={groupRef} dispose={null} scale={0.03} position={[0, 0, 0]} rotation={[Math.PI / 2, 2, 0]}>
+    <group {...props} dispose={null}>
+      {/* Render the sun from the gltf */}
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes["sun_01_Sphere-Mesh"].geometry}
-        material={materials.FF9800}
-      />
-
-      {/* Add a PointLight */}
-      <pointLight
-        ref={lightRef}
-        position={[0, 0, 0]}
-        color={0xffff00}
-        intensity={2}
+        geometry={nodes.Object_4.geometry}
+        material={materials["Scene_-_Root"]}
+        scale={2.633}
       />
     </group>
   );
 }
 
-useGLTF.preload("assets/models/Sun.glb");
+useGLTF.preload("assets/models/sun.glb");

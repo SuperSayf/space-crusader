@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
-import App from "./Lvl3.jsx";
+import App from "./App.jsx";
 import { Canvas } from "@react-three/fiber";
 import "./index.css";
 
