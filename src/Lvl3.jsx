@@ -14,6 +14,7 @@ import { Targets } from "./TargetsLvl3";
 import { MotionBlur } from "./MotionBlur";
 import { Asteroid } from "./Asteroid";
 import { SpaceStation } from "./spaceStation";
+import { MiniMap } from "./MiniMap";
 import { Sun } from "./Sun";
 import { BlackHole } from "./BlackHole";
 import { AnimatedSpaceship } from "./Lvl3Spaceship";
@@ -74,6 +75,7 @@ function Lvl3() {
       <BlackHole />
       <Targets />
       <Asteroid />
+      <MiniMap />
 
       {/* <directionalLight
         castShadow
