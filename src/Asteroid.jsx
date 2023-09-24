@@ -10,8 +10,6 @@ import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./animatedSpaceship";
 
 
-
-
 //Display function to add Gameover pop up html (Currently not using this )
 function DisplayGameOver() {
   const gameScreen = document.createElement('div');
@@ -118,7 +116,7 @@ export function Asteroid() {
   useFrame(() => {
     // Move the asteroids downward in each frame
     targets.forEach((target, i) => {
-       target.center.y -= 0.02; 
+       target.center.y -= 0.01; 
       if (target.center.y < SPAWN_DEPTH) {
         // Remove asteroids that have reached the spawn depth
         target.center.set(
@@ -129,21 +127,19 @@ export function Asteroid() {
         target.hit = false;
       }
 
-      const v = planePosition.clone().sub(target.center);
-      const dist = target.direction.dot(v);
-      const projected = planePosition
-        .clone()
-        .sub(target.direction.clone().multiplyScalar(dist));
+      // const v = planePosition.clone().sub(target.center);
+      // const dist = target.direction.dot(v);
+      // const projected = planePosition
+      //   .clone()
+      //   .sub(target.direction.clone().multiplyScalar(dist));
 
-      const hitDist = projected.distanceTo(target.center);
-
+      // const hitDist = projected.distanceTo(target.center);
+      const distance = planePosition.distanceTo(target.center)
       //if the ship hits the asteroid
-      if (hitDist < TARGET_RAD && !gameOver) {
+      if (distance < TARGET_RAD && !gameOver) {
         target.hit = true; //  muz
         console.log("Game over");
         setGameOver(true);
-        //window.location.href = "GameOver.html";
-        //Create the main container div
         DisplayGameOver();
 
         document.getElementById("restartButton").addEventListener("click", function () {
