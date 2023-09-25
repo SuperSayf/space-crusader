@@ -1,9 +1,8 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { Quaternion, SphereGeometry, TorusGeometry, Vector3 } from "three";
+import { Quaternion, SphereGeometry, Vector3 } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
-import { planePosition } from "./Lvl3Spaceship"
-import { Html } from "@react-three/drei";
+import { planePosition } from "./Lvl3Spaceship";
 import { FuelShield } from "../FuelShield";
 
 function randomPoint(scale) {
@@ -19,7 +18,7 @@ const TARGET_RAD = 0.125;
 export let externalBoost = 100; // Export the boost value
 
 export function Targets() {
-  const TargetAmt = 2;
+  const TargetAmt = 10;
   const [targets, setTargets] = useState(() => {
     const arr = [];
     for (let i = 0; i < TargetAmt; i++) {
@@ -37,42 +36,47 @@ export function Targets() {
 
   // Add a state variable for boost and its initial value
   const [boost, setBoost] = useState(100);
+  let boostUsedPerSecond = 2
 
   // Use useEffect to decrease boost every second
   useEffect(() => {
     const interval = setInterval(() => {
-      // Decrease boost by 1 every second
-      setBoost((prevBoost) => prevBoost - 2);
+      // Decrease boost by 2 every second
+      setBoost((prevBoost) => prevBoost - boostUsedPerSecond);
     }, 1000);
 
     return () => {
       clearInterval(interval);
     };
   }, []);
+  
+  
+  // Event listener to track Shift key press
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Shift") {
+        console.log("Shift key is pressed down");
+        boostUsedPerSecond = 4;
+      }
+    };
 
-  const geometry = useMemo(() => {
-    let geo;
+    const handleKeyUp = (event) => {
+      if (event.key === "Shift") {
+        console.log("Shift key is released");
+        boostUsedPerSecond = 2;
+      }
+    };
 
-    targets.forEach((target) => {
-      // Use a torus geometry to create a ring around the target
-      const torusGeo = new SphereGeometry(TARGET_RAD, 32, 32);
-      torusGeo.applyQuaternion(
-        new Quaternion().setFromUnitVectors(
-          new Vector3(0, 0, 1),
-          target.direction
-        )
-      );
-      torusGeo.translate(target.center.x, target.center.y, target.center.z);
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
 
-      if (!geo) geo = torusGeo;
-      else geo = mergeBufferGeometries([geo, torusGeo]);
-    });
-
-    return geo;
-  }, [targets]);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, []);
 
   useFrame(() => {
-    
     targets.forEach((target, i) => {
       const v = planePosition.clone().sub(target.center);
       const dist = target.direction.dot(v);
@@ -93,7 +97,12 @@ export function Targets() {
       setTargets(targets.filter((target) => !target.hit));
     }
 
-    //console.log(boost);
+    // Check if boost has reached 0
+    if (boost <= 0) {
+      //Implement the game over logic here
+    }
+
+    // Update the externalBoost variable
     externalBoost = boost;
   });
 
@@ -103,7 +112,7 @@ export function Targets() {
         <FuelShield
           key={index}
           position={[target.center.x, target.center.y, target.center.z]}
-          scale = {0.001}
+          scale={0.001}
         />
       ))}
     </>

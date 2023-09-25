@@ -18,6 +18,7 @@ import { MiniMap } from "../MiniMap";
 import { Sun } from "../solarSystem/Sun";
 import { BlackHole } from "../BlackHole";
 import { AnimatedSpaceship } from "./Lvl3Spaceship";
+import { DeathStar } from "../DeathStar";
 import { Howl, Howler } from "howler"; // Import Howler
 import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file
 import commander from "/assets/audio/commander.mp3"; // Replace with the path to your background music file
@@ -71,6 +72,7 @@ function Lvl3() {
       {/* <Landscape /> */}
       <SpaceStation />
       <Sun />
+      <DeathStar />
       <AnimatedSpaceship />
       <BlackHole />
       <Targets />
