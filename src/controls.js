@@ -10,8 +10,25 @@ export let controls = {};
 // Add a flag to track if the sound has been played
 let soundPlayed = false;
 
+// Define the cheat code sequence
+const cheatCodeSequence = ["r", "i", "c", "k"];
+let currentCodeIndex = 0;
+
 window.addEventListener("keydown", (e) => {
   controls[e.key.toLowerCase()] = true;
+
+  // Check for the cheat code sequence
+  if (e.key.toLowerCase() === cheatCodeSequence[currentCodeIndex]) {
+    currentCodeIndex++;
+
+    if (currentCodeIndex === cheatCodeSequence.length) {
+      // Cheat code has been successfully entered
+      executeCheatCodeAction();
+      currentCodeIndex = 0; // Reset the code index
+    }
+  } else {
+    currentCodeIndex = 0; // Reset if a wrong key is pressed
+  }
 
   if (e.key.toLowerCase() === "shift" && !soundPlayed) {
     // Create a Howl instance with the desired volume (e.g., 0.2 for softer)
@@ -100,4 +117,10 @@ export function updatePlaneAxis(x, y, z, planePosition, camera) {
   camera.updateProjectionMatrix();
 
   planePosition.add(z.clone().multiplyScalar(-planeSpeed - turboSpeed));
+}
+
+// Define the action to be executed when the cheat code is entered
+function executeCheatCodeAction() {
+  //Go to a page with a Rick Astley video
+  window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
 }
