@@ -16,12 +16,12 @@ import { Asteroid } from "../Asteroid";
 import { SpaceStation } from "../spaceStation";
 import { MiniMap } from "../MiniMap";
 import { Sun } from "../solarSystem/Sun";
-import { BlackHole } from "../BlackHole";
 import { AnimatedSpaceship } from "./Lvl3Spaceship";
 import { DeathStar } from "../DeathStar";
 import { Howl, Howler } from "howler"; // Import Howler
 import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file
 import commander from "/assets/audio/commander.mp3"; // Replace with the path to your background music file
+import { Stats } from "@react-three/drei";
 
 export let externalShowSubtitles = false;
 
@@ -63,6 +63,7 @@ function Lvl3() {
 
   return (
     <>
+      <Stats />
       <SphereEnv />
       <Environment background={false} files={"assets/textures/space.hdr"} />
 
@@ -74,7 +75,6 @@ function Lvl3() {
       <Sun />
       <DeathStar />
       <AnimatedSpaceship />
-      <BlackHole />
       <Targets />
       <Asteroid />
       <MiniMap />

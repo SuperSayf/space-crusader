@@ -3,7 +3,7 @@ import { Quaternion, SphereGeometry, Vector3 } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl3Spaceship";
-import { FuelShield } from "../FuelShield";
+import { FuelShield } from "./FuelShield";
 
 function randomPoint(scale) {
   return new Vector3(
@@ -36,7 +36,7 @@ export function Targets() {
 
   // Add a state variable for boost and its initial value
   const [boost, setBoost] = useState(100);
-  let boostUsedPerSecond = 2
+  let boostUsedPerSecond = 2;
 
   // Use useEffect to decrease boost every second
   useEffect(() => {
@@ -49,8 +49,7 @@ export function Targets() {
       clearInterval(interval);
     };
   }, []);
-  
-  
+
   // Event listener to track Shift key press
   useEffect(() => {
     const handleKeyDown = (event) => {
