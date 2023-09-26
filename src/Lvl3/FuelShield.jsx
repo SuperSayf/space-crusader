@@ -11,7 +11,7 @@ export function FuelShield(props) {
           receiveShadow
           geometry={nodes.Object_2.geometry}
           material={materials.lambert3SG}
-          scale={14.058}
+          scale={14.149}
         />
       </group>
       <mesh
@@ -31,5 +31,3 @@ export function FuelShield(props) {
 }
 
 useGLTF.preload("assets/models/FuelShield.glb");
-
-
