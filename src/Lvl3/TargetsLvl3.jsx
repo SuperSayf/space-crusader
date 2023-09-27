@@ -92,7 +92,7 @@ export function Targets() {
     const atLeastOneHit = targets.find((target) => target.hit);
     if (atLeastOneHit) {
       // Increase boost by 10 when a target is hit
-      setBoost((prevBoost) => prevBoost + 10);
+      setBoost((prevBoost) => prevBoost + 15);
       setTargets(targets.filter((target) => !target.hit));
     }
 

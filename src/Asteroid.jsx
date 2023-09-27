@@ -9,8 +9,6 @@ import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./animatedSpaceship";
 
-
-
 //Display function to add Gameover pop up html (Currently not using this )
 function DisplayGameOver() {
   const gameScreen = document.createElement('div');
@@ -61,6 +59,7 @@ function DisplayGameOver() {
   `;
   document.head.appendChild(style);
 }
+
 function randomPoint(scale) {
   return new Vector3(
     Math.random() * 2 - 1,

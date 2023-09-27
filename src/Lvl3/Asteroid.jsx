@@ -9,8 +9,6 @@ import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl3Spaceship";
 
-
-
 //Display function to add Gameover pop up html (Currently not using this )
 function DisplayGameOver() {
   const gameScreen = document.createElement('div');
@@ -61,6 +59,7 @@ function DisplayGameOver() {
   `;
   document.head.appendChild(style);
 }
+
 function randomPoint(scale) {
   return new Vector3(
     Math.random() * 2 - 1,
@@ -70,7 +69,6 @@ function randomPoint(scale) {
 }
 
 const TARGET_RAD = 0.125*2;
-const SPAWN_DEPTH = -10; // Depth at which new asteroids are spawned
 const MAX_ASTEROIDS = 15; // Maximum number of asteroids
 
 export function Asteroid() {
@@ -89,8 +87,8 @@ export function Asteroid() {
     return arr;
   });
 
-  //Game Over State Component
-  const[gameOver , setGameOver] = useState(false);
+  // Game Over State Component
+  const [gameOver, setGameOver] = useState(false);
 
   const textureLoader = new TextureLoader();
   const asteroidTexture = textureLoader.load("assets/textures/asteroid.jpg");
@@ -114,31 +112,25 @@ export function Asteroid() {
     return geo;
   }, [targets]);
 
-  useFrame(() => {
-    // Move the asteroids downward in each frame
+  useFrame(({ clock }) => {
+    // Get the current time to make the movement smoother
+    const elapsedTime = clock.elapsedTime;
+
     targets.forEach((target, i) => {
-       target.center.y -= 0.01; 
-      if (target.center.y < SPAWN_DEPTH) {
-        // Remove asteroids that have reached the spawn depth
-        target.center.set(
-          randomPoint(new Vector3(4, 1, 4)).x,
-          5,
-          randomPoint(new Vector3(4, 1, 4)).z
-        );
-        target.hit = false;
-      }
+      // Calculate the direction vector from the asteroid to the player
+      const directionToPlayer = planePosition.clone().sub(target.center).normalize();
 
-      // const v = planePosition.clone().sub(target.center);
-      // const dist = target.direction.dot(v);
-      // const projected = planePosition
-      //   .clone()
-      //   .sub(target.direction.clone().multiplyScalar(dist));
+      // Define a speed at which the asteroids move towards the player
+      const speed = 0.0002;
 
-      // const hitDist = projected.distanceTo(target.center);
-      const distance = planePosition.distanceTo(target.center)
-      //if the ship hits the asteroid
-      if (distance < TARGET_RAD && !gameOver) {
-        target.hit = true; //  muz
+      // Update the position of the asteroid towards the player
+      target.center.add(directionToPlayer.multiplyScalar(speed * elapsedTime));
+
+      // Check if the asteroid is close enough to the player to trigger a collision
+      const distanceToPlayer = target.center.distanceTo(planePosition);
+
+      if (distanceToPlayer < TARGET_RAD && !gameOver) {
+        target.hit = true;
         console.log("Game over");
         setGameOver(true);
         DisplayGameOver();
@@ -149,7 +141,6 @@ export function Asteroid() {
         document.getElementById("menuButton").addEventListener("click", function () {
           window.location.href = "index.html";
         });
-
       }
     });
 
