@@ -1,36 +1,31 @@
 import { useState, useMemo } from "react";
-import {
-  Quaternion,
-  SphereGeometry,
-  TextureLoader,
-  Vector3,
-} from "three";
+import { Quaternion, SphereGeometry, TextureLoader, Vector3 } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl3Spaceship";
+import { externalBoost } from "./TargetsLvl3";
 
 //Display function to add Gameover pop up html (Currently not using this )
 function DisplayGameOver() {
-  const gameScreen = document.createElement('div');
-  gameScreen.classList.add('game-screen');
-  gameScreen.id = 'gameScreen';
+  const gameScreen = document.createElement("div");
+  gameScreen.classList.add("game-screen");
+  gameScreen.id = "gameScreen";
 
   // Create the h2 element
-  const h2 = document.createElement('h2');
-  h2.textContent = 'Game Over!';
+  const h2 = document.createElement("h2");
+  h2.textContent = "Game Over!";
   gameScreen.appendChild(h2);
 
-
   // Create the restart button
-  const restartButton = document.createElement('button');
-  restartButton.id = 'restartButton';
-  restartButton.textContent = 'Restart';
+  const restartButton = document.createElement("button");
+  restartButton.id = "restartButton";
+  restartButton.textContent = "Restart";
   gameScreen.appendChild(restartButton);
 
   // Create the menu button
-  const menuButton = document.createElement('button');
-  menuButton.id = 'menuButton';
-  menuButton.textContent = 'Go to Main Menu';
+  const menuButton = document.createElement("button");
+  menuButton.id = "menuButton";
+  menuButton.textContent = "Go to Main Menu";
   gameScreen.appendChild(menuButton);
 
   // Add event listeners to buttons (if needed)
@@ -39,7 +34,7 @@ function DisplayGameOver() {
   document.body.appendChild(gameScreen);
 
   // Create the style element
-  const style = document.createElement('style');
+  const style = document.createElement("style");
   style.textContent = `
     .game-screen {
       display: block;
@@ -68,7 +63,7 @@ function randomPoint(scale) {
   ).multiply(scale || new Vector3(1, 1, 1));
 }
 
-const TARGET_RAD = 0.125*2;
+const TARGET_RAD = 0.125 * 2;
 const MAX_ASTEROIDS = 15; // Maximum number of asteroids
 
 export function Asteroid() {
@@ -118,7 +113,10 @@ export function Asteroid() {
 
     targets.forEach((target, i) => {
       // Calculate the direction vector from the asteroid to the player
-      const directionToPlayer = planePosition.clone().sub(target.center).normalize();
+      const directionToPlayer = planePosition
+        .clone()
+        .sub(target.center)
+        .normalize();
 
       // Define a speed at which the asteroids move towards the player
       const speed = 0.0002;
@@ -135,12 +133,33 @@ export function Asteroid() {
         setGameOver(true);
         DisplayGameOver();
 
-        document.getElementById("restartButton").addEventListener("click", function () {
-          window.location.href = "game.html";
-        });
-        document.getElementById("menuButton").addEventListener("click", function () {
-          window.location.href = "index.html";
-        });
+        document
+          .getElementById("restartButton")
+          .addEventListener("click", function () {
+            window.location.href = "game.html";
+          });
+        document
+          .getElementById("menuButton")
+          .addEventListener("click", function () {
+            window.location.href = "index.html";
+          });
+      }
+
+      if (externalBoost <= 0 && !gameOver) {
+        console.log("Game over");
+        setGameOver(true);
+        DisplayGameOver();
+
+        document
+          .getElementById("restartButton")
+          .addEventListener("click", function () {
+            window.location.href = "game.html";
+          });
+        document
+          .getElementById("menuButton")
+          .addEventListener("click", function () {
+            window.location.href = "index.html";
+          });
       }
     });
 
@@ -148,9 +167,7 @@ export function Asteroid() {
     const newTargets = targets.filter((target) => !target.hit);
     if (newTargets.length < MAX_ASTEROIDS) {
       newTargets.push({
-        center: randomPoint(new Vector3(4, 1, 4)).add(
-          new Vector3(0, 5, 0)
-        ),
+        center: randomPoint(new Vector3(4, 1, 4)).add(new Vector3(0, 5, 0)),
         direction: randomPoint().normalize(),
         hit: false,
       });
