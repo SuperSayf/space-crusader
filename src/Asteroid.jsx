@@ -1,36 +1,79 @@
 import { useState, useMemo } from "react";
-import {
-  Quaternion,
-  SphereGeometry,
-  TextureLoader,
-  Vector3,
-} from "three";
+import { Quaternion, SphereGeometry, TextureLoader, Vector3 } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./animatedSpaceship";
 
 //Display function to add Gameover pop up html (Currently not using this )
+// function DisplayGameOver() {
+//   const gameScreen = document.createElement('div');
+//   gameScreen.classList.add('game-screen');
+//   gameScreen.id = 'gameScreen';
+
+//   // Create the h2 element
+//   const h2 = document.createElement('h2');
+//   h2.textContent = 'Game Over!';
+//   gameScreen.appendChild(h2);
+
+//   // Create the restart button
+//   const restartButton = document.createElement('button');
+//   restartButton.id = 'restartButton';
+//   restartButton.textContent = 'Restart';
+//   gameScreen.appendChild(restartButton);
+
+//   // Create the menu button
+//   const menuButton = document.createElement('button');
+//   menuButton.id = 'menuButton';
+//   menuButton.textContent = 'Go to Main Menu';
+//   gameScreen.appendChild(menuButton);
+
+//   // Add event listeners to buttons (if needed)
+
+//   // Append the game screen to the body
+//   document.body.appendChild(gameScreen);
+
+//   // Create the style element
+//   const style = document.createElement('style');
+//   style.textContent = `
+//     .game-screen {
+//       display: block;
+//       position: fixed;
+//       top: 50%;
+//       left: 50%;
+//       transform: translate(-50%, -50%);
+//       background-color: #333;
+//       border: 4px solid #fff;
+//       padding: 40px;
+//       text-align: center;
+//       box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+//       z-index: 9999;
+//       color: #fff;
+//       font-family: 'Arial', sans-serif;
+//     }
+//   `;
+//   document.head.appendChild(style);
+// }
+
 function DisplayGameOver() {
-  const gameScreen = document.createElement('div');
-  gameScreen.classList.add('game-screen');
-  gameScreen.id = 'gameScreen';
+  const gameScreen = document.createElement("div");
+  gameScreen.classList.add("game-screen");
+  gameScreen.id = "gameScreen";
 
   // Create the h2 element
-  const h2 = document.createElement('h2');
-  h2.textContent = 'Game Over!';
+  const h2 = document.createElement("h2");
+  h2.textContent = "Game Over!";
   gameScreen.appendChild(h2);
 
-
   // Create the restart button
-  const restartButton = document.createElement('button');
-  restartButton.id = 'restartButton';
-  restartButton.textContent = 'Restart';
+  const restartButton = document.createElement("button");
+  restartButton.id = "restartButton";
+  restartButton.textContent = "Restart";
   gameScreen.appendChild(restartButton);
 
   // Create the menu button
-  const menuButton = document.createElement('button');
-  menuButton.id = 'menuButton';
-  menuButton.textContent = 'Go to Main Menu';
+  const menuButton = document.createElement("button");
+  menuButton.id = "menuButton";
+  menuButton.textContent = "Go to Main Menu";
   gameScreen.appendChild(menuButton);
 
   // Add event listeners to buttons (if needed)
@@ -39,7 +82,9 @@ function DisplayGameOver() {
   document.body.appendChild(gameScreen);
 
   // Create the style element
-  const style = document.createElement('style');
+  const style = document.createElement("style");
+  // Not working
+  // style.innerHTML = `
   style.textContent = `
     .game-screen {
       display: block;
@@ -47,7 +92,7 @@ function DisplayGameOver() {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background-color: #333;
+      background-color: #000; /* Dark background for a space theme */
       border: 4px solid #fff;
       padding: 40px;
       text-align: center;
@@ -55,6 +100,25 @@ function DisplayGameOver() {
       z-index: 9999;
       color: #fff;
       font-family: 'Arial', sans-serif;
+    }
+
+    .game-screen h2 {
+      color: #33ccff; /* Cosmic blue for the heading */
+    }
+
+    .game-screen button {
+      background-color: #33ccff; /* Cosmic blue for buttons */
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      margin: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .game-screen button:hover {
+      background-color: #005580; /* Darker blue on hover */
     }
   `;
   document.head.appendChild(style);
@@ -68,7 +132,7 @@ function randomPoint(scale) {
   ).multiply(scale || new Vector3(1, 1, 1));
 }
 
-const TARGET_RAD = 0.125*2;
+const TARGET_RAD = 0.125 * 2;
 const SPAWN_DEPTH = -10; // Depth at which new asteroids are spawned
 const MAX_ASTEROIDS = 15; // Maximum number of asteroids
 
@@ -89,7 +153,7 @@ export function Asteroid() {
   });
 
   //Game Over State Component
-  const[gameOver , setGameOver] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
 
   const textureLoader = new TextureLoader();
   const asteroidTexture = textureLoader.load("assets/textures/asteroid.jpg");
@@ -116,7 +180,7 @@ export function Asteroid() {
   useFrame(() => {
     // Move the asteroids downward in each frame
     targets.forEach((target, i) => {
-       target.center.y -= 0.01; 
+      target.center.y -= 0.01;
       if (target.center.y < SPAWN_DEPTH) {
         // Remove asteroids that have reached the spawn depth
         target.center.set(
@@ -134,7 +198,7 @@ export function Asteroid() {
       //   .sub(target.direction.clone().multiplyScalar(dist));
 
       // const hitDist = projected.distanceTo(target.center);
-      const distance = planePosition.distanceTo(target.center)
+      const distance = planePosition.distanceTo(target.center);
       //if the ship hits the asteroid
       if (distance < TARGET_RAD && !gameOver) {
         target.hit = true; //  muz
@@ -142,13 +206,16 @@ export function Asteroid() {
         setGameOver(true);
         DisplayGameOver();
 
-        document.getElementById("restartButton").addEventListener("click", function () {
-          window.location.href = "game.html";
-        });
-        document.getElementById("menuButton").addEventListener("click", function () {
-          window.location.href = "index.html";
-        });
-
+        document
+          .getElementById("restartButton")
+          .addEventListener("click", function () {
+            window.location.href = "game.html";
+          });
+        document
+          .getElementById("menuButton")
+          .addEventListener("click", function () {
+            window.location.href = "index.html";
+          });
       }
     });
 
@@ -156,9 +223,7 @@ export function Asteroid() {
     const newTargets = targets.filter((target) => !target.hit);
     if (newTargets.length < MAX_ASTEROIDS) {
       newTargets.push({
-        center: randomPoint(new Vector3(4, 1, 4)).add(
-          new Vector3(0, 5, 0)
-        ),
+        center: randomPoint(new Vector3(4, 1, 4)).add(new Vector3(0, 5, 0)),
         direction: randomPoint().normalize(),
         hit: false,
       });
