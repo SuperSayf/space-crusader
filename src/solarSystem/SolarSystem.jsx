@@ -18,38 +18,13 @@ const SolarSystem = React.memo(() => {
     <group ref={solarRef}>
     <Sun /> 
     <Mercury />
-    <mesh rotateY={Math.PI}>
-        <torusGeometry args={[15, 0.1, 2, 100]} />
-    </mesh>
     <Venus />
-    <mesh>
-        <torusGeometry args={[25, 0.1, 2, 100]} />
-    </mesh>
     <Earth displacementScale={0.01}/>
-    <mesh>
-        <torusGeometry args={[45, 0.1, 2, 100]} />
-    </mesh>
     <Mars />
-    <mesh>
-        <torusGeometry args={[70, 0.1, 2, 100]} />
-    </mesh>
     <Jupiter />
-    <mesh>
-        <torusGeometry args={[95, 0.1, 2, 100]} />
-    </mesh>
     <Saturn />
-    <mesh>
-        <torusGeometry args={[120, 0.1, 2, 100]} />
-    </mesh>
     <Uranus />
-    <mesh>
-        <torusGeometry args={[130, 0.1, 2, 100]} />
-    </mesh>
     <Neptune />
-    <mesh>
-        <torusGeometry args={[150, 0.1, 2, 100]} />
-    </mesh>
-
     </group>
   )
 })

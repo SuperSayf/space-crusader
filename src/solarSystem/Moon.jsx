@@ -2,7 +2,7 @@ import { useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import React, { useRef, useCallback } from 'react'
 import * as THREE from 'three'
-import { planePosition } from "../Lvl3/Lvl3Spaceship";
+import { planePosition } from "../Lvl2/Lvl2SpaceShip";
 
 
 const Moon = React.memo(() => {

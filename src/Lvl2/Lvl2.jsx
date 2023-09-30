@@ -9,10 +9,10 @@ import { BlendFunction } from "postprocessing";
 import { SphereEnv } from "../SphereEnv";
 import { Spaceship } from "../spaceShip";
 import { MiniMap } from "../MiniMap";
-import { Targets } from "../TargetsLvl2";
+import { Targets } from "./TargetsLvl2";
 import { MotionBlur } from "../MotionBlur";
 import { Asteroid } from "../Asteroid";
-import { AnimatedSpaceship } from "../animatedSpaceship";
+import { AnimatedSpaceship } from "./Lvl2SpaceShip";
 import SolarSystem from "../solarSystem/solarSystem";
 
 import { Howl, Howler } from "howler"; // Import Howler
@@ -43,9 +43,9 @@ function App() {
       
       <PerspectiveCamera makeDefault position={[0, 10, 10]} />
       <OrbitControls target={[0, 0, 0]} />
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={0.3} />
       {/* <Spaceship /> */}
-      {/* <AnimatedSpaceship /> */}
+      <AnimatedSpaceship />
       <SolarSystem /> 
       <Targets />
       {/* <Asteroid /> */}

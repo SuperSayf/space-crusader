@@ -15,7 +15,7 @@ import { MotionBlur } from "../MotionBlur";
 import { Asteroid } from "./Asteroid";
 import { SpaceStation } from "../spaceStation";
 import { MiniMap } from "../MiniMap";
-import { Sun } from "../solarSystem/Sun";
+import { Sun } from "./Sun";
 import { AnimatedSpaceship } from "./Lvl3Spaceship";
 import { DeathStar } from "../DeathStar";
 import { Howl, Howler } from "howler"; // Import Howler

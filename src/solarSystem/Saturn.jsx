@@ -2,7 +2,7 @@ import { useTexture } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import React, { useRef, useCallback, useEffect, useState } from 'react'
 import { SaturnModel } from './SaturnModel'
-import { planePosition } from "../Lvl3/Lvl3Spaceship";
+import { planePosition } from "../Lvl2/Lvl2SpaceShip";
 
 import * as THREE from 'three'
 

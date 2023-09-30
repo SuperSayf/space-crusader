@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useGLTF, useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Vector3 } from "three";
-import { planePosition } from "../Lvl2/Lvl2SpaceShip";
+import { planePosition } from "./Lvl3Spaceship";
 
 export function Sun(props) {
   const { nodes, materials } = useGLTF("assets/models/Sun.glb");
@@ -20,6 +20,7 @@ export function Sun(props) {
   useFrame(() => {
     // Calculate the distance between the plane position and the sphere center
     const distance = planePosition.distanceTo(sphereCenter);
+    console.log(planePosition)
 
     // Check if the plane is inside the sphere
     if (distance < sphereRadius) {
