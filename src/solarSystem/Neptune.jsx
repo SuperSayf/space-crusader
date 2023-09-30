@@ -1,6 +1,7 @@
 import { useTexture } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import React, { useRef, useCallback, useEffect, useState } from 'react'
+import { planePosition } from "../Lvl3/Lvl3Spaceship";
 
 import * as THREE from 'three'
 
@@ -25,8 +26,18 @@ const Neptune = React.memo(() => {
     neptuneRef.current.rotation.y += 0.002
   }, [])
 
+  const collisionCheck = useCallback(() => {
+    const distance = planePosition.distanceTo(neptuneRef.current.position);
+
+    // Check if the plane is inside the sphere
+    if (distance <= 3.5) {
+      console.log("Collision detected!");
+    }
+  }, [])
+
   useFrame(() => {
     updateneptunePosition()
+    collisionCheck()
   })
 
   return (
@@ -35,7 +46,7 @@ const Neptune = React.memo(() => {
         castShadow
         receiveShadow>
         {/* Radius , X-axis , Y-axis */}
-        <sphereGeometry args={[1.3, 32, 32]} />
+        <sphereGeometry args={[3.5, 32, 32]} />
         <meshPhongMaterial
           map={neptuneTexture}
         />

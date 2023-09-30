@@ -1,6 +1,7 @@
 import { useTexture } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import React, { useRef, useCallback, useEffect, useState } from 'react'
+import { planePosition } from "../Lvl3/Lvl3Spaceship";
 
 import * as THREE from 'three'
 
@@ -25,8 +26,18 @@ const Jupiter = React.memo(() => {
     jupiterRef.current.rotation.y += 0.002
   }, [])
 
+  const collisionCheck = useCallback(() => {
+    const distance = planePosition.distanceTo(jupiterRef.current.position);
+
+    // Check if the plane is inside the sphere
+    if (distance <= 5) {
+      console.log("Collision detected!");
+    }
+  }, [])
+
   useFrame(() => {
     updatejupiterPosition()
+    collisionCheck()
   })
 
   return (
