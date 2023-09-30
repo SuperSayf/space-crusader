@@ -15,7 +15,7 @@ if (rootContainer) {
       <Canvas shadows>
         <color attach="background" args={["black"]} />
         <Suspense fallback={null}>
-          <Lvl3 />
+          <Lvl2 />
           {/* <App /> */}
         </Suspense>
       </Canvas>

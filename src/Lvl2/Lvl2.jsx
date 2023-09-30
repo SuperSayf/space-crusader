@@ -9,7 +9,7 @@ import { BlendFunction } from "postprocessing";
 import { SphereEnv } from "../SphereEnv";
 import { Spaceship } from "../spaceShip";
 import { MiniMap } from "../MiniMap";
-import { Targets } from "../Targets";
+import { Targets } from "../TargetsLvl2";
 import { MotionBlur } from "../MotionBlur";
 import { Asteroid } from "../Asteroid";
 import { AnimatedSpaceship } from "../animatedSpaceship";
@@ -45,9 +45,9 @@ function App() {
       <OrbitControls target={[0, 0, 0]} />
       <ambientLight intensity={0.5} />
       {/* <Spaceship /> */}
-      <AnimatedSpaceship />
+      {/* <AnimatedSpaceship /> */}
       <SolarSystem /> 
-      {/* <Targets /> */}
+      <Targets />
       {/* <Asteroid /> */}
       <MiniMap />
 
