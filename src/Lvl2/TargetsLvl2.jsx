@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { Quaternion, SphereGeometry, TorusGeometry, Vector3 } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
-import { planePosition } from "../animatedSpaceship";
+import { planePosition } from "./Lvl2SpaceShip";
 
 const NUM_TARGETS = 40; // Number of targets
 const TARGET_SPACING = 6.0; // Spacing between targets on the line
@@ -17,9 +17,9 @@ export function Targets() {
     for (let i = 1; i < NUM_TARGETS; i++) {
       // Change the starting point for each target as needed
       const position = new Vector3(
-        ChangeZ + Math.random() * 2, // Z-component (depth position)
+        ChangeZ + Math.random() * 2, // X-component (depth position)
         ChangeY + Math.random() * 2, // Y-component (vertical position)
-        i * TARGET_SPACING + offset, // X-component (horizontal position)
+        i * TARGET_SPACING + offset, // Z-component (horizontal position)
       );
 
       // Create an initial direction vector (0, 0, 1) for the positive Z-axis

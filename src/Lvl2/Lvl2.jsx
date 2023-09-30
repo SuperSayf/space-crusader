@@ -17,6 +17,8 @@ import SolarSystem from "../solarSystem/solarSystem";
 
 import { Howl, Howler } from "howler"; // Import Howler
 import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file
+import {Bridge} from "./bridge";
+
 
 function App() {
   // // Create an instance of the background music
@@ -42,7 +44,7 @@ function App() {
       <Environment background={false} files={"assets/textures/space.hdr"} />
       
       <PerspectiveCamera makeDefault position={[0, 10, 10]} />
-      <OrbitControls target={[0, 0, 0]} />
+      <OrbitControls target={[0, 0, 165]} />
       <ambientLight intensity={0.3} />
       {/* <Spaceship /> */}
       <AnimatedSpaceship />
@@ -50,7 +52,11 @@ function App() {
       <Targets />
       {/* <Asteroid /> */}
       <MiniMap />
-
+      <Bridge 
+          position = {[1,-8,170]} 
+          rotation={[0,Math.PI/2, 0]}
+          scale = {[0.5,0.5,0.5]}
+          />
       <EffectComposer>
         <MotionBlur />
         <HueSaturation
