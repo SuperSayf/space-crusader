@@ -1,6 +1,7 @@
 import { useTexture } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import React, { useRef, useCallback, useEffect, useState } from 'react'
+import { planePosition } from "../Lvl3/Lvl3Spaceship";
 import Moon from './Moon'
 
 import * as THREE from 'three'
@@ -34,8 +35,18 @@ const Earth = React.memo(({ displacementScale }) => {
     earthRef.current.rotation.y += 0.002
   }, [])
 
+  const collisionCheck = useCallback(() => {
+    const distance = planePosition.distanceTo(earthRef.current.position);
+
+    // Check if the plane is inside the sphere
+    if (distance <= 2) {
+      console.log("Collision detected!");
+    }
+  }, [])
+
   useFrame(() => {
-    updateEarthPosition()
+    updateEarthPosition();
+    collisionCheck();
   })
 
   return (
