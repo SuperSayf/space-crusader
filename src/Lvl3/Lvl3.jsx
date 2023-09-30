@@ -79,7 +79,7 @@ function Lvl3() {
       <Asteroid />
       <MiniMap />
 
-      {/* <directionalLight
+      <directionalLight
         castShadow
         color={'#f3d29a'}
         intensity={1}
@@ -93,7 +93,7 @@ function Lvl3() {
         shadow-camera-bottom={-6}
         shadow-camera-left={-6.2}
         shadow-camera-right={6.4}
-      /> */}
+      />
 
       <EffectComposer>
         <MotionBlur />
