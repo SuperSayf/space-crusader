@@ -4,12 +4,12 @@ import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./animatedSpaceship";
 
-const NUM_TARGETS = 40; // Number of targets
-const TARGET_SPACING = 2.0; // Spacing between targets on the line
+const NUM_TARGETS = 20; // Number of targets
+const TARGET_SPACING = 6.0; // Spacing between targets on the line
 const TARGET_RAD = 0.125; // Radius of the target
 const offset = 4;//adjusts the starting point of the targets
 const ChangeY = 0;//adjusts the height of the targets
-const ChangeZ = 0;//adjusts the depth of the targets
+const ChangeZ = -1;//adjusts the depth of the targets
 
 export function Targets() {
   const [targets, setTargets] = useState(() => {
