@@ -22,7 +22,7 @@ const Saturn = React.memo(() => {
 
   const updatesaturnPosition = useCallback(() => {
     // Calculate the saturn' position based on its angle from the Sun
-    const angle = clockRef.current.getElapsedTime() * 0.12
+    const angle = 30 + clockRef.current.getElapsedTime() * 0.12
     const distance = 120
     const x = Math.sin(angle) * distance
     const z = Math.cos(angle) * distance

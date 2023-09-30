@@ -18,7 +18,7 @@ const Mercury = React.memo(() => {
 
   const updatemercuryPosition = useCallback(() => {
     // Calculate the mercury' position based on its angle from the Sun
-    const angle = clockRef.current.getElapsedTime() * 0.03
+    const angle = 50 + clockRef.current.getElapsedTime() * 0.03
     const distance = 15
     const x = Math.sin(angle) * distance
     const z = Math.cos(angle) * distance

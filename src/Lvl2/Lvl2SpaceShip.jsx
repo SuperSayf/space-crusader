@@ -15,7 +15,7 @@ import { JustSpaceshhip } from "../justSpaceship";
 const x = new Vector3(1, 0, 0);
 const y = new Vector3(0, 1, 0);
 const z = new Vector3(0, 0, 1);
-export const planePosition = new Vector3(165, 0, 1);
+export const planePosition = new Vector3(1, 2, 170);
 
 const delayedRotMatrix = new Matrix4();
 const delayedQuaternion = new Quaternion();

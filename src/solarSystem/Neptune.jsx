@@ -18,7 +18,7 @@ const Neptune = React.memo(() => {
 
   const updateneptunePosition = useCallback(() => {
     // Calculate the neptune' position based on its angle from the Sun
-    const angle = clockRef.current.getElapsedTime() * 0.07
+    const angle = 5 + clockRef.current.getElapsedTime() * 0.07
     const distance = 150
     const x = Math.sin(angle) * distance
     const z = Math.cos(angle) * distance

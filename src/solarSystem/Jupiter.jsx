@@ -18,7 +18,7 @@ const Jupiter = React.memo(() => {
 
   const updatejupiterPosition = useCallback(() => {
     // Calculate the jupiter' position based on its angle from the Sun
-    const angle = clockRef.current.getElapsedTime() * 0.1
+    const angle = 20 + clockRef.current.getElapsedTime() * 0.1
     const distance = 95
     const x = Math.sin(angle) * distance
     const z = Math.cos(angle) * distance

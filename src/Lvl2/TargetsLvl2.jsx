@@ -8,8 +8,8 @@ const NUM_TARGETS = 40; // Number of targets
 const TARGET_SPACING = 6.0; // Spacing between targets on the line
 const TARGET_RAD = 0.125; // Radius of the target
 const offset = 4;//adjusts the starting point of the targets
-const ChangeY = 0;//adjusts the height of the targets
-const ChangeZ = -1;//adjusts the depth of the targets
+const ChangeY = 1;//adjusts the height of the targets
+const ChangeZ = 0;//adjusts the depth of the targets
 
 export function Targets() {
   const [targets, setTargets] = useState(() => {
@@ -17,13 +17,13 @@ export function Targets() {
     for (let i = 1; i < NUM_TARGETS; i++) {
       // Change the starting point for each target as needed
       const position = new Vector3(
-        i * TARGET_SPACING + offset, // X-component (horizontal position)
-        ChangeY + Math.random() * 2, // Y-component (vertical position)
         ChangeZ + Math.random() * 2, // Z-component (depth position)
+        ChangeY + Math.random() * 2, // Y-component (vertical position)
+        i * TARGET_SPACING + offset, // X-component (horizontal position)
       );
 
       // Create an initial direction vector (0, 0, 1) for the positive Z-axis
-      const initialDirection = new Vector3(0, 0, 1);
+      const initialDirection = new Vector3(1, 0, 0);
       // Calculate the rotated direction vector by 90 degrees around the Y-axis
       const rotatedDirection = new Vector3(-initialDirection.z, 0, initialDirection.x);
       arr.push({
