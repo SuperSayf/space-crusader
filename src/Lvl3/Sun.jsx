@@ -25,7 +25,6 @@ export function Sun(props) {
 
     // Check if the plane is inside the sphere
     if (distance < sphereRadius && !gameOver) {
-      console.log("Game Over!");
       const leaderboardData = [
         { name: "Sayf", timeLasted: "1 second" },
         { name: "Muz", timeLasted: "180 seconds" },
