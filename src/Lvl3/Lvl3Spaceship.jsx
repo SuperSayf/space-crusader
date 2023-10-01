@@ -11,6 +11,7 @@ import { externalShowSubtitles } from "./Lvl3";
 import TypeWriterEffect from "react-typewriter-effect";
 import { Flame } from "../flame";
 import { JustSpaceshhip } from "../justSpaceship";
+import { ShipExplosion } from "../shipExplosion";
 
 const x = new Vector3(1, 0, 0);
 const y = new Vector3(0, 1, 0);
@@ -212,6 +213,8 @@ export function AnimatedSpaceship(props) {
             </div>
           </Html>
         )}
+
+        {/* <ShipExplosion /> */}
 
         <JustSpaceshhip />
 
