@@ -56,7 +56,32 @@ let pitchVelocity = 0;
 let planeSpeed = 0.006;
 export let turbo = 0;
 
+// Define gamepad state
+const gamepadState = {
+  leftStickX: 0,
+  leftStickY: 0,
+};
+
+// Handle gamepad input
+function handleGamepadInput() {
+  const gamepads = navigator.getGamepads();
+  if (gamepads.length > 0) {
+    const gamepad = gamepads[0]; // You may need to adjust this index based on the connected gamepad
+
+    // Check if the gamepad object is not null before accessing its properties
+    if (gamepad) {
+      // Read left stick input for ship movement
+      gamepadState.leftStickX = gamepad.axes[0];
+      gamepadState.leftStickY = gamepad.axes[1];
+
+      // You can add more logic here to handle other gamepad buttons for actions
+    }
+  }
+}
+
 export function updatePlaneAxis(x, y, z, planePosition, camera) {
+  handleGamepadInput(); // Update gamepad input
+
   jawVelocity *= 0.95;
   pitchVelocity *= 0.95;
 
@@ -65,6 +90,10 @@ export function updatePlaneAxis(x, y, z, planePosition, camera) {
 
   if (Math.abs(pitchVelocity) > maxVelocity)
     pitchVelocity = Math.sign(pitchVelocity) * maxVelocity;
+
+  // Use gamepad input for ship movement
+  jawVelocity += gamepadState.leftStickX * 0.0025;
+  pitchVelocity -= gamepadState.leftStickY * 0.0025;
 
   if (controls["a"]) {
     jawVelocity += 0.0025;
@@ -121,6 +150,20 @@ export function updatePlaneAxis(x, y, z, planePosition, camera) {
 
 // Define the action to be executed when the cheat code is entered
 function executeCheatCodeAction() {
-  //Go to a page with a Rick Astley video
+  // Go to a page with a Rick Astley video
   window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
 }
+
+// Check for gamepad support
+window.addEventListener("gamepadconnected", (event) => {
+  const gamepad = event.gamepad;
+  console.log(`Gamepad connected: ${gamepad.id}`);
+  // Add your gamepad input handling logic here
+});
+
+// Check for gamepad disconnection
+window.addEventListener("gamepaddisconnected", (event) => {
+  const gamepad = event.gamepad;
+  console.log(`Gamepad disconnected: ${gamepad.id}`);
+  // Add your gamepad disconnection handling logic here
+});
