@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head >
+	<title>Space Crusaders | Levels</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="hsl(221 90% 98%)" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="Canvas" media="(prefers-color-scheme: dark)">
+    <meta name="description" content="🙂">
+    <link rel="stylesheet" href="./src/startScreen/style.css">
+    <script type="module" src="./src/startScreen/index.js"></script>
+	
+</head>
+
+<body>
+	<ul class="threeD-button-set">
+		<li><button onclick="handleLevelClick('lvl1')">Level 1</button></li>
+		<li><button onclick="handleLevelClick('lvl2')">Level 2</button></li>
+		<li><button onclick="handleLevelClick('lvl3')">Level 3</button></li>
+	</ul>	
+		
+	
+
+	<script>
+		const handleLevelClick = (level) => {
+			window.location.href = `game.html?level=${level}`;
+		};
+	</script>
+</body>
+
+</html>

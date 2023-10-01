@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import {
   PerspectiveCamera,
   Environment,
-  OrbitControls
+  OrbitControls,
 } from "@react-three/drei";
 import { EffectComposer, HueSaturation } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
@@ -17,8 +17,8 @@ import SolarSystem from "../solarSystem/solarSystem";
 
 import { Howl, Howler } from "howler"; // Import Howler
 import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file
-import {Bridge} from "./bridge";
-
+import { Bridge } from "./bridge";
+import { Stats } from "@react-three/drei";
 
 function App() {
   // // Create an instance of the background music
@@ -40,23 +40,24 @@ function App() {
 
   return (
     <>
+      <Stats />
       <SphereEnv />
       <Environment background={false} files={"assets/textures/space.hdr"} />
-      
+
       <PerspectiveCamera makeDefault position={[0, 10, 10]} />
-      <OrbitControls target={[0, 0, 165]} />
+      <OrbitControls target={[0, 0, 0]} />
       <ambientLight intensity={0.3} />
       {/* <Spaceship /> */}
       <AnimatedSpaceship />
-      <SolarSystem /> 
+      <SolarSystem />
       <Targets />
       {/* <Asteroid /> */}
       <MiniMap />
-      <Bridge 
-          position = {[1,-8,170]} 
-          rotation={[0,Math.PI/2, 0]}
-          scale = {[0.5,0.5,0.5]}
-          />
+      <Bridge
+        position={[1, -8, 170]}
+        rotation={[0, Math.PI / 2, 0]}
+        scale={[0.5, 0.5, 0.5]}
+      />
       <EffectComposer>
         <MotionBlur />
         <HueSaturation
