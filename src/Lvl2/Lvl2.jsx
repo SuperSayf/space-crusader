@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import {
   PerspectiveCamera,
   Environment,
-  OrbitControls
+  OrbitControls,
 } from "@react-three/drei";
 import { EffectComposer, HueSaturation } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
@@ -65,13 +65,13 @@ function App() {
     <Stats />
       <SphereEnv />
       <Environment background={false} files={"assets/textures/space.hdr"} />
-      
+
       <PerspectiveCamera makeDefault position={[0, 10, 10]} />
       <OrbitControls target={[0, 0, 0]} />
       <ambientLight intensity={0.3} />
       {/* <Spaceship /> */}
       <AnimatedSpaceship />
-      <SolarSystem /> 
+      <SolarSystem />
       <Targets />
       {/* <Asteroid /> */}
       <MiniMap />
