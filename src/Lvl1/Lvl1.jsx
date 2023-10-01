@@ -10,7 +10,7 @@ import { Landscape } from "../Landscape";
 import { SphereEnv } from "../SphereEnv";
 import { Spaceship } from "../spaceShip";
 import { MiniMap } from "../MiniMap";
-import { Targets } from "../Targets";
+import { Targets } from "./Targets";
 import { MotionBlur } from "../MotionBlur";
 import { Asteroid } from "./Asteroid";
 import { AnimatedSpaceship } from "../animatedSpaceship";
