@@ -83,7 +83,8 @@ import { Quaternion, TorusGeometry, Vector3 } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "../animatedSpaceship";
-
+import { displayLevelCompletion } from "../LevelComplete";
+import { displayGameOver } from "../GameOver";
 function pointsInCircle(numPoints, radius, center) {
   const points = [];
   for (let i = 0; i < numPoints; i++) {
@@ -107,7 +108,7 @@ function randomPoint(scale) {
 const TARGET_RAD = 0.125;
 
 export function Targets() {
-  const numTargets = 25;
+  const numTargets = 2;
   const circleRadius = 5;
 
   const [targets, setTargets] = useState(() => {
@@ -148,15 +149,12 @@ export function Targets() {
 
   useFrame(() => {
     targets.forEach((target, i) => {
-      const v = planePosition.clone().sub(target.center);
-      const dist = target.direction.dot(v);
-      const projected = planePosition
-        .clone()
-        .sub(target.direction.clone().multiplyScalar(dist));
-
-      const hitDist = projected.distanceTo(target.center);
-      if (hitDist < TARGET_RAD) {
+      //Target Collision Updated Logic
+      const distance = planePosition.distanceTo(target.center);
+      //if the ship hits the target/ring
+      if (distance < TARGET_RAD) {
         target.hit = true;
+        console.log("Ring hit")
       }
     });
 
@@ -166,7 +164,7 @@ export function Targets() {
     }
   });
 
-  return (
+  return  targets.length > 0 ?(
     <mesh geometry={geometry}>
       <meshStandardMaterial
         roughness={0.5}
@@ -174,5 +172,6 @@ export function Targets() {
         emissive={"#00ff00"}
       />
     </mesh>
-  );
+  ):
+  null;
 }

@@ -1,14 +1,19 @@
 //Still in Work not in use rn.
 
-export function displayLevelCompletion(levelNumber) {
+export function displayLevelCompletion() {
     const gameScreen = document.createElement("div");
     gameScreen.classList.add("game-screen");
     gameScreen.id = "gameScreen";
 
     // Create the h2 element
     const h2 = document.createElement("h2");
-    h2.textContent = `Level ${levelNumber} Completed!`;
+    h2.textContent = "Level Completed!";
     gameScreen.appendChild(h2);
+
+    // Create the hmsg element
+    const hmsg = document.createElement("h2");
+    hmsg.textContent = `Congratulations you have completed level 1 !`;
+    gameScreen.appendChild(hmsg);
 
     // // Create a paragraph for rewards
     // const rewardsParagraph = document.createElement("p");
@@ -75,7 +80,7 @@ export function displayLevelCompletion(levelNumber) {
         .getElementById("nextLevelButton")
         .addEventListener("click", function () {
             // Add logic to go to the next level
-            window.location.href =`game.html?level=lvl ${levelNumber++} `;
+            // window.location.href =`game.html?level=lvl ${levelNumber++} `;
         });
 
     document
