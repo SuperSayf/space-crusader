@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
+import Lvl1 from "./Lvl1/Lvl1.jsx";
 import Lvl2 from "./Lvl2/Lvl2.jsx";
 import Lvl3 from "./Lvl3/Lvl3.jsx";
 import { Canvas } from "@react-three/fiber";
@@ -15,8 +15,7 @@ if (rootContainer) {
       <Canvas shadows>
         <color attach="background" args={["black"]} />
         <Suspense fallback={null}>
-          <Lvl2 />
-          {/* <App /> */}
+          <Lvl1 />
         </Suspense>
       </Canvas>
       <Loader />

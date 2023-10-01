@@ -11,7 +11,7 @@ import { Spaceship } from "../spaceShip";
 import { MiniMap } from "../MiniMap";
 import { Targets } from "./TargetsLvl2";
 import { MotionBlur } from "../MotionBlur";
-import { Asteroid } from "../Asteroid";
+import { Asteroid } from "../Lvl1/Asteroid";
 import { AnimatedSpaceship } from "./Lvl2SpaceShip";
 import SolarSystem from "../solarSystem/solarSystem";
 

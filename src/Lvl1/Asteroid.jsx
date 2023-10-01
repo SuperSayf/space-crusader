@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { Quaternion, SphereGeometry, TextureLoader, Vector3 } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
-import { planePosition } from "./animatedSpaceship";
+import { planePosition } from "../animatedSpaceship";
 
 //Display function to add Gameover pop up html (Currently not using this )
 // function DisplayGameOver() {
@@ -232,12 +232,16 @@ export function Asteroid() {
   });
 
   return (
+ 
+
     <mesh geometry={geometry} castShadow receiveShadow>
       <meshStandardMaterial
         roughness={0.9}
         metalness={0.1}
         map={asteroidTexture}
-      />
+        />
     </mesh>
+
+
   );
 }
