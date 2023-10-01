@@ -14,32 +14,55 @@ import { MotionBlur } from "../MotionBlur";
 import { Asteroid } from "../Lvl1/Asteroid";
 import { AnimatedSpaceship } from "./Lvl2SpaceShip";
 import SolarSystem from "../solarSystem/solarSystem";
-
-import { Howl, Howler } from "howler"; // Import Howler
 import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file
+import { Howl, Howler } from "howler"; // Import Howler
+import commander from "/assets/audio/Level_2_voice_over.mp3"; // Replace with the path to your background music file
 import {Bridge} from "./bridge";
+import { Stats } from "@react-three/drei";
 
+export let externalShowSubtitles = false;
 
 function App() {
-  // // Create an instance of the background music
-  // const backgroundMusic = new Howl({
-  //   src: [soundEffect],
-  //   loop: true,
-  // });
+  // Create an instance of the background music
+  const backgroundMusic = new Howl({
+    src: [soundEffect],
+    loop: true,
+  });
+  // Create an instance of the second audio
+  const secondAudio = new Howl({
+    src: [commander],
+    loop: false,
+  });
 
-  // //Start playing the background music when the component mounts
-  // useEffect(() => {
-  //   backgroundMusic.volume(0.3); // Adjust the volume as needed
-  //   backgroundMusic.play();
+  // Start playing the background music and the second audio when the component mounts
+  useEffect(() => {
+    backgroundMusic.volume(0.3); // Adjust the volume as needed
+    backgroundMusic.play();
 
-  //   // Clean up the audio when the component unmounts
-  //   return () => {
-  //     backgroundMusic.stop();
-  //   };
-  // }, []);
+    secondAudio.volume(1.0); // Adjust the volume as needed
+    secondAudio.play();
+
+    externalShowSubtitles = true;
+
+    // Add an event listener to the second audio to detect when it ends
+    secondAudio.on("end", () => {
+      externalShowSubtitles = false;
+    });
+
+    // Clean up the audio and event listener when the component unmounts
+    return () => {
+      backgroundMusic.stop();
+      secondAudio.stop();
+      secondAudio.off("end"); // Remove the event listener to prevent memory leaks
+      externalShowSubtitles = false;
+    };
+  }, []);
+
+  
 
   return (
     <>
+    <Stats />
       <SphereEnv />
       <Environment background={false} files={"assets/textures/space.hdr"} />
       
