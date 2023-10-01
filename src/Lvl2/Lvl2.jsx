@@ -67,7 +67,7 @@ function App() {
       <Environment background={false} files={"assets/textures/space.hdr"} />
 
       <PerspectiveCamera makeDefault position={[0, 10, 10]} />
-      <OrbitControls target={[0, 0, 0]} />
+      <OrbitControls target={[0, 0, 160]} />
       <ambientLight intensity={0.3} />
       {/* <Spaceship /> */}
       <AnimatedSpaceship />
@@ -76,9 +76,9 @@ function App() {
       {/* <Asteroid /> */}
       <MiniMap />
       <Bridge
-        position={[1, -8, 170]}
-        rotation={[0, Math.PI / 2, 0]}
-        scale={[0.5, 0.5, 0.5]}
+        position={[1, 1, 179]}
+        rotation={[0, 0, 0]}
+        scale={[0.1, 0.1, 0.1]}
       />
       <EffectComposer>
         <MotionBlur />
