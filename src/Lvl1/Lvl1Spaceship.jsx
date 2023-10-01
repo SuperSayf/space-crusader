@@ -2,9 +2,9 @@ import React, { useRef, useEffect, useState } from "react";
 import { useGLTF, Html } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Matrix4, Quaternion, Vector3 } from "three";
-import { updatePlaneAxis } from "./controls";
-import { Flame } from "./flame";
-import { JustSpaceshhip } from "./justSpaceship";
+import { updatePlaneAxis } from "../controls";
+import { Flame } from "../flame";
+import { JustSpaceshhip } from "../justSpaceship";
 
 const x = new Vector3(1, 0, 0);
 const y = new Vector3(0, 1, 0);

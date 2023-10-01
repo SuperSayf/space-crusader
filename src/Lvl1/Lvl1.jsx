@@ -8,12 +8,11 @@ import { EffectComposer, HueSaturation } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
 import { Landscape } from "../Landscape";
 import { SphereEnv } from "../SphereEnv";
-import { Spaceship } from "../spaceShip";
 import { MiniMap } from "../MiniMap";
 import { Targets } from "./Targets";
 import { MotionBlur } from "../MotionBlur";
 import { Asteroid } from "./Asteroid";
-import { AnimatedSpaceship } from "../animatedSpaceship";
+import { AnimatedSpaceship } from "./Lvl1Spaceship";
 import SolarSystem from "../solarSystem/solarSystem";
 
 import { Howl, Howler } from "howler"; // Import Howler

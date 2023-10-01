@@ -7,7 +7,6 @@ import {
 import { EffectComposer, HueSaturation } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
 import { SphereEnv } from "../SphereEnv";
-import { Spaceship } from "../spaceShip";
 import { MiniMap } from "../MiniMap";
 import { Targets } from "./TargetsLvl2";
 import { MotionBlur } from "../MotionBlur";
@@ -17,7 +16,7 @@ import SolarSystem from "../solarSystem/solarSystem";
 import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file
 import { Howl, Howler } from "howler"; // Import Howler
 import commander from "/assets/audio/Level_2_voice_over.mp3"; // Replace with the path to your background music file
-import {Bridge} from "./bridge";
+import { Bridge } from "./bridge";
 import { Stats } from "@react-three/drei";
 
 export let externalShowSubtitles = false;
@@ -58,11 +57,9 @@ function App() {
     };
   }, []);
 
-  
-
   return (
     <>
-    <Stats />
+      <Stats />
       <SphereEnv />
       <Environment background={false} files={"assets/textures/space.hdr"} />
 

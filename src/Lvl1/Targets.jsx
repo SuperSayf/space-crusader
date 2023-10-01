@@ -82,7 +82,7 @@ import { useState, useMemo } from "react";
 import { Quaternion, TorusGeometry, Vector3 } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
-import { planePosition } from "../animatedSpaceship";
+import { planePosition } from "./Lvl1Spaceship";
 import { displayLevelCompletion } from "../LevelComplete";
 import { displayGameOver } from "../GameOver";
 function pointsInCircle(numPoints, radius, center) {
@@ -154,7 +154,7 @@ export function Targets() {
       //if the ship hits the target/ring
       if (distance < TARGET_RAD) {
         target.hit = true;
-        console.log("Ring hit")
+        console.log("Ring hit");
       }
     });
 
@@ -164,7 +164,7 @@ export function Targets() {
     }
   });
 
-  return  targets.length > 0 ?(
+  return targets.length > 0 ? (
     <mesh geometry={geometry}>
       <meshStandardMaterial
         roughness={0.5}
@@ -172,6 +172,5 @@ export function Targets() {
         emissive={"#00ff00"}
       />
     </mesh>
-  ):
-  null;
+  ) : null;
 }
