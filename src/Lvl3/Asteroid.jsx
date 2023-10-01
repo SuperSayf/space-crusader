@@ -94,8 +94,13 @@ export function Asteroid() {
     updatedTargets.forEach((target, i) => {
       const distance = planePosition.distanceTo(target.center);
       if (distance < TARGET_RAD && !gameOver) {
+        const leaderboardData = [
+          { name: "Sayf", timeLasted: "Didn't even put it in" },
+          { name: "Muz", timeLasted: "180 seconds" },
+          { name: "Daggy", timeLasted: "90 seconds" }
+      ];
         setGameOver(true);
-        displayGameOver();
+        displayGameOver(leaderboardData);
       }
     });
   });

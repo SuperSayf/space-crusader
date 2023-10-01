@@ -1,6 +1,4 @@
-// GameOver.js
-
-export function displayGameOver() {
+export function displayGameOver(leaderboardData) {
     const gameScreen = document.createElement("div");
     gameScreen.classList.add("game-screen");
     gameScreen.id = "gameScreen";
@@ -9,6 +7,38 @@ export function displayGameOver() {
     const h2 = document.createElement("h2");
     h2.textContent = "Game Over!";
     gameScreen.appendChild(h2);
+  
+    // Create the leaderboard table
+    const leaderboardTable = document.createElement("table");
+    leaderboardTable.classList.add("leaderboard-table");
+  
+    // Create the table header row
+    const tableHeaderRow = document.createElement("tr");
+    const nameHeader = document.createElement("th");
+    nameHeader.textContent = "Name";
+    const timeHeader = document.createElement("th");
+    timeHeader.textContent = "Time Lasted";
+  
+    tableHeaderRow.appendChild(nameHeader);
+    tableHeaderRow.appendChild(timeHeader);
+  
+    leaderboardTable.appendChild(tableHeaderRow);
+  
+    // Populate the table with leaderboard data
+    for (const entry of leaderboardData) {
+        const tableRow = document.createElement("tr");
+        const nameCell = document.createElement("td");
+        nameCell.textContent = entry.name;
+        const timeCell = document.createElement("td");
+        timeCell.textContent = entry.timeLasted;
+  
+        tableRow.appendChild(nameCell);
+        tableRow.appendChild(timeCell);
+  
+        leaderboardTable.appendChild(tableRow);
+    }
+  
+    gameScreen.appendChild(leaderboardTable);
   
     // Create the restart button
     const restartButton = document.createElement("button");
@@ -64,17 +94,43 @@ export function displayGameOver() {
       .game-screen button:hover {
         background-color: #005580; /* Darker blue on hover */
       }
+  
+      .leaderboard-table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+      }
+  
+      .leaderboard-table th, .leaderboard-table td {
+        border: 1px solid #fff;
+        padding: 8px;
+        text-align: left;
+      }
+  
+      .leaderboard-table th {
+        background-color: #33ccff;
+        color: #fff;
+      }
+  
+      .leaderboard-table tr:nth-child(even) {
+        background-color: #005580;
+      }
+  
+      .leaderboard-table tr:nth-child(odd) {
+        background-color: #33ccff;
+      }
     `;
     document.head.appendChild(style);
+  
     document
     .getElementById("restartButton")
     .addEventListener("click", function () {
       window.location.href = "game.html";
     });
-  document
+  
+    document
     .getElementById("menuButton")
     .addEventListener("click", function () {
       window.location.href = "index.html";
     });
-  }
-  
+}
