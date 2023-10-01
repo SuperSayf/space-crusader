@@ -59,15 +59,12 @@ export function Targets() {
 
   useFrame(() => {
     targets.forEach((target, i) => {
-      const v = planePosition.clone().sub(target.center);
-      const dist = target.direction.dot(v);
-      const projected = planePosition
-        .clone()
-        .sub(target.direction.clone().multiplyScalar(dist));
-
-      const hitDist = projected.distanceTo(target.center);
-      if (hitDist < TARGET_RAD) {
+      //Target Collision Updated Logic
+      const distance = planePosition.distanceTo(target.center);
+      //if the ship hits the target/ring
+      if (distance < TARGET_RAD) {
         target.hit = true;
+        console.log("Ring hit")
       }
     });
 

@@ -95,7 +95,7 @@ export function Asteroid() {
       const distance = planePosition.distanceTo(target.center);
       if (distance < TARGET_RAD && !gameOver) {
         const leaderboardData = [
-          { name: "Sayf", timeLasted: "Didn't even put it in" },
+          { name: "Sayf", timeLasted: "1 second" },
           { name: "Muz", timeLasted: "180 seconds" },
           { name: "Daggy", timeLasted: "90 seconds" }
       ];

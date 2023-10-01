@@ -72,13 +72,7 @@ export function Asteroid() {
         target.hit = false;
       }
 
-      // const v = planePosition.clone().sub(target.center);
-      // const dist = target.direction.dot(v);
-      // const projected = planePosition
-      //   .clone()
-      //   .sub(target.direction.clone().multiplyScalar(dist));
 
-      // const hitDist = projected.distanceTo(target.center);
       const distance = planePosition.distanceTo(target.center);
       //if the ship hits the asteroid
       if (distance < TARGET_RAD && !gameOver) {
