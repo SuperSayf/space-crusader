@@ -3,7 +3,7 @@ import { Quaternion, SphereGeometry, TextureLoader, Vector3 } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl3Spaceship";
-import { displayGameOver } from "./GameOver";
+import { displayGameOver } from "../GameOver";
 
 
 function randomPoint(scale) {
@@ -100,7 +100,9 @@ export function Asteroid() {
           { name: "Daggy", timeLasted: "90 seconds" }
       ];
         setGameOver(true);
-        displayGameOver(leaderboardData);
+        //Msg For Game over Reason
+        const message = "You hit an asteroid!";
+        displayGameOver(leaderboardData,message);
       }
     });
   });

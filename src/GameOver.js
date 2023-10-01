@@ -1,4 +1,4 @@
-export function displayGameOver(leaderboardData) {
+export function displayGameOver(leaderboardData,message) {
     const gameScreen = document.createElement("div");
     gameScreen.classList.add("game-screen");
     gameScreen.id = "gameScreen";
@@ -7,6 +7,11 @@ export function displayGameOver(leaderboardData) {
     const h2 = document.createElement("h2");
     h2.textContent = "Game Over!";
     gameScreen.appendChild(h2);
+
+    // Create the h2 element with the dynamic message
+    const hmsg = document.createElement("h2");
+    hmsg.textContent = message; // Set the dynamic message
+    gameScreen.appendChild(hmsg);
   
     // Create the leaderboard table
     const leaderboardTable = document.createElement("table");
