@@ -24,7 +24,6 @@ if (selectedLevel === "lvl1") {
   LevelComponent = Lvl1; // Default to Lvl1 if no valid level is provided
 }
 
-
 if (rootContainer) {
   ReactDOM.createRoot(rootContainer).render(
     <>
@@ -32,10 +31,10 @@ if (rootContainer) {
         <color attach="background" args={["black"]} />
         <Suspense fallback={null}>
           {/* <Lvl3 /> */}
-          <LevelComponent/>
+          <LevelComponent />
         </Suspense>
       </Canvas>
-      <Loader />
+      {/* <Loader /> */}
     </>
   );
 } else {

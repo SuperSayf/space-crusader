@@ -17,7 +17,7 @@ import { SpaceStation } from "../spaceStation";
 import { MiniMap } from "../MiniMap";
 import { Sun } from "./Sun";
 import { AnimatedSpaceship } from "./Lvl3Spaceship";
-import { DeathStar } from "../DeathStar";
+import { DeathStar } from "./DeathStar";
 import { Howl, Howler } from "howler"; // Import Howler
 import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file
 import commander from "/assets/audio/commander.mp3"; // Replace with the path to your background music file
@@ -81,7 +81,7 @@ function Lvl3() {
 
       <directionalLight
         castShadow
-        color={'#f3d29a'}
+        color={"#f3d29a"}
         intensity={1}
         position={[10, 5, 4]}
         shadow-bias={-0.0005}

@@ -2,15 +2,23 @@ import React, { useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { MeshStandardMaterial, Vector3 } from "three";
-import { planePosition } from "./Lvl3/Lvl3Spaceship";
-import { displayGameOver } from "./GameOver";
+import { planePosition } from "./Lvl3Spaceship";
+import { displayGameOver } from "../GameOver";
+import { timeAliveExternal } from "./Lvl3Spaceship";
 
 export function DeathStar(props) {
   const { nodes, materials } = useGLTF("assets/models/deathStar.glb");
   const [gameOver, setGameOver] = useState(false);
-// Define the center and radius of the green sphere
-  const sphereCenter = new Vector3(5,1,1);
+  const [timeAlive, setTimeAlive] = useState(0);
+
+  // Define the center and radius of the green sphere
+  const sphereCenter = new Vector3(5, 1, 1);
   const sphereRadius = 0.51;
+
+  // Use effect to set the time alive
+  useFrame(() => {
+    setTimeAlive(timeAliveExternal);
+  });
 
   // Use useFrame for continuous collision detection
   useFrame(() => {
@@ -19,22 +27,19 @@ export function DeathStar(props) {
 
     // Check if the plane is inside the sphere
     if (distance < sphereRadius && !gameOver) {
-      const leaderboardData = [
-        { name: "Sayf", timeLasted: "1 second" },
-        { name: "Muz", timeLasted: "180 seconds" },
-        { name: "Daggy", timeLasted: "90 seconds" }
-    ];
+      const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
       setGameOver(true);
       //Msg For Game over Reason
-      const message = "You went into the death star... BRUH have you not watched Star Wars?";
-      displayGameOver(leaderboardData,message);
+      const message =
+        "You went into the death star... BRUH have you not watched Star Wars?";
+      displayGameOver(leaderboardData, message);
     }
   });
 
   return (
-    <group {...props} dispose={null} position={[5,1,1]}>
+    <group {...props} dispose={null} position={[5, 1, 1]}>
       <mesh
-      scale={0.01}
+        scale={0.01}
         castShadow
         receiveShadow
         geometry={nodes.DeathStar001_1_0.geometry}

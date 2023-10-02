@@ -6,7 +6,6 @@ import { planePosition } from "./Lvl3Spaceship";
 import { displayGameOver } from "../GameOver";
 import { timeAliveExternal } from "./Lvl3Spaceship";
 
-
 function randomPoint(scale) {
   return new Vector3(
     Math.random() * 2 - 1,
@@ -60,6 +59,11 @@ export function Asteroid() {
     return geo;
   }, [targets]);
 
+  // Use effect to set the time alive
+  useFrame(() => {
+    setTimeAlive(timeAliveExternal);
+  });
+
   useFrame(() => {
     // Find the closest asteroid to the player
     let closestAsteroid = null;
@@ -77,9 +81,13 @@ export function Asteroid() {
 
     // Move the closest asteroid toward the player
     if (closestAsteroid) {
-      const directionToPlayer = planePosition.clone().sub(closestAsteroid.center);
+      const directionToPlayer = planePosition
+        .clone()
+        .sub(closestAsteroid.center);
       const speed = 0.008; // Adjust the speed as needed
-      closestAsteroid.center.add(directionToPlayer.normalize().multiplyScalar(speed));
+      closestAsteroid.center.add(
+        directionToPlayer.normalize().multiplyScalar(speed)
+      );
     }
 
     // Update the targets array with the closest asteroid information
@@ -96,11 +104,9 @@ export function Asteroid() {
     updatedTargets.forEach((target, i) => {
       const distance = planePosition.distanceTo(target.center);
       if (distance < TARGET_RAD && !gameOver) {
-        const leaderboardData = [
-          { name: "Player", timeLasted: timeAlive },
-      ];
+        const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
         setGameOver(true);
-        displayGameOver(leaderboardData,"You hit an asteroid!, DUMMY!");
+        displayGameOver(leaderboardData, "You hit an asteroid!, DUMMY!");
       }
     });
   });
