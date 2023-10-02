@@ -3,7 +3,8 @@ import { Quaternion, SphereGeometry, TextureLoader, Vector3 } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl1Spaceship";
-import { displayGameOver } from "../GameOver";
+// import { displayGameOver } from "../GameOver";
+import { displayGameOver } from "../Completion";
 
 function randomPoint(scale) {
   return new Vector3(

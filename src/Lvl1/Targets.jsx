@@ -83,8 +83,8 @@ import { Quaternion, TorusGeometry, Vector3 } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl1Spaceship";
-import { displayLevelCompletion } from "../LevelComplete";
-import { displayGameOver } from "../GameOver";
+// import { displayLevelCompletion } from "../LevelComplete";
+import { displayLevelCompletion } from "../Completion";
 function pointsInCircle(numPoints, radius, center) {
   const points = [];
   for (let i = 0; i < numPoints; i++) {
