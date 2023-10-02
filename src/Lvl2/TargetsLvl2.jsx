@@ -136,7 +136,4 @@ export function Targets() {
         ))}
     </>
 );
-
-
-
 }
