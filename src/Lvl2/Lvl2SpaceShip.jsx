@@ -62,6 +62,55 @@ export function AnimatedSpaceship(props) {
   const isShiftPressed = useKeyPress("Shift");
 
   useFrame(({ camera }) => {
+
+    //black hole 1 gravitational pull
+    const blackHolePosition = new Vector3(3, 2, 70);
+    const spacecraftPosition = planePosition; // assuming planePosition is the position of the spacecraft
+
+    const directionToBlackHole = new Vector3().subVectors(blackHolePosition, spacecraftPosition);
+    const distanceToBlackHole = spacecraftPosition.distanceTo(blackHolePosition);
+
+    const gravitationalRange = 3;  // adjust this value as needed
+    const gravitationalStrength = 0.01;  // adjust this value as needed
+
+    if (distanceToBlackHole < gravitationalRange) {
+      const force = directionToBlackHole.normalize().multiplyScalar(gravitationalStrength);
+
+      spacecraftPosition.add(force);
+    }
+
+    //black hole 2 gravitational pull
+    const blackHolePosition2 = new Vector3(2, 3, 127.5);
+    const spacecraftPosition2 = planePosition; // assuming planePosition is the position of the spacecraft
+
+    const directionToBlackHole2 = new Vector3().subVectors(blackHolePosition2, spacecraftPosition2);
+    const distanceToBlackHole2 = spacecraftPosition2.distanceTo(blackHolePosition2);
+
+    const gravitationalRange2 = 3;  // adjust this value as needed
+    const gravitationalStrength2 = 0.01;  // adjust this value as needed
+
+    if (distanceToBlackHole2 < gravitationalRange2) {
+      const force = directionToBlackHole2.normalize().multiplyScalar(gravitationalStrength2);
+
+      spacecraftPosition2.add(force);
+    }
+
+    //black hole 3 gravitational pull
+    const blackHolePosition3 = new Vector3(0, 2, 42.5);
+    const spacecraftPosition3 = planePosition; // assuming planePosition is the position of the spacecraft
+
+    const directionToBlackHole3 = new Vector3().subVectors(blackHolePosition3, spacecraftPosition3);
+    const distanceToBlackHole3 = spacecraftPosition3.distanceTo(blackHolePosition3);
+
+    const gravitationalRange3 = 3;  // adjust this value as needed
+    const gravitationalStrength3 = 0.01;  // adjust this value as needed
+
+    if (distanceToBlackHole3 < gravitationalRange3) {
+      const force = directionToBlackHole3.normalize().multiplyScalar(gravitationalStrength3);
+
+      spacecraftPosition2.add(force);
+    }
+    
     updatePlaneAxis(x, y, z, planePosition, camera);
 
     const rotMatrix = new Matrix4().makeBasis(x, y, z);
@@ -118,6 +167,7 @@ export function AnimatedSpaceship(props) {
 
     // setBoost(externalBoost);
     // setShowSubtitles(externalShowSubtitles);
+
   });
 
   // Use setInterval to increase timeAlive every second
@@ -133,7 +183,7 @@ export function AnimatedSpaceship(props) {
   return (
     <group ref={groupRef}>
       <group ref={group} {...props} dispose={null} scale={0.01}>
-         {/* <Html position={[-6, 1, 7]}>
+        {/* <Html position={[-6, 1, 7]}>
            <div style={{ width: 100, height: 100 }}>
              <CircularProgressbar
                value={boost}
@@ -195,8 +245,8 @@ export function AnimatedSpaceship(props) {
           </div>
         </Html> */}
 
-         {/* if showSubtitles  */}
-         {/* {showSubtitles && (
+        {/* if showSubtitles  */}
+        {/* {showSubtitles && (
            <Html position={[6.6, -9, 7]}>
              <div className="subtitles" style={{ width: 500, height: 100 }}>
                <TypeWriterEffect

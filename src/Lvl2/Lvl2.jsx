@@ -16,8 +16,9 @@ import { AnimatedSpaceship } from "./Lvl2SpaceShip";
 import SolarSystem from "../solarSystem/solarSystem";
 import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file
 import { Howl, Howler } from "howler"; // Import Howler
-import commander from "/assets/audio/Level_2_voice_over.mp3"; // Replace with the path to your background music file
+import commander from "/assets/audio/Commander_voice_level_2.mp3"; // Replace with the path to your background music file
 import {Bridge} from "./bridge";
+import {BlackHole} from "./blackhole";
 import { Stats } from "@react-three/drei";
 
 export let externalShowSubtitles = false;
@@ -77,6 +78,21 @@ function App() {
       <MiniMap />
       <Bridge
         position={[1, 1, 179]}
+        rotation={[0, 0, 0]}
+        scale={[0.1, 0.1, 0.1]}
+      />
+      <BlackHole
+        position={[3, 2, 70]}
+        rotation={[0, 0, 0]}
+        scale={[0.1, 0.1, 0.1]}
+      />
+      <BlackHole
+        position={[2, 3, 127.5]}
+        rotation={[0, 0, 0]}
+        scale={[0.1, 0.1, 0.1]}
+      />
+      <BlackHole
+        position={[0, 2, 42.5]}
         rotation={[0, 0, 0]}
         scale={[0.1, 0.1, 0.1]}
       />
