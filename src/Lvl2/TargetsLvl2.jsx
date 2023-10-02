@@ -1,13 +1,10 @@
 import { useState, useMemo, useEffect, createContext } from "react";
-import { Quaternion, SphereGeometry, TorusGeometry, Vector3 } from "three";
+import { Quaternion, SphereGeometry, TorusGeometry, Vector3, DoubleSide } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl2SpaceShip";
 import { Astronaut} from "./astronaut";
 import {TargetsProvider, useTargets} from "./targetsContext";
-// import { CircularProgressbar } from "react-circular-progressbar";
-// import { Html } from "@react-three/drei";
-// import { buildStyles } from "react-circular-progressbar";
 
 export const NUM_TARGETS = 30; // Number of targets
 const TARGET_SPACING = 5.0; // Spacing between targets on the line
@@ -18,8 +15,11 @@ const ChangeZ = 0;//adjusts the depth of the targets
 
 export function Targets() {
   const [collectedTargets, setCollectedTargets] = useState(0); // state to keep track of the number of collected targets
-  const [gameWon, setGameWon] = useState(false); //  state to track if game has been won
-  
+  const [progress, setProgress] = useState(100); // New state for the progress bar
+
+  // Update the progress bar every frame
+  const PROGRESS_DURATION = 100000; // 100 seconds in milliseconds
+
   const [targets, setTargets] = useState(() => {
     const arr = [];
     for (let i = 0; i < NUM_TARGETS; i++) {
@@ -75,7 +75,7 @@ export function Targets() {
     console.log("Collected Targets: ", collectedTargets);
   }, [collectedTargets]);
 
-  useFrame(() => {
+  useFrame((state, delta) => {
     targets.forEach((target, i) => {
       //Target Collision Updated Logic
       const distance = planePosition.distanceTo(target.center);
@@ -91,16 +91,70 @@ export function Targets() {
     if (atLeastOneHit) {
       setTargets(targets.filter((target) => !target.hit));
     }
+
+    // Update progress based on elapsed time
+    const decrement = (delta * 100) / (PROGRESS_DURATION / 1000);
+    setProgress((prev) => Math.max(prev - decrement, 0));
+
+    // Optionally, if you want the astronaut to disappear once progress reaches 0
+    if (progress <= 0) {
+      setTargets([]);
+    }
   });
+
+  // For each astronaut, decrease the progress by a certain amount on every frame (or every few frames) until it reaches 0. 
+  useFrame(() => {
+    let updatedTargets = [...targets];
+    let needUpdate = false;
+    updatedTargets.forEach((target) => {
+        if (target.progress > 0) {
+            target.progress -= 0.01;  // Adjust the rate of progress reduction as needed
+            if (target.progress <= 0) {
+                target.hit = true;
+            }
+            needUpdate = true;
+        }
+    });
+  
+    if (needUpdate) {
+        setTargets(updatedTargets.filter(target => !target.hit));
+    }
+  });
+  
+    //creates the progress bar for the astronautes
+    function CircularProgressBar({ position,progress }) {
+      const radius = 0.2;  // adjust this value for size
+      const tube = 0.05;   // adjust this value for thickness of the ring
+    
+      const thetaLength = (progress / 100) * 2 * Math.PI;
+    
+      return (
+        <mesh position={position}>
+          <ringGeometry attach="geometry" args={[radius - tube, radius, 32, 8, 0, thetaLength]} />
+          <meshBasicMaterial attach="material" color="red" side={DoubleSide} />
+        </mesh>
+      );
+    }
 
   return (
     <>
       {targets.map((target, index) => (
-        <Astronaut
-          key={index}
-          position={[target.center.x, target.center.y, target.center.z]}
-          scale={0.001}// Adjust scale as required
-        />
+        <>
+        {target.progress > 0 && (
+            <>
+                <Astronaut
+                    key={`astronaut-${index}`}
+                    position={[target.center.x, target.center.y, target.center.z]}
+                    scale={0.001} // Adjust scale as required
+                />
+                {/* adds the progress bar to each astronaut */}
+                <CircularProgressBar
+                    position={[target.center.x, target.center.y, target.center.z]}
+                    progress={target.progress}
+                />
+            </>
+        )}
+        </>
       //   <mesh geometry={geometry}>
       //   <meshStandardMaterial
       //     roughness={0.5}
