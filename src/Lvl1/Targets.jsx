@@ -78,7 +78,7 @@
 //   );
 // }
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Quaternion, TorusGeometry, Vector3 } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
@@ -107,9 +107,14 @@ function randomPoint(scale) {
 
 const TARGET_RAD = 0.125;
 
+
 export function Targets() {
-  const numTargets = 2;
+  const numTargets = 1;
   const circleRadius = 5;
+ 
+const [collectedTargets, setCollectedTargets] = useState(0); // state to keep track of the number of collected targets
+const [gameWon, setGameWon] = useState(false); //  state to track if game has been won
+
 
   const [targets, setTargets] = useState(() => {
     const arr = [];
@@ -147,6 +152,24 @@ export function Targets() {
     return geo;
   }, [targets]);
 
+
+
+/*Handles Level Completion
+-Called everytime the collectedTagets value changes
+-Sets GameWon to true
+-Calls diplayLevelCompletion function , parses 1 to it
+-See LevelComplete.js Page for more on what diplayLevelCompletion function does
+*/
+  useEffect(() => {
+    if (collectedTargets === numTargets && !gameWon) {
+      setGameWon(true);
+      console.log("u win");
+      displayLevelCompletion(1);
+
+    }
+  }, [collectedTargets]);
+
+
   useFrame(() => {
     targets.forEach((target, i) => {
       //Target Collision Updated Logic
@@ -155,8 +178,11 @@ export function Targets() {
       if (distance < TARGET_RAD) {
         target.hit = true;
         console.log("Ring hit");
+        setCollectedTargets(prev => prev + 1); // Increase collected targets count
+
       }
     });
+
 
     const atLeastOneHit = targets.find((target) => target.hit);
     if (atLeastOneHit) {
