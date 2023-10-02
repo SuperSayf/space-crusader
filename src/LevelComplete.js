@@ -1,19 +1,19 @@
-//Still in Work not in use rn.
 
-export function displayLevelCompletion(levelNumber) {
+
+export function displayLevelCompletion(level) {
     const gameScreen = document.createElement("div");
     gameScreen.classList.add("game-screen");
     gameScreen.id = "gameScreen";
 
     // Create the h2 element
     const h2 = document.createElement("h2");
-    h2.textContent = `Level ${levelNumber} Completed!`;
+    h2.textContent = "Level Completed!";
     gameScreen.appendChild(h2);
 
-    // // Create a paragraph for rewards
-    // const rewardsParagraph = document.createElement("p");
-    // rewardsParagraph.textContent = `You earned: ${rewards}`;
-    // gameScreen.appendChild(rewardsParagraph);
+    // Create the hmsg element based on level 
+    const hmsg = document.createElement("h2");
+    hmsg.textContent = `Congratulations you have completed level ${level} !`;
+    gameScreen.appendChild(hmsg);
 
     // Create the next level button
     const nextLevelButton = document.createElement("button");
@@ -27,7 +27,6 @@ export function displayLevelCompletion(levelNumber) {
     menuButton.textContent = "Go to Main Menu";
     gameScreen.appendChild(menuButton);
 
-    // Add event listeners to buttons (if needed)
 
     // Append the game screen to the body
     document.body.appendChild(gameScreen);
@@ -38,46 +37,58 @@ export function displayLevelCompletion(levelNumber) {
       /* Add your CSS styling for the level completion screen here */
 
       .game-screen {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #071428; /* Dark blue-green background */
+        border: 4px solid #33ccff; /* Cosmic blue border */
+        padding: 40px;
         text-align: center;
-        margin: 20% auto;
-        padding: 20px;
-        background-color: #f5f5f5;
-        border: 2px solid #ccc;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+        z-index: 9999;
+        color: #fff;
+        font-family: 'Arial', sans-serif;
         max-width: 400px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
-      
-      h2 {
-        font-size: 1.5em;
+  
+      .game-screen h2 {
+        color: #33ccff; /* Cosmic blue for the heading */
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+  
+      .game-screen hmsg {
+        font-size: 18px;
         margin-bottom: 20px;
       }
-      
-      button {
-        padding: 10px 20px;
-        font-size: 1em;
-        margin: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        background-color: #007bff;
+  
+      .game-screen button {
+        background-color: #33ccff; /* Cosmic blue for buttons */
         color: #fff;
-        transition: background-color 0.3s;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        margin: 10px;
+        transition: background-color 0.3s ease;
       }
       
-      button:hover {
+      .game-screen button:hover {
         background-color: #0056b3;
       }
     `;
     document.head.appendChild(style);
-
+    
+    //Logic for nextLevelButtton Navigation
     document
         .getElementById("nextLevelButton")
         .addEventListener("click", function () {
-            // Add logic to go to the next level
-            window.location.href =`game.html?level=lvl ${levelNumber++} `;
-        });
+            //Responsible to navigate to  the next level page by increamenting 1 
+            window.location.href = `game.html?level=lvl${level+1 }`;
 
+        });
+    //Logic for menuButton Navigation
     document
         .getElementById("menuButton")
         .addEventListener("click", function () {

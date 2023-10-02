@@ -78,12 +78,13 @@
 //   );
 // }
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Quaternion, TorusGeometry, Vector3 } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
-import { planePosition } from "../animatedSpaceship";
-
+import { planePosition } from "./Lvl1Spaceship";
+// import { displayLevelCompletion } from "../LevelComplete";
+import { displayLevelCompletion } from "../Completion";
 function pointsInCircle(numPoints, radius, center) {
   const points = [];
   for (let i = 0; i < numPoints; i++) {
@@ -106,9 +107,14 @@ function randomPoint(scale) {
 
 const TARGET_RAD = 0.125;
 
+
 export function Targets() {
-  const numTargets = 25;
+  const numTargets = 1;
   const circleRadius = 5;
+ 
+const [collectedTargets, setCollectedTargets] = useState(0); // state to keep track of the number of collected targets
+const [gameWon, setGameWon] = useState(false); //  state to track if game has been won
+
 
   const [targets, setTargets] = useState(() => {
     const arr = [];
@@ -146,19 +152,37 @@ export function Targets() {
     return geo;
   }, [targets]);
 
+
+
+/*Handles Level Completion
+-Called everytime the collectedTagets value changes
+-Sets GameWon to true
+-Calls diplayLevelCompletion function , parses 1 to it
+-See LevelComplete.js Page for more on what diplayLevelCompletion function does
+*/
+  useEffect(() => {
+    if (collectedTargets === numTargets && !gameWon) {
+      setGameWon(true);
+      console.log("u win");
+      displayLevelCompletion(1);
+
+    }
+  }, [collectedTargets]);
+
+
   useFrame(() => {
     targets.forEach((target, i) => {
-      const v = planePosition.clone().sub(target.center);
-      const dist = target.direction.dot(v);
-      const projected = planePosition
-        .clone()
-        .sub(target.direction.clone().multiplyScalar(dist));
-
-      const hitDist = projected.distanceTo(target.center);
-      if (hitDist < TARGET_RAD) {
+      //Target Collision Updated Logic
+      const distance = planePosition.distanceTo(target.center);
+      //if the ship hits the target/ring
+      if (distance < TARGET_RAD) {
         target.hit = true;
+        console.log("Ring hit");
+        setCollectedTargets(prev => prev + 1); // Increase collected targets count
+
       }
     });
+
 
     const atLeastOneHit = targets.find((target) => target.hit);
     if (atLeastOneHit) {
@@ -166,7 +190,7 @@ export function Targets() {
     }
   });
 
-  return (
+  return targets.length > 0 ? (
     <mesh geometry={geometry}>
       <meshStandardMaterial
         roughness={0.5}
@@ -174,5 +198,5 @@ export function Targets() {
         emissive={"#00ff00"}
       />
     </mesh>
-  );
+  ) : null;
 }

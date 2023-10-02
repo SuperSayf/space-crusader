@@ -7,7 +7,6 @@ import {
 import { EffectComposer, HueSaturation } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
 import { SphereEnv } from "../SphereEnv";
-import { Spaceship } from "../spaceShip";
 import { MiniMap } from "../MiniMap";
 import { Targets } from "./TargetsLvl2";
 import { MotionBlur } from "../MotionBlur";
@@ -59,11 +58,9 @@ function App() {
     };
   }, []);
 
-  
-
   return (
     <>
-    <Stats />
+      <Stats />
       <SphereEnv />
       <Environment background={false} files={"assets/textures/space.hdr"} />
 

@@ -2,8 +2,9 @@ import { useState, useMemo } from "react";
 import { Quaternion, SphereGeometry, TextureLoader, Vector3 } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
-import { planePosition } from "../animatedSpaceship";
-import { displayGameOver } from "../GameOver";
+import { planePosition } from "./Lvl1Spaceship";
+// import { displayGameOver } from "../GameOver";
+import { displayGameOver } from "../Completion";
 
 function randomPoint(scale) {
   return new Vector3(
@@ -72,25 +73,22 @@ export function Asteroid() {
         target.hit = false;
       }
 
-
       const distance = planePosition.distanceTo(target.center);
       //if the ship hits the asteroid
       if (distance < TARGET_RAD && !gameOver) {
-
         target.hit = true; //  muz
         console.log("Game over");
-        
-       //Dummy Leaderboard 
+
+        //Dummy Leaderboard
         const leaderboardData = [
           { name: "Sayf", timeLasted: "Didn't even put it in" },
           { name: "Muz", timeLasted: "180 seconds" },
-          { name: "Daggy", timeLasted: "90 seconds" }
-      ];
-      setGameOver(true);
-      //Msg For Game over Reason
-      const message = "You hit an asteroid!";
-      displayGameOver(leaderboardData,message);
-
+          { name: "Daggy", timeLasted: "90 seconds" },
+        ];
+        setGameOver(true);
+        //Msg For Game over Reason
+        const message = "You hit an asteroid!";
+        displayGameOver(leaderboardData, message);
       }
     });
 
@@ -107,16 +105,12 @@ export function Asteroid() {
   });
 
   return (
- 
-
     <mesh geometry={geometry} castShadow receiveShadow>
       <meshStandardMaterial
         roughness={0.9}
         metalness={0.1}
         map={asteroidTexture}
-        />
+      />
     </mesh>
-
-
   );
 }
