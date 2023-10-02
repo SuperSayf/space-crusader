@@ -18,7 +18,7 @@ export function DeathStar(props) {
     const distance = planePosition.distanceTo(sphereCenter);
 
     // Check if the plane is inside the sphere
-    if (distance < sphereRadius) {
+    if (distance < sphereRadius && !gameOver) {
       const leaderboardData = [
         { name: "Sayf", timeLasted: "1 second" },
         { name: "Muz", timeLasted: "180 seconds" },

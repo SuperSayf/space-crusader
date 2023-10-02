@@ -4,6 +4,7 @@ import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl3Spaceship";
 import { displayGameOver } from "../GameOver";
+import { timeAliveExternal } from "./Lvl3Spaceship";
 
 
 function randomPoint(scale) {
@@ -35,6 +36,7 @@ export function Asteroid() {
 
   //Game Over State Component
   const [gameOver, setGameOver] = useState(false);
+  const [timeAlive, setTimeAlive] = useState(0);
 
   const textureLoader = new TextureLoader();
   const asteroidTexture = textureLoader.load("assets/textures/asteroid.jpg");
@@ -95,14 +97,10 @@ export function Asteroid() {
       const distance = planePosition.distanceTo(target.center);
       if (distance < TARGET_RAD && !gameOver) {
         const leaderboardData = [
-          { name: "Sayf", timeLasted: "1 second" },
-          { name: "Muz", timeLasted: "180 seconds" },
-          { name: "Daggy", timeLasted: "90 seconds" }
+          { name: "Player", timeLasted: timeAlive },
       ];
         setGameOver(true);
-        //Msg For Game over Reason
-        const message = "You hit an asteroid!";
-        displayGameOver(3, leaderboardData,message);
+        displayGameOver(leaderboardData,"You hit an asteroid!, DUMMY!");
       }
     });
   });

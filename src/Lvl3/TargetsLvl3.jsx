@@ -4,6 +4,7 @@ import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl3Spaceship";
 import { FuelShield } from "./FuelShield";
+
 function randomPoint(scale) {
   return new Vector3(
     Math.random() * 2 - 1,
@@ -53,14 +54,12 @@ export function Targets() {
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Shift") {
-        console.log("Shift key is pressed down");
         boostUsedPerSecond = 4;
       }
     };
 
     const handleKeyUp = (event) => {
       if (event.key === "Shift") {
-        console.log("Shift key is released");
         boostUsedPerSecond = 2;
       }
     };
@@ -76,14 +75,13 @@ export function Targets() {
 
   useFrame(() => {
     targets.forEach((target, i) => {
-      //Target Collision Updated Logic
+      // Target Collision Updated Logic
       const distance = planePosition.distanceTo(target.center);
-      //if the ship hits the target/ring
+      // If the ship hits the target/ring
       if (distance < TARGET_RAD) {
         target.hit = true;
-        console.log("Ring hit")
+        console.log(targets.length);
       }
- 
     });
 
     const atLeastOneHit = targets.find((target) => target.hit);
@@ -95,11 +93,26 @@ export function Targets() {
 
     // Check if boost has reached 0
     if (boost <= 0) {
-      //Implement the game over logic here
+      
     }
 
     // Update the externalBoost variable
     externalBoost = boost;
+
+    // Check if half of the targets are left and respawn if needed
+    if (targets.length <= TargetAmt / 2) {
+      const newTargets = [];
+      for (let i = 0; i < TargetAmt; i++) {
+        newTargets.push({
+          center: randomPoint(new Vector3(4, 1, 4)).add(
+            new Vector3(0, 2 + Math.random() * 2, 0)
+          ),
+          direction: randomPoint().normalize(),
+          hit: false,
+        });
+      }
+      setTargets(newTargets);
+    }
   });
 
   return (

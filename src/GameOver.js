@@ -1,4 +1,15 @@
 export function displayGameOver(leaderboardData,message) {
+    //Create a default leaderboardData
+    const defaultLeaderboardData = [
+      { name: "Sayf", timeLasted: "1 second" },
+      { name: "Muz", timeLasted: "180 seconds" },
+      { name: "Daggy", timeLasted: "90 seconds" }
+    ];
+
+    //Then add the default leaderboardData to the leaderboardData
+    leaderboardData = leaderboardData.concat(defaultLeaderboardData);
+    
+
     const gameScreen = document.createElement("div");
     gameScreen.classList.add("game-screen");
     gameScreen.id = "gameScreen";
