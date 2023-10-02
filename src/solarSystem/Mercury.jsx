@@ -2,6 +2,7 @@ import { useTexture } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import React, { useRef, useCallback, useEffect, useState } from 'react'
 import { planePosition } from "../Lvl2/Lvl2SpaceShip";
+import { displayGameOver } from "../Completion";
 
 import * as THREE from 'three'
 
@@ -9,6 +10,7 @@ const Mercury = React.memo(() => {
   const mercuryRef = useRef()
 
   const clockRef = useRef(new THREE.Clock()) // Create a reference to the clock
+  const [gameOver, setGameOver] = useState(false);
 
   const [
     mercuryTexture
@@ -30,8 +32,16 @@ const Mercury = React.memo(() => {
     const distance = planePosition.distanceTo(mercuryRef.current.position);
 
     // Check if the plane is inside the sphere
-    if (distance <= 0.5) {
-      console.log("Collision detected!");
+    if (distance <= 0.5 && !gameOver) {
+      const leaderboardData = [
+        { name: "Sayf", timeLasted: "1 second" },
+        { name: "Muz", timeLasted: "180 seconds" },
+        { name: "Daggy", timeLasted: "90 seconds" }
+      ];
+      setGameOver(true);
+      //Msg For Game over Reason
+      const message = "You went into Mercury... BRUH";
+      displayGameOver(2, leaderboardData,message);
     }
   }, [])
 

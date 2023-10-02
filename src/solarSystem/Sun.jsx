@@ -1,13 +1,15 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useGLTF, useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Vector3 } from "three";
 import { planePosition } from "../Lvl2/Lvl2SpaceShip";
+import { displayGameOver } from "../Completion";
 
 export function Sun(props) {
   const { nodes, materials } = useGLTF("assets/models/Sun.glb");
 
-  const [sunTexture] = useTexture(['/assets/textures/sun.jpg'])
+  const [sunTexture] = useTexture(['/assets/textures/sun.jpg']);
+  const [gameOver, setGameOver] = useState(false);
 
   // Define the center and radius of the green sphere
   const sphereCenter = new Vector3(0, 0, 0);
@@ -22,8 +24,16 @@ export function Sun(props) {
     const distance = planePosition.distanceTo(sphereCenter);
 
     // Check if the plane is inside the sphere
-    if (distance < sphereRadius) {
-      console.log("Collision detected!");
+    if (distance < sphereRadius && !gameOver) {
+      const leaderboardData = [
+        { name: "Sayf", timeLasted: "1 second" },
+        { name: "Muz", timeLasted: "180 seconds" },
+        { name: "Daggy", timeLasted: "90 seconds" }
+      ];
+      setGameOver(true);
+      //Msg For Game over Reason
+      const message = "You went into the sun... BRUH";
+      displayGameOver(2, leaderboardData,message);
     }
   });
 

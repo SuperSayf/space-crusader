@@ -3,6 +3,7 @@ import { useFrame, useThree } from '@react-three/fiber'
 import React, { useRef, useCallback, useEffect, useState } from 'react'
 import { planePosition } from "../Lvl2/Lvl2SpaceShip";
 import Moon from './Moon'
+import { displayGameOver } from "../Completion";
 
 import * as THREE from 'three'
 
@@ -10,6 +11,7 @@ const Earth = React.memo(({ displacementScale }) => {
   const earthRef = useRef()
 
   const clockRef = useRef(new THREE.Clock()) // Create a reference to the clock
+  const [gameOver, setGameOver] = useState(false);
 
   const [
     earthTexture,
@@ -39,8 +41,16 @@ const Earth = React.memo(({ displacementScale }) => {
     const distance = planePosition.distanceTo(earthRef.current.position);
 
     // Check if the plane is inside the sphere
-    if (distance <= 2) {
-      console.log("Collision detected!");
+    if (distance <= 2 && !gameOver) {
+      const leaderboardData = [
+        { name: "Sayf", timeLasted: "1 second" },
+        { name: "Muz", timeLasted: "180 seconds" },
+        { name: "Daggy", timeLasted: "90 seconds" }
+      ];
+      setGameOver(true);
+      //Msg For Game over Reason
+      const message = "You went into Earth... BRUH";
+      displayGameOver(2, leaderboardData,message);
     }
   }, [])
 

@@ -3,6 +3,7 @@ import { useFrame, useThree } from '@react-three/fiber'
 import React, { useRef, useCallback, useEffect, useState } from 'react'
 import { SaturnModel } from './SaturnModel'
 import { planePosition } from "../Lvl2/Lvl2SpaceShip";
+import { displayGameOver } from "../Completion";
 
 import * as THREE from 'three'
 
@@ -10,6 +11,7 @@ const Saturn = React.memo(() => {
   const saturnRef = useRef()
 
   const clockRef = useRef(new THREE.Clock()) // Create a reference to the clock
+  const [gameOver, setGameOver] = useState(false);
 
   const [
     saturnTexture,
@@ -28,14 +30,23 @@ const Saturn = React.memo(() => {
     const z = Math.cos(angle) * distance
     saturnRef.current.position.set(x, 0, z)
     saturnRef.current.rotation.y += 0.002
+    saturnRef.current.rotation.z += 0.0003
   }, [])
 
   const collisionCheck = useCallback(() => {
     const distance = planePosition.distanceTo(saturnRef.current.position);
 
     // Check if the plane is inside the sphere
-    if (distance <= 6) {
-      console.log("Collision detected!");
+    if (distance <= 6 && !gameOver) {
+      const leaderboardData = [
+        { name: "Sayf", timeLasted: "1 second" },
+        { name: "Muz", timeLasted: "180 seconds" },
+        { name: "Daggy", timeLasted: "90 seconds" }
+      ];
+      setGameOver(true);
+      //Msg For Game over Reason
+      const message = "You went into Saturn... BRUH";
+      displayGameOver(2, leaderboardData,message);
     }
   }, [])
 

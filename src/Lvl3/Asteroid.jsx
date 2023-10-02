@@ -102,7 +102,7 @@ export function Asteroid() {
         setGameOver(true);
         //Msg For Game over Reason
         const message = "You hit an asteroid!";
-        displayGameOver(leaderboardData,message);
+        displayGameOver(3, leaderboardData,message);
       }
     });
   });

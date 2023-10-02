@@ -19,6 +19,7 @@ import commander from "/assets/audio/Commander_voice_level_2.mp3"; // Replace wi
 import {Bridge} from "./bridge";
 import {BlackHole} from "./blackhole";
 import { Stats } from "@react-three/drei";
+import { TargetsProvider } from './targetsContext';
 
 export let externalShowSubtitles = false;
 
@@ -60,6 +61,7 @@ function App() {
 
   return (
     <>
+      <TargetsProvider>
       <Stats />
       <SphereEnv />
       <Environment background={false} files={"assets/textures/space.hdr"} />
@@ -68,9 +70,9 @@ function App() {
       <OrbitControls target={[0, 0, 160]} />
       <ambientLight intensity={0.3} />
       {/* <Spaceship /> */}
+      <Targets />
       <AnimatedSpaceship />
       <SolarSystem />
-      <Targets />
       {/* <Asteroid /> */}
       <MiniMap />
       <Bridge
@@ -101,6 +103,7 @@ function App() {
           saturation={0.1} // saturation in radians
         />
       </EffectComposer>
+      </TargetsProvider>
     </>
   );
 }

@@ -10,6 +10,7 @@ import Jupiter from './Jupiter'
 import Saturn from './Saturn'
 import Uranus from './Uranus'
 import Neptune from './Neptune'
+import { Stargate } from '../Lvl2/Stargate'
 
 const SolarSystem = React.memo(() => {
   const solarRef = useRef()
@@ -17,6 +18,7 @@ const SolarSystem = React.memo(() => {
   return (
     <group ref={solarRef}>
     <Sun /> 
+    <Stargate position={[0,0,5]} scale={0.005} />
     <Mercury />
     <Venus />
     <Earth displacementScale={0.01}/>

@@ -1,14 +1,16 @@
 import { useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import React, { useRef, useCallback } from 'react'
+import React, { useRef, useCallback, useState } from 'react'
 import * as THREE from 'three'
 import { planePosition } from "../Lvl2/Lvl2SpaceShip";
+import { displayGameOver } from "../Completion";
 
 
 const Moon = React.memo(() => {
   const moonRef = useRef()
   const clockRef = useRef(new THREE.Clock()) // Create a reference to the clock
-
+  const [gameOver, setGameOver] = useState(false);
+  
   const [moonTexture] = useTexture(['/assets/textures/moon_map.jpg'])
   const xAxis = 4
   const updateMoonPosition = useCallback(() => {
@@ -25,8 +27,16 @@ const Moon = React.memo(() => {
     const distance = planePosition.distanceTo(moonRef.current.position);
 
     // Check if the plane is inside the sphere
-    if (distance <= 0.5) {
-      console.log("Collision detected!");
+    if (distance <= 0.5 && !gameOver) {
+      const leaderboardData = [
+        { name: "Sayf", timeLasted: "1 second" },
+        { name: "Muz", timeLasted: "180 seconds" },
+        { name: "Daggy", timeLasted: "90 seconds" }
+      ];
+      setGameOver(true);
+      //Msg For Game over Reason
+      const message = "You went into the Moon... BRUH";
+      displayGameOver(2, leaderboardData,message);
     }
   }, [])
 

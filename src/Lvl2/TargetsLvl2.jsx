@@ -1,15 +1,15 @@
-import { useState, useRef } from "react";
+import { useState, useMemo, useEffect, createContext } from "react";
 import { Quaternion, SphereGeometry, TorusGeometry, Vector3 } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl2SpaceShip";
 import { Astronaut} from "./astronaut";
-import { Text } from "@react-three/drei";
-import { Mesh, RingGeometry, MeshBasicMaterial, DoubleSide } from 'three';
-import { Ring } from '@react-three/drei';
+import {TargetsProvider, useTargets} from "./targetsContext";
+// import { CircularProgressbar } from "react-circular-progressbar";
+// import { Html } from "@react-three/drei";
+// import { buildStyles } from "react-circular-progressbar";
 
-
-const NUM_TARGETS = 30; // Number of targets
+export const NUM_TARGETS = 30; // Number of targets
 const TARGET_SPACING = 5.0; // Spacing between targets on the line
 const TARGET_RAD = 0.125; // Radius of the target
 const offset = 4;//adjusts the starting point of the targets
@@ -17,6 +17,9 @@ const ChangeY = 1;//adjusts the height of the targets
 const ChangeZ = 0;//adjusts the depth of the targets
 
 export function Targets() {
+  const [collectedTargets, setCollectedTargets] = useState(0); // state to keep track of the number of collected targets
+  const [gameWon, setGameWon] = useState(false); //  state to track if game has been won
+  
   const [targets, setTargets] = useState(() => {
     const arr = [];
     for (let i = 0; i < NUM_TARGETS; i++) {
@@ -41,26 +44,46 @@ export function Targets() {
     return arr;
   });
 
-  // Use useRef for collected count
-  const [collectedCount, setCollectedCount] = useState(0);
-  // New state for the progress bar
-  const [progress, setProgress] = useState(100);
+  const geometry = useMemo(() => {
+    let geo;
 
-  // Update the progress bar every frame
-  const PROGRESS_DURATION = 100000; // 100 seconds in milliseconds
+    targets.forEach((target) => {
+      // Use a torus geometry to create a ring around the target
+      const torusGeo = new TorusGeometry(TARGET_RAD, TARGET_RAD / 4, 16, 32);
+      torusGeo.applyQuaternion(
+        new Quaternion().setFromUnitVectors(
+          new Vector3(0, 0, 1),
+          target.direction
+        )
+      );
+      torusGeo.translate(target.center.x, target.center.y, target.center.z);
 
-  useFrame((state, delta) => {
+      if (!geo) geo = torusGeo;
+      else geo = mergeBufferGeometries([geo, torusGeo]);
+    });
+
+    return geo;
+  }, [targets]);
+
+  /*Handles Level Completion
+  -Called everytime the collectedTagets value changes
+  -Sets GameWon to true
+  -Calls diplayLevelCompletion function , parses 1 to it
+  -See LevelComplete.js Page for more on what diplayLevelCompletion function does
+  */
+  useEffect(() => {
+    console.log("Collected Targets: ", collectedTargets);
+  }, [collectedTargets]);
+
+  useFrame(() => {
     targets.forEach((target, i) => {
       //Target Collision Updated Logic
       const distance = planePosition.distanceTo(target.center);
       //if the ship hits the target/ring
-      if (distance < TARGET_RAD) {
+      if (distance <= TARGET_RAD + 0.15) {
         target.hit = true;
-        console.log("Ring hit")
-
-        // Increment the collected count and log it
-        setCollectedCount(prevCount => prevCount + 1);
-        console.log(`Collected targets: ${collectedCount.current}`);
+        console.log("Ring hit");
+        setCollectedTargets(prev => prev + 1); // Increase collected targets count
       }
     });
 
@@ -68,72 +91,24 @@ export function Targets() {
     if (atLeastOneHit) {
       setTargets(targets.filter((target) => !target.hit));
     }
-
-    // Update progress based on elapsed time
-    const decrement = (delta * 100) / (PROGRESS_DURATION / 1000);
-    setProgress((prev) => Math.max(prev - decrement, 0));
-
-    // Optionally, if you want the astronaut to disappear once progress reaches 0
-    if (progress <= 0) {
-      setTargets([]);
-    }
   });
-  
-  // For each astronaut, decrease the progress by a certain amount on every frame (or every few frames) until it reaches 0. 
-  useFrame(() => {
-    let updatedTargets = [...targets];
-    let needUpdate = false;
-    updatedTargets.forEach((target) => {
-        if (target.progress > 0) {
-            target.progress -= 0.01;  // Adjust the rate of progress reduction as needed
-            if (target.progress <= 0) {
-                target.hit = true;
-            }
-            needUpdate = true;
-        }
-    });
-
-    if (needUpdate) {
-        setTargets(updatedTargets.filter(target => !target.hit));
-    }
-});
-
-  //creates the progress bar for the astronautes
-  function CircularProgressBar({ position,progress }) {
-    const radius = 0.2;  // adjust this value for size
-    const tube = 0.05;   // adjust this value for thickness of the ring
-  
-    const thetaLength = (progress / 100) * 2 * Math.PI;
-  
-    return (
-      <mesh position={position}>
-        <ringGeometry attach="geometry" args={[radius - tube, radius, 32, 8, 0, thetaLength]} />
-        <meshBasicMaterial attach="material" color="red" side={DoubleSide} />
-      </mesh>
-    );
-  }
-  
 
   return (
     <>
-        {targets.map((target, index) => (
-            <>
-                {target.progress > 0 && (
-                    <>
-                        <Astronaut
-                            key={`astronaut-${index}`}
-                            position={[target.center.x, target.center.y, target.center.z]}
-                            scale={0.001} // Adjust scale as required
-                        />
-                        {/* adds the progress bar to each astronaut */}
-                        <CircularProgressBar
-                            position={[target.center.x, target.center.y, target.center.z]}
-                            progress={target.progress}
-                        />
-                    </>
-                )}
-            </>
-        ))}
+      {targets.map((target, index) => (
+        <Astronaut
+          key={index}
+          position={[target.center.x, target.center.y, target.center.z]}
+          scale={0.001}// Adjust scale as required
+        />
+      //   <mesh geometry={geometry}>
+      //   <meshStandardMaterial
+      //     roughness={0.5}
+      //     metalness={0.5}
+      //     emissive={"#00ff00"}
+      //   />
+      // </mesh>
+      ))}
     </>
-);
+  );
 }

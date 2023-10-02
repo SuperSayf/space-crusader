@@ -33,7 +33,7 @@ export function Sun(props) {
       setGameOver(true);
       //Msg For Game over Reason
       const message = "You went into the sun... BRUH";
-      displayGameOver(leaderboardData,message);
+      displayGameOver(3, leaderboardData,message);
     }
   });
 

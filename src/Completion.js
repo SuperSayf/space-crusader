@@ -2,7 +2,7 @@
 let isPopupDisplayed = false;
 
 //Game Over
-export function displayGameOver(leaderboardData, message) {
+export function displayGameOver(level, leaderboardData, message) {
   if (!isPopupDisplayed) {
     isPopupDisplayed = true;
     const gameScreen = document.createElement("div");
@@ -136,7 +136,8 @@ export function displayGameOver(leaderboardData, message) {
     document
       .getElementById("restartButton")
       .addEventListener("click", function () {
-        window.location.href = "game.html";
+        window.location.href = `game.html?level=lvl${level}`;
+        ;
       });
 
     document
