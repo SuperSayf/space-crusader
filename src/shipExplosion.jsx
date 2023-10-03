@@ -15,7 +15,7 @@ export function ShipExplosion(props) {
       {...props}
       dispose={null}
       ref={group}
-      scale={1}
+      scale={0.01}
       rotation={[Math.PI, -Math.PI / 400, -Math.PI]}
     >
       <mesh

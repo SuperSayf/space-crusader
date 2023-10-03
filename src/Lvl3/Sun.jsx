@@ -6,6 +6,8 @@ import { planePosition } from "./Lvl3Spaceship";
 import { displayGameOver } from "../GameOver";
 import { timeAliveExternal } from "./Lvl3Spaceship";
 
+export let externalGameOverSun = false;
+
 export function Sun(props) {
   const { nodes, materials } = useGLTF("assets/models/Sun.glb");
 
@@ -34,9 +36,14 @@ export function Sun(props) {
     if (distance < sphereRadius && !gameOver) {
       const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
       setGameOver(true);
+      externalGameOverSun = true;
       //Msg For Game over Reason
       const message = "You went into the sun... BRUH";
-      displayGameOver(leaderboardData, message);
+
+      // Wait for 3 seconds before displaying the game over screen
+      setTimeout(() => {
+        displayGameOver(leaderboardData, message);
+      }, 3000);
     }
   });
 

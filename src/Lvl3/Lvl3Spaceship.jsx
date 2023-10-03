@@ -11,7 +11,6 @@ import { externalShowSubtitles } from "./Lvl3";
 import TypeWriterEffect from "react-typewriter-effect";
 import { Flame } from "../flame";
 import { JustSpaceshhip } from "../justSpaceship";
-import { ShipExplosion } from "../shipExplosion";
 
 const x = new Vector3(1, 0, 0);
 const y = new Vector3(0, 1, 0);
@@ -121,19 +120,16 @@ export function AnimatedSpaceship(props) {
     setBoost(externalBoost);
     setShowSubtitles(externalShowSubtitles);
     timeAliveExternal = timeAlive;
-
   });
 
   // Use setInterval to increase timeAlive every second
   useEffect(() => {
     const interval = setInterval(() => {
       setTimeAlive((prevTimeAlive) => prevTimeAlive + 1);
-
     }, 1000); // 1000 milliseconds = 1 second
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(interval);
-
   }, []);
 
   return (
@@ -203,7 +199,7 @@ export function AnimatedSpaceship(props) {
 
         {/* if showSubtitles */}
         {showSubtitles && (
-          <Html position={[0,0,0]}>
+          <Html position={[0, 0, 0]}>
             <div className="subtitles" style={{ width: 500, height: 100 }}>
               <TypeWriterEffect
                 textStyle={{
@@ -218,8 +214,6 @@ export function AnimatedSpaceship(props) {
             </div>
           </Html>
         )}
-
-        {/* <ShipExplosion /> */}
 
         <JustSpaceshhip />
 
@@ -242,6 +236,5 @@ export function AnimatedSpaceship(props) {
     </group>
   );
 }
-
 
 useGLTF.preload("assets/models/justSpaceship.glb");

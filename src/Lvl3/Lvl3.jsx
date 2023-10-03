@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   PerspectiveCamera,
   Environment,
@@ -22,10 +22,34 @@ import { Howl, Howler } from "howler"; // Import Howler
 import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file
 import commander from "/assets/audio/commander.mp3"; // Replace with the path to your background music file
 import { Stats } from "@react-three/drei";
+import { ShipExplosion } from "../shipExplosion";
+import { planePosition } from "./Lvl3Spaceship";
+import { externalGameOver } from "./Asteroid";
+import { externalGameOverSun } from "./Sun";
+import { useFrame } from "@react-three/fiber";
 
 export let externalShowSubtitles = false;
 
+export let masterGameOverLvl3 = false;
+
 function Lvl3() {
+  // Use state to set the external game over state
+  const [gameOver, setGameOver] = useState(false);
+
+  // Use state to set the plane position
+  const [planePos, setPlanePos] = useState(planePosition);
+
+  // Use frame to update the game over state
+  useFrame(() => {
+    if (externalGameOver || externalGameOverSun) {
+      setGameOver(true);
+      masterGameOverLvl3 = true;
+    }
+
+    // Update the plane position
+    setPlanePos(planePosition);
+  });
+
   // Create an instance of the background music
   const backgroundMusic = new Howl({
     src: [soundEffect],
@@ -74,9 +98,15 @@ function Lvl3() {
       <SpaceStation />
       <Sun />
       <DeathStar />
-      <AnimatedSpaceship />
+
+      {/* If game over, show ship explosion */}
+      {gameOver && <ShipExplosion position={planePos} />}
+
+      {/* If not game over, show animated ship */}
+      {!gameOver && <AnimatedSpaceship />}
+
       <Targets />
-      <Asteroid />
+      {/* <Asteroid /> */}
       <MiniMap />
 
       <directionalLight

@@ -1,33 +1,11 @@
 import { useFrame } from "@react-three/fiber";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { masterGameOverLvl3 } from "./Lvl3/Lvl3";
 
 export const useExplode = (group, { distance = 3, enableRotation = true }) => {
-  const spaceBarPressed = useRef(false);
-
-  useEffect(() => {
-    const handleKeyPress = (event) => {
-      if (event.key === " ") {
-        // Space bar pressed
-        spaceBarPressed.current = true;
-      }
-    };
-
-    const handleKeyRelease = (event) => {
-      if (event.key === " ") {
-        // Space bar released
-        spaceBarPressed.current = false;
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyPress);
-    document.addEventListener("keyup", handleKeyRelease);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-      document.removeEventListener("keyup", handleKeyRelease);
-    };
-  }, []);
+  // Use state to set the external game over state
+  const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
     const groupWorldPosition = new THREE.Vector3();
@@ -68,9 +46,10 @@ export const useExplode = (group, { distance = 3, enableRotation = true }) => {
   }, []);
 
   useFrame(() => {
-    group.current.children.forEach((mesh) => {
-      if (spaceBarPressed.current) {
-        // Trigger explosion animation when space bar is pressed
+    setGameOver(masterGameOverLvl3);
+
+    if (gameOver) {
+      group.current.children.forEach((mesh) => {
         mesh.targetPosition = mesh.originalPosition
           .clone()
           .add(mesh.directionVector.clone().multiplyScalar(distance));
@@ -102,7 +81,7 @@ export const useExplode = (group, { distance = 3, enableRotation = true }) => {
           mesh.rotation.y += mesh.rotationSpeed; // Apply rotation speed
           mesh.rotation.z += mesh.rotationSpeed; // Apply rotation speed
         }
-      }
-    });
+      });
+    }
   });
 };
