@@ -34,7 +34,7 @@ if (rootContainer) {
           <LevelComponent />
         </Suspense>
       </Canvas>
-      {/* <Loader /> */}
+      <Loader />
     </>
   );
 } else {
