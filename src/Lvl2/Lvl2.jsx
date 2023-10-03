@@ -12,14 +12,13 @@ import { Targets } from "./TargetsLvl2";
 import { MotionBlur } from "../MotionBlur";
 import { Asteroid } from "../Lvl1/Asteroid";
 import { AnimatedSpaceship } from "./Lvl2SpaceShip";
-import SolarSystem from "../solarSystem/solarSystem";
+import SolarSystem from "../solarSystem/SolarSystem";
 import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file
 import { Howl, Howler } from "howler"; // Import Howler
 import commander from "/assets/audio/Commander_voice_level_2.mp3"; // Replace with the path to your background music file
 import {Bridge} from "./bridge";
 import {BlackHole} from "./blackhole";
 import { Stats } from "@react-three/drei";
-import { TargetsProvider } from './targetsContext';
 
 export let externalShowSubtitles = false;
 
@@ -61,7 +60,6 @@ function App() {
 
   return (
     <>
-      <TargetsProvider>
       <Stats />
       <SphereEnv />
       <Environment background={false} files={"assets/textures/space.hdr"} />
@@ -103,7 +101,6 @@ function App() {
           saturation={0.1} // saturation in radians
         />
       </EffectComposer>
-      </TargetsProvider>
     </>
   );
 }

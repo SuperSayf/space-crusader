@@ -6,45 +6,73 @@ Source: https://sketchfab.com/3d-models/gargantua-the-black-hole-d8b4c8af897842d
 Title: Gargantua the Black Hole
 */
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useCallback } from "react";
+import { useFrame } from '@react-three/fiber'
 import { useGLTF } from "@react-three/drei";
+import { planePosition } from "../Lvl2/Lvl2SpaceShip";
+import { displayGameOver } from "../Completion";
 
 export function BlackHole(props) {
+  const holeRef = useRef()
+
   const { nodes, materials } = useGLTF("assets/models/gargantua_the_black_hole.glb");
+  const [gameOver, setGameOver] = useState(false);
+
+  const collisionCheck = useCallback(() => {
+    const distance = planePosition.distanceTo(holeRef.current.position);
+
+    // Check if the plane is inside the sphere
+    if (distance <= 0.2 && !gameOver) {
+      const leaderboardData = [
+        { name: "Sayf", timeLasted: "1 second" },
+        { name: "Muz", timeLasted: "180 seconds" },
+        { name: "Daggy", timeLasted: "90 seconds" }
+      ];
+      setGameOver(true);
+      //Msg For Game over Reason
+      const message = "You went into Black Hole... BRUH";
+      displayGameOver(2, leaderboardData,message);
+    }
+  }, [])
+
+  useFrame(() => {
+    collisionCheck();
+  })
+
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} ref={holeRef}>
       <group rotation={[-1.493, -0.212, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <mesh
-            castShadow
-            receiveShadow
+            // castShadow
+            // receiveShadow
             geometry={nodes.Object_4.geometry}
             material={materials.black}
             scale={0.748}
           />
           <mesh
-            castShadow
-            receiveShadow
+            // castShadow
+            // receiveShadow
             geometry={nodes.Object_6.geometry}
             material={materials.accretion_disk}
             scale={0.91}
           />
           <mesh
-            castShadow
-            receiveShadow
+            // castShadow
+            // receiveShadow
             geometry={nodes.Object_8.geometry}
             material={materials.Einstein_ring}
           />
           <mesh
-            castShadow
-            receiveShadow
+            // castShadow
+            // receiveShadow
             geometry={nodes.Object_10.geometry}
             material={materials.black}
             scale={1.048}
           />
           <mesh
-            castShadow
-            receiveShadow
+            // castShadow
+            // receiveShadow
             geometry={nodes.Object_12.geometry}
             material={materials.glowing}
             scale={1.065}

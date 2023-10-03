@@ -23,7 +23,7 @@ export function Stargate(props) {
       //Target Collision Updated Logic
       const distance = planePosition.distanceTo(group.current.position);
       //if the ship hits the target/ring
-      if (distance <= 0.3) {
+      if (distance <= 0.4) {
         setGameWon(true);
         console.log("u win");
         displayLevelCompletion(2);// Increase collected targets count

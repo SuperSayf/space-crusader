@@ -15,20 +15,20 @@ export function Astronaut(props) {
         scale={1.208}
       >
         <mesh
-          castShadow
-          receiveShadow
+          // castShadow
+          // receiveShadow
           geometry={nodes.Object_2.geometry}
           material={materials.material_0}
         />
         <mesh
-          castShadow
-          receiveShadow
+          // castShadow
+          // receiveShadow
           geometry={nodes.Object_3.geometry}
           material={materials.material_0}
         />
         <mesh
-          castShadow
-          receiveShadow
+          // castShadow
+          // receiveShadow
           geometry={nodes.Object_4.geometry}
           material={materials.material_0}
         />
@@ -39,21 +39,21 @@ export function Astronaut(props) {
           material={materials.material_0}
         />
         <mesh
-          castShadow
-          receiveShadow
+          // castShadow
+          // receiveShadow
           geometry={nodes.Object_6.geometry}
           material={materials.material_0}
         />
       </group>
       <mesh
-        castShadow
-        receiveShadow
+        // castShadow
+        // receiveShadow
         geometry={nodes.Sphere_6_A_1.geometry}
         material={materials.material_1}
       />
       <mesh
-        castShadow
-        receiveShadow
+        // castShadow
+        // receiveShadow
         geometry={nodes.Sphere_6_M_0.geometry}
         material={materials.material}
       />

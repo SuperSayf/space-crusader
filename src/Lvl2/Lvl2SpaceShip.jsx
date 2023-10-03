@@ -11,8 +11,7 @@ import "react-circular-progressbar/dist/styles.css";
 import TypeWriterEffect from "react-typewriter-effect";
 import { Flame } from "../flame";
 import { JustSpaceshhip } from "../justSpaceship";
-import { useTargets } from './targetsContext';
-import { NUM_TARGETS } from "./TargetsLvl2";
+import { NUM_TARGETS, collectedObjs } from "./TargetsLvl2";
 
 const x = new Vector3(1, 0, 0);
 const y = new Vector3(0, 1, 0);
@@ -60,7 +59,6 @@ export function AnimatedSpaceship(props) {
   const [boost, setBoost] = useState(100);
   const [timeAlive, setTimeAlive] = useState(0);
   const [showSubtitles, setShowSubtitles] = useState(false);
-  const { collectedTargets, setCollectedTargets } = useTargets();
 
   // Detect the shift key press
   const isShiftPressed = useKeyPress("Shift");
@@ -187,11 +185,11 @@ export function AnimatedSpaceship(props) {
   return (
     <group ref={groupRef}>
       <group ref={group} {...props} dispose={null} scale={0.01}>
-         <Html position={[-6, 1, 7]}>
+         <Html position={[-15, 0, 7]}>
            <div style={{ width: 100, height: 100 }}>
              <CircularProgressbar
-               value={collectedTargets/NUM_TARGETS}
-               text={`${collectedTargets}/${NUM_TARGETS}`}
+               value={collectedObjs}
+               text={`${collectedObjs}/${NUM_TARGETS}`}
                styles={buildStyles({
                  // Rotation of path and trail, in number of turns (0-1)
                  rotation: 0.25,

@@ -4,7 +4,6 @@ import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl2SpaceShip";
 import { Astronaut} from "./astronaut";
-import {TargetsProvider, useTargets} from "./targetsContext";
 
 export const NUM_TARGETS = 30; // Number of targets
 const TARGET_SPACING = 5.0; // Spacing between targets on the line
@@ -12,6 +11,7 @@ const TARGET_RAD = 0.125; // Radius of the target
 const offset = 4;//adjusts the starting point of the targets
 const ChangeY = 1;//adjusts the height of the targets
 const ChangeZ = 0;//adjusts the depth of the targets
+export var collectedObjs = 0; // Number of collected targets
 
 export function Targets() {
   const [collectedTargets, setCollectedTargets] = useState(0); // state to keep track of the number of collected targets
@@ -84,6 +84,7 @@ export function Targets() {
         target.hit = true;
         console.log("Ring hit");
         setCollectedTargets(prev => prev + 1); // Increase collected targets count
+        collectedObjs = collectedTargets + 1;
       }
     });
 
