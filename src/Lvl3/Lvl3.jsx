@@ -24,7 +24,8 @@ import commander from "/assets/audio/commander.mp3"; // Replace with the path to
 import { Stats } from "@react-three/drei";
 import { ShipExplosion } from "../shipExplosion";
 import { planePosition } from "./Lvl3Spaceship";
-import { externalGameOver } from "./Asteroid";
+import { externalGameOverAsteroid } from "./Asteroid";
+import { externalGameOverDeathStar } from "./DeathStar";
 import { externalGameOverSun } from "./Sun";
 import { useFrame } from "@react-three/fiber";
 
@@ -41,7 +42,11 @@ function Lvl3() {
 
   // Use frame to update the game over state
   useFrame(() => {
-    if (externalGameOver || externalGameOverSun) {
+    if (
+      externalGameOverAsteroid ||
+      externalGameOverSun ||
+      externalGameOverDeathStar
+    ) {
       setGameOver(true);
       masterGameOverLvl3 = true;
     }
@@ -106,7 +111,7 @@ function Lvl3() {
       {!gameOver && <AnimatedSpaceship />}
 
       <Targets />
-      {/* <Asteroid /> */}
+      <Asteroid />
       <MiniMap />
 
       <directionalLight

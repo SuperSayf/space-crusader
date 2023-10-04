@@ -42,7 +42,7 @@ export function Sun(props) {
 
       // Wait for 3 seconds before displaying the game over screen
       setTimeout(() => {
-        displayGameOver(leaderboardData, message);
+        displayGameOver(3, leaderboardData, message);
       }, 3000);
     }
   });

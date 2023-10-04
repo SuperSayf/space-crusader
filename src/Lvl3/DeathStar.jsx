@@ -6,6 +6,8 @@ import { planePosition } from "./Lvl3Spaceship";
 import { displayGameOver } from "../GameOver";
 import { timeAliveExternal } from "./Lvl3Spaceship";
 
+export let externalGameOverDeathStar = false;
+
 export function DeathStar(props) {
   const { nodes, materials } = useGLTF("assets/models/deathStar.glb");
   const [gameOver, setGameOver] = useState(false);
@@ -29,10 +31,14 @@ export function DeathStar(props) {
     if (distance < sphereRadius && !gameOver) {
       const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
       setGameOver(true);
+      externalGameOverDeathStar = true;
       //Msg For Game over Reason
       const message =
         "You went into the death star... BRUH have you not watched Star Wars?";
-      displayGameOver(leaderboardData, message);
+      // Wait for 3 seconds before displaying the game over screen
+      setTimeout(() => {
+        displayGameOver(3, leaderboardData, message);
+      }, 3000);
     }
   });
 

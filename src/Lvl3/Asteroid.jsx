@@ -17,7 +17,7 @@ function randomPoint(scale) {
 const TARGET_RAD = 0.125 * 2;
 const MAX_ASTEROIDS = 20; // Maximum number of asteroids
 
-export let externalGameOver = false;
+export let externalGameOverAsteroid = false;
 
 export function Asteroid() {
   const [targets, setTargets] = useState(() => {
@@ -108,8 +108,13 @@ export function Asteroid() {
       if (distance < TARGET_RAD && !gameOver) {
         const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
         setGameOver(true);
-        externalGameOver = true;
-        displayGameOver(leaderboardData, "You hit an asteroid!, DUMMY!");
+        externalGameOverAsteroid = true;
+        const message = "You hit an asteroid!, DUMMY!";
+
+        // Wait for 3 seconds before displaying the game over screen
+        setTimeout(() => {
+          displayGameOver(3, leaderboardData, message);
+        }, 3000);
       }
     });
   });
