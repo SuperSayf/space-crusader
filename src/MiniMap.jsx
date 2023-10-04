@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useFrame } from "react-three-fiber";
+import { useFrame } from "@react-three/fiber";
 import { OrthographicCamera } from "@react-three/drei";
 
 const MiniMap = (props) => {
@@ -66,6 +66,5 @@ const MiniMap = (props) => {
     </>
   );
 };
-
 
 export { MiniMap };
