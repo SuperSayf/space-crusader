@@ -7,7 +7,7 @@ import {
 import { EffectComposer, HueSaturation } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
 import { SphereEnv } from "../SphereEnv";
-import { MiniMap } from "../MiniMap";
+import { MiniMap } from "./MiniMap";
 import { Targets } from "./TargetsLvl2";
 import { MotionBlur } from "../MotionBlur";
 import { Asteroid } from "../Lvl1/Asteroid";
@@ -64,7 +64,7 @@ function App() {
       <SphereEnv />
       <Environment background={false} files={"assets/textures/space.hdr"} />
 
-      <PerspectiveCamera makeDefault position={[0, 10, 10]} />
+      <PerspectiveCamera makeDefault position={[0, 0, 0]} />
       <OrbitControls target={[0, 0, 160]} />
       <ambientLight intensity={0.3} />
       {/* <Spaceship /> */}
@@ -93,14 +93,14 @@ function App() {
         rotation={[0, 0, 0]}
         scale={[0.1, 0.1, 0.1]}
       />
-      <EffectComposer>
+      {/* <EffectComposer>
         <MotionBlur />
         <HueSaturation
           blendFunction={BlendFunction.NORMAL} // blend mode
           hue={-0.15} // hue in radians
           saturation={0.1} // saturation in radians
         />
-      </EffectComposer>
+      </EffectComposer> */}
     </>
   );
 }

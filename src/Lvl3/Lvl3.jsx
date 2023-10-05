@@ -14,7 +14,7 @@ import { Targets } from "./TargetsLvl3";
 import { MotionBlur } from "../MotionBlur";
 import { Asteroid } from "./Asteroid";
 import { SpaceStation } from "../spaceStation";
-import { MiniMap } from "../MiniMap";
+import { MiniMap } from "./MiniMap";
 import { Sun } from "./Sun";
 import { AnimatedSpaceship } from "./Lvl3Spaceship";
 import { DeathStar } from "./DeathStar";
@@ -96,7 +96,7 @@ function Lvl3() {
       <SphereEnv />
       <Environment background={false} files={"assets/textures/space.hdr"} />
 
-      <PerspectiveCamera makeDefault position={[0, 10, 10]} />
+      <PerspectiveCamera makeDefault position={[0, 0, 0]} />
       <OrbitControls target={[0, 0, 0]} />
       <ambientLight intensity={0.5} />
       {/* <Landscape /> */}
@@ -130,14 +130,14 @@ function Lvl3() {
         shadow-camera-right={6.4}
       />
 
-      <EffectComposer>
+      {/* <EffectComposer>
         <MotionBlur />
         <HueSaturation
           blendFunction={BlendFunction.NORMAL} // blend mode
           hue={-0.15} // hue in radians
           saturation={0.1} // saturation in radians
         />
-      </EffectComposer>
+      </EffectComposer> */}
     </>
   );
 }
