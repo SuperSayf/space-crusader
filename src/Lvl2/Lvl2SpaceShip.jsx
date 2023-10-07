@@ -16,7 +16,7 @@ import { NUM_TARGETS, collectedObjs } from "./TargetsLvl2";
 const x = new Vector3(1, 0, 0);
 const y = new Vector3(0, 1, 0);
 const z = new Vector3(0, 0, 1);
-export const planePosition = new Vector3(1, 2, 170);
+export const planePosition = new Vector3(1, 2, 110);
 // export const planePosition = new Vector3(10, 0, 0);
 
 const delayedRotMatrix = new Matrix4();
@@ -66,7 +66,7 @@ export function AnimatedSpaceship(props) {
   useFrame(({ camera }) => {
 
     //black hole 1 gravitational pull
-    const blackHolePosition = new Vector3(3, 2, 70);
+    const blackHolePosition = new Vector3(3, 2, 65);
     const spacecraftPosition = planePosition; // assuming planePosition is the position of the spacecraft
 
     const directionToBlackHole = new Vector3().subVectors(blackHolePosition, spacecraftPosition);
@@ -82,7 +82,7 @@ export function AnimatedSpaceship(props) {
     }
 
     //black hole 2 gravitational pull
-    const blackHolePosition2 = new Vector3(2, 3, 127.5);
+    const blackHolePosition2 = new Vector3(2, 3, 80);
     const spacecraftPosition2 = planePosition; // assuming planePosition is the position of the spacecraft
 
     const directionToBlackHole2 = new Vector3().subVectors(blackHolePosition2, spacecraftPosition2);

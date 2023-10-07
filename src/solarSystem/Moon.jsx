@@ -27,7 +27,7 @@ const Moon = React.memo(() => {
     const distance = planePosition.distanceTo(moonRef.current.position);
 
     // Check if the plane is inside the sphere
-    if (distance <= 0.5 && !gameOver) {
+    if (distance <= 0.3 && !gameOver) {
       const leaderboardData = [
         { name: "Sayf", timeLasted: "1 second" },
         { name: "Muz", timeLasted: "180 seconds" },
@@ -48,7 +48,7 @@ const Moon = React.memo(() => {
   return (
     <mesh castShadow receiveShadow ref={moonRef} position={[xAxis, 0, 0]}>
       {/* Radius , X-axis , Y-axis */}
-      <sphereGeometry args={[0.5, 32, 32]} />
+      <sphereGeometry args={[0.3, 32, 32]} />
       <meshPhongMaterial
         map={moonTexture}
         emissiveMap={moonTexture}

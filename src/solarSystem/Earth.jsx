@@ -30,7 +30,7 @@ const Earth = React.memo(({ displacementScale }) => {
   const updateEarthPosition = useCallback(() => {
     // Calculate the Earth's position based on its angle from the Sun
     const angle = 10 + clockRef.current.getElapsedTime() * 0.01
-    const distance = 45
+    const distance = 30
     const x = Math.sin(angle) * distance
     const z = Math.cos(angle) * distance
     earthRef.current.position.set(x, 0, z)
@@ -41,7 +41,7 @@ const Earth = React.memo(({ displacementScale }) => {
     const distance = planePosition.distanceTo(earthRef.current.position);
 
     // Check if the plane is inside the sphere
-    if (distance <= 2 && !gameOver) {
+    if (distance <= 1.5 && !gameOver) {
       const leaderboardData = [
         { name: "Sayf", timeLasted: "1 second" },
         { name: "Muz", timeLasted: "180 seconds" },
@@ -65,7 +65,7 @@ const Earth = React.memo(({ displacementScale }) => {
         castShadow
         receiveShadow>
         {/* Radius , X-axis , Y-axis */}
-        <sphereGeometry args={[2, 32, 32]} />
+        <sphereGeometry args={[1.5, 32, 32]} />
         <meshPhongMaterial
           map={earthTexture}
           normalMap={earthNormalMap}

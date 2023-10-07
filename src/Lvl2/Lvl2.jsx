@@ -74,33 +74,33 @@ function App() {
       {/* <Asteroid /> */}
       <MiniMap />
       <Bridge
-        position={[1, 1, 179]}
+        position={[1, 1, 120]}
         rotation={[0, 0, 0]}
         scale={[0.1, 0.1, 0.1]}
       />
       <BlackHole
-        position={[3, 2, 70]}
+        position={[3, 2, 55]}
         rotation={[0, 0, 0]}
         scale={[0.1, 0.1, 0.1]}
       />
       <BlackHole
-        position={[2, 3, 127.5]}
+        position={[2, 3, 75]}
         rotation={[0, 0, 0]}
         scale={[0.1, 0.1, 0.1]}
       />
       <BlackHole
-        position={[0, 2, 42.5]}
+        position={[0, 2, 35]}
         rotation={[0, 0, 0]}
         scale={[0.1, 0.1, 0.1]}
       />
-      {/* <EffectComposer>
+      <EffectComposer>
         <MotionBlur />
         <HueSaturation
           blendFunction={BlendFunction.NORMAL} // blend mode
           hue={-0.15} // hue in radians
           saturation={0.1} // saturation in radians
         />
-      </EffectComposer> */}
+      </EffectComposer>
     </>
   );
 }

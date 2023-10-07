@@ -21,7 +21,7 @@ const Neptune = React.memo(() => {
   const updateneptunePosition = useCallback(() => {
     // Calculate the neptune' position based on its angle from the Sun
     const angle = 5 + clockRef.current.getElapsedTime() * 0.07
-    const distance = 150
+    const distance = 90
     const x = Math.sin(angle) * distance
     const z = Math.cos(angle) * distance
     neptuneRef.current.position.set(x, 0, z)
@@ -32,7 +32,7 @@ const Neptune = React.memo(() => {
     const distance = planePosition.distanceTo(neptuneRef.current.position);
 
     // Check if the plane is inside the sphere
-    if (distance <= 3.5 && !gameOver) {
+    if (distance <= 3 && !gameOver) {
       const leaderboardData = [
         { name: "Sayf", timeLasted: "1 second" },
         { name: "Muz", timeLasted: "180 seconds" },
@@ -56,7 +56,7 @@ const Neptune = React.memo(() => {
         castShadow
         receiveShadow>
         {/* Radius , X-axis , Y-axis */}
-        <sphereGeometry args={[3.5, 32, 32]} />
+        <sphereGeometry args={[3, 32, 32]} />
         <meshPhongMaterial
           map={neptuneTexture}
         />

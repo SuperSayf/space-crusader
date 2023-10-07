@@ -5,7 +5,7 @@ import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl2SpaceShip";
 import { Astronaut} from "./astronaut";
 
-export const NUM_TARGETS = 30; // Number of targets
+export const NUM_TARGETS = 20; // Number of targets
 const TARGET_SPACING = 5.0; // Spacing between targets on the line
 const TARGET_RAD = 0.125; // Radius of the target
 const offset = 4;//adjusts the starting point of the targets

@@ -25,7 +25,7 @@ const Saturn = React.memo(() => {
   const updatesaturnPosition = useCallback(() => {
     // Calculate the saturn' position based on its angle from the Sun
     const angle = 30 + clockRef.current.getElapsedTime() * 0.12
-    const distance = 120
+    const distance = 70
     const x = Math.sin(angle) * distance
     const z = Math.cos(angle) * distance
     saturnRef.current.position.set(x, 0, z)
@@ -37,7 +37,7 @@ const Saturn = React.memo(() => {
     const distance = planePosition.distanceTo(saturnRef.current.position);
 
     // Check if the plane is inside the sphere
-    if (distance <= 6 && !gameOver) {
+    if (distance <= 5.5 && !gameOver) {
       const leaderboardData = [
         { name: "Sayf", timeLasted: "1 second" },
         { name: "Muz", timeLasted: "180 seconds" },

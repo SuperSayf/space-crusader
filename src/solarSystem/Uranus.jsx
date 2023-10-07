@@ -21,7 +21,7 @@ const Uranus = React.memo(() => {
   const updateuranusPosition = useCallback(() => {
     // Calculate the uranus' position based on its angle from the Sun
     const angle = clockRef.current.getElapsedTime() * 0.09
-    const distance = 130
+    const distance = 80
     const x = Math.sin(angle) * distance
     const z = Math.cos(angle) * distance
     uranusRef.current.position.set(x, 0, z)
@@ -32,7 +32,7 @@ const Uranus = React.memo(() => {
     const distance = planePosition.distanceTo(uranusRef.current.position);
 
     // Check if the plane is inside the sphere
-    if (distance <= 3 && !gameOver) {
+    if (distance <= 2.5 && !gameOver) {
       const leaderboardData = [
         { name: "Sayf", timeLasted: "1 second" },
         { name: "Muz", timeLasted: "180 seconds" },
@@ -56,7 +56,7 @@ const Uranus = React.memo(() => {
         castShadow
         receiveShadow>
         {/* Radius , X-axis , Y-axis */}
-        <sphereGeometry args={[3, 32, 32]} />
+        <sphereGeometry args={[2.5, 32, 32]} />
         <meshPhongMaterial
           map={uranusTexture}
         />

@@ -21,7 +21,7 @@ const Venus = React.memo(() => {
   const updatevenusPosition = useCallback(() => {
     // Calculate the venus' position based on its angle from the Sun
     const angle = clockRef.current.getElapsedTime() * 0.065
-    const distance = 25
+    const distance = 20
     const x = Math.sin(angle) * distance
     const z = Math.cos(angle) * distance
     venusRef.current.position.set(x, 0, z)
@@ -32,7 +32,7 @@ const Venus = React.memo(() => {
     const distance = planePosition.distanceTo(venusRef.current.position);
 
     // Check if the plane is inside the sphere
-    if (distance <= 1.5 && !gameOver) {
+    if (distance <= 1 && !gameOver) {
       const leaderboardData = [
         { name: "Sayf", timeLasted: "1 second" },
         { name: "Muz", timeLasted: "180 seconds" },
@@ -56,7 +56,7 @@ const Venus = React.memo(() => {
         castShadow
         receiveShadow>
         {/* Radius , X-axis , Y-axis */}
-        <sphereGeometry args={[1.5, 32, 32]} />
+        <sphereGeometry args={[1, 32, 32]} />
         <meshPhongMaterial
           map={venusTexture}
         />

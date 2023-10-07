@@ -21,7 +21,7 @@ const Jupiter = React.memo(() => {
   const updatejupiterPosition = useCallback(() => {
     // Calculate the jupiter' position based on its angle from the Sun
     const angle = 20 + clockRef.current.getElapsedTime() * 0.1
-    const distance = 95
+    const distance = 55
     const x = Math.sin(angle) * distance
     const z = Math.cos(angle) * distance
     jupiterRef.current.position.set(x, 0, z)
@@ -32,7 +32,7 @@ const Jupiter = React.memo(() => {
     const distance = planePosition.distanceTo(jupiterRef.current.position);
 
     // Check if the plane is inside the sphere
-    if (distance <= 5 && !gameOver) {
+    if (distance <= 4 && !gameOver) {
       const leaderboardData = [
         { name: "Sayf", timeLasted: "1 second" },
         { name: "Muz", timeLasted: "180 seconds" },
@@ -56,7 +56,7 @@ const Jupiter = React.memo(() => {
         castShadow
         receiveShadow>
         {/* Radius , X-axis , Y-axis */}
-        <sphereGeometry args={[5, 32, 32]} />
+        <sphereGeometry args={[4, 32, 32]} />
         <meshPhongMaterial
           map={jupiterTexture}
         />

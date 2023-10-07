@@ -21,7 +21,7 @@ const Mars = React.memo(() => {
   const updateMarsPosition = useCallback(() => {
     // Calculate the Mars' position based on its angle from the Sun
     const angle = 1 + clockRef.current.getElapsedTime() * 0.05
-    const distance = 70
+    const distance = 40
     const x = Math.sin(angle) * distance
     const z = Math.cos(angle) * distance
     marsRef.current.position.set(x, 0, z)
@@ -32,7 +32,7 @@ const Mars = React.memo(() => {
     const distance = planePosition.distanceTo(marsRef.current.position);
 
     // Check if the plane is inside the sphere
-    if (distance <= 1.3 && !gameOver) {
+    if (distance <= 1.1 && !gameOver) {
       const leaderboardData = [
         { name: "Sayf", timeLasted: "1 second" },
         { name: "Muz", timeLasted: "180 seconds" },
@@ -56,7 +56,7 @@ const Mars = React.memo(() => {
         castShadow
         receiveShadow>
         {/* Radius , X-axis , Y-axis */}
-        <sphereGeometry args={[1.3, 32, 32]} />
+        <sphereGeometry args={[1.1, 32, 32]} />
         <meshPhongMaterial
           map={marsTexture}
         />

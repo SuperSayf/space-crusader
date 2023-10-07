@@ -21,7 +21,7 @@ const Mercury = React.memo(() => {
   const updatemercuryPosition = useCallback(() => {
     // Calculate the mercury' position based on its angle from the Sun
     const angle = 50 + clockRef.current.getElapsedTime() * 0.03
-    const distance = 15
+    const distance = 10
     const x = Math.sin(angle) * distance
     const z = Math.cos(angle) * distance
     mercuryRef.current.position.set(x, 0, z)
@@ -32,7 +32,7 @@ const Mercury = React.memo(() => {
     const distance = planePosition.distanceTo(mercuryRef.current.position);
 
     // Check if the plane is inside the sphere
-    if (distance <= 0.5 && !gameOver) {
+    if (distance <= 0.3 && !gameOver) {
       const leaderboardData = [
         { name: "Sayf", timeLasted: "1 second" },
         { name: "Muz", timeLasted: "180 seconds" },
@@ -56,7 +56,7 @@ const Mercury = React.memo(() => {
         castShadow
         receiveShadow>
         {/* Radius , X-axis , Y-axis */}
-        <sphereGeometry args={[0.5, 32, 32]} />
+        <sphereGeometry args={[0.3, 32, 32]} />
         <meshPhongMaterial
           map={mercuryTexture}
         />

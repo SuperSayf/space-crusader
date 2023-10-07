@@ -18,7 +18,7 @@ const SolarSystem = React.memo(() => {
   return (
     <group ref={solarRef}>
     <Sun /> 
-    <Stargate position={[0,-2,5]} scale={0.005} />
+    <Stargate position={[0,-3,5]} scale={0.005} rotation={[100,0,0]}/>
     <Mercury />
     <Venus />
     <Earth displacementScale={0.01}/>
