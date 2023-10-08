@@ -67,11 +67,9 @@ function App() {
       <PerspectiveCamera makeDefault position={[0, 0, 0]} />
       <OrbitControls target={[0, 0, 160]} />
       <ambientLight intensity={0.3} />
-      {/* <Spaceship /> */}
       <Targets />
       <AnimatedSpaceship />
       <SolarSystem />
-      {/* <Asteroid /> */}
       <MiniMap />
       <Bridge
         position={[1, 1, 120]}
@@ -79,17 +77,17 @@ function App() {
         scale={[0.1, 0.1, 0.1]}
       />
       <BlackHole
-        position={[3, 2, 55]}
+        position={[0, 2, 42.5]}
         rotation={[0, 0, 0]}
         scale={[0.1, 0.1, 0.1]}
       />
       <BlackHole
-        position={[2, 3, 75]}
+        position={[2, 3, 80]}
         rotation={[0, 0, 0]}
         scale={[0.1, 0.1, 0.1]}
       />
       <BlackHole
-        position={[0, 2, 35]}
+        position={[3, 2, 65]}
         rotation={[0, 0, 0]}
         scale={[0.1, 0.1, 0.1]}
       />
