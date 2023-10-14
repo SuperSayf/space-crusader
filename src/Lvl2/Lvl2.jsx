@@ -30,6 +30,7 @@ import {extGameOverSaturn} from '../solarSystem/Saturn'
 import {extGameOverUranus} from '../solarSystem/Uranus'
 import {extGameOverNeptune} from '../solarSystem/Neptune'
 import { useFrame } from "@react-three/fiber";
+import { ShipExplosion } from "../shipExplosion";
 
 export let externalShowSubtitles = false;
 
