@@ -2,6 +2,7 @@ import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { masterGameOverLvl3 } from "./Lvl3/Lvl3";
+import { masterGameOverLvl2 } from "./Lvl2/Lvl2";
 
 export const useExplode = (group, { distance = 3, enableRotation = true }) => {
   // Use state to set the external game over state
@@ -46,7 +47,7 @@ export const useExplode = (group, { distance = 3, enableRotation = true }) => {
   }, []);
 
   useFrame(() => {
-    setGameOver(masterGameOverLvl3);
+    setGameOver(masterGameOverLvl3 || masterGameOverLvl2);
 
     if (gameOver) {
       group.current.children.forEach((mesh) => {

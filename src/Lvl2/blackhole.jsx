@@ -12,6 +12,8 @@ import { useGLTF } from "@react-three/drei";
 import { planePosition } from "../Lvl2/Lvl2SpaceShip";
 import { displayGameOver } from "../Completion";
 
+export let extGameOverBlackHole = false;
+
 export function BlackHole(props) {
   const holeRef = useRef()
 
@@ -29,9 +31,13 @@ export function BlackHole(props) {
         { name: "Daggy", timeLasted: "90 seconds" }
       ];
       setGameOver(true);
+      extGameOverBlackHole = true;
       //Msg For Game over Reason
       const message = "You went into Black Hole... BRUH";
-      displayGameOver(2, leaderboardData,message);
+      // Wait for 3 seconds before displaying the game over screen
+      setTimeout(() => {
+        displayGameOver(3, leaderboardData, message);
+      }, 3000);
     }
   }, [])
 

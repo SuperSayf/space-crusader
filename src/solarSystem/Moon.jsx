@@ -5,6 +5,7 @@ import * as THREE from 'three'
 import { planePosition } from "../Lvl2/Lvl2SpaceShip";
 import { displayGameOver } from "../Completion";
 
+export let extGameOverMoon = false;
 
 const Moon = React.memo(() => {
   const moonRef = useRef()
@@ -34,9 +35,13 @@ const Moon = React.memo(() => {
         { name: "Daggy", timeLasted: "90 seconds" }
       ];
       setGameOver(true);
+      extGameOverMoon = true;
       //Msg For Game over Reason
       const message = "You went into the Moon... BRUH";
-      displayGameOver(2, leaderboardData,message);
+      // Wait for 3 seconds before displaying the game over screen
+      setTimeout(() => {
+        displayGameOver(3, leaderboardData, message);
+      }, 3000);
     }
   }, [])
 

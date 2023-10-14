@@ -5,6 +5,8 @@ import { Vector3 } from "three";
 import { planePosition } from "../Lvl2/Lvl2SpaceShip";
 import { displayGameOver } from "../Completion";
 
+export let extGameOverSun = false;
+
 export function Sun(props) {
   const { nodes, materials } = useGLTF("assets/models/Sun.glb");
 
@@ -31,9 +33,13 @@ export function Sun(props) {
         { name: "Daggy", timeLasted: "90 seconds" }
       ];
       setGameOver(true);
+      extGameOverSun = true;
       //Msg For Game over Reason
       const message = "You went into the sun... BRUH";
-      displayGameOver(2, leaderboardData,message);
+      // Wait for 3 seconds before displaying the game over screen
+      setTimeout(() => {
+        displayGameOver(3, leaderboardData, message);
+      }, 3000);
     }
   });
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   PerspectiveCamera,
   Environment,
@@ -19,10 +19,50 @@ import commander from "/assets/audio/Commander_voice_level_2.mp3"; // Replace wi
 import {Bridge} from "./bridge";
 import {BlackHole} from "./blackhole";
 import { Stats } from "@react-three/drei";
+import { planePosition } from "./Lvl2SpaceShip";
+import {extGameOverEarth} from '../solarSystem/Earth'
+import {extGameOverMars} from '../solarSystem/Mars'
+import { extGameOverSun } from '../solarSystem/Sun'
+import {extGameOverMercury} from '../solarSystem/Mercury'
+import {extGameOverVenus} from '../solarSystem/Venus'
+import {extGameOverJupiter} from '../solarSystem/Jupiter'
+import {extGameOverSaturn} from '../solarSystem/Saturn'
+import {extGameOverUranus} from '../solarSystem/Uranus'
+import {extGameOverNeptune} from '../solarSystem/Neptune'
+import { useFrame } from "@react-three/fiber";
 
 export let externalShowSubtitles = false;
 
+export let masterGameOverLvl2 = false;
+
 function App() {
+  // Use state to set the external game over state
+  const [gameOver, setGameOver] = useState(false);
+
+  // Use state to set the plane position
+  const [planePos, setPlanePos] = useState(planePosition);
+
+  // Use frame to update the game over state
+  useFrame(() => {
+    if (
+      extGameOverEarth ||
+      extGameOverMars ||
+      extGameOverSun ||
+      extGameOverMercury ||
+      extGameOverVenus ||
+      extGameOverJupiter ||
+      extGameOverSaturn ||
+      extGameOverUranus ||
+      extGameOverNeptune
+    ) {
+      setGameOver(true);
+      masterGameOverLvl2 = true;
+    }
+
+    // Update the plane position
+    setPlanePos(planePosition);
+  });
+
   // Create an instance of the background music
   const backgroundMusic = new Howl({
     src: [soundEffect],
@@ -68,7 +108,13 @@ function App() {
       <OrbitControls target={[0, 0, 160]} />
       <ambientLight intensity={0.3} />
       <Targets />
-      <AnimatedSpaceship />
+
+      {/* If game over, show ship explosion */}
+      {gameOver && <ShipExplosion position={planePos} />}
+
+      {/* If not game over, show animated ship */}
+      {!gameOver && <AnimatedSpaceship />}
+
       <SolarSystem />
       <MiniMap />
       <Bridge

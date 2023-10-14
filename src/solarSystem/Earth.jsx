@@ -7,6 +7,8 @@ import { displayGameOver } from "../Completion";
 
 import * as THREE from 'three'
 
+export let extGameOverEarth = false;
+
 const Earth = React.memo(({ displacementScale }) => {
   const earthRef = useRef()
 
@@ -48,9 +50,13 @@ const Earth = React.memo(({ displacementScale }) => {
         { name: "Daggy", timeLasted: "90 seconds" }
       ];
       setGameOver(true);
+      extGameOverEarth = true;
       //Msg For Game over Reason
       const message = "You went into Earth... BRUH";
-      displayGameOver(2, leaderboardData,message);
+      // Wait for 3 seconds before displaying the game over screen
+      setTimeout(() => {
+        displayGameOver(3, leaderboardData, message);
+      }, 3000);
     }
   }, [])
 

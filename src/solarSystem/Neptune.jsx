@@ -6,6 +6,8 @@ import { displayGameOver } from "../Completion";
 
 import * as THREE from 'three'
 
+export let extGameOverNeptune = false;
+
 const Neptune = React.memo(() => {
   const neptuneRef = useRef()
 
@@ -39,9 +41,13 @@ const Neptune = React.memo(() => {
         { name: "Daggy", timeLasted: "90 seconds" }
       ];
       setGameOver(true);
+      extGameOverNeptune = true;
       //Msg For Game over Reason
       const message = "You went into Neptune... BRUH";
-      displayGameOver(2, leaderboardData,message);
+      // Wait for 3 seconds before displaying the game over screen
+      setTimeout(() => {
+        displayGameOver(3, leaderboardData, message);
+      }, 3000);
     }
   }, [])
 
