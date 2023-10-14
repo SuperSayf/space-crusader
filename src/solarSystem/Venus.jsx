@@ -47,7 +47,7 @@ const Venus = React.memo(() => {
       // Wait for 3 seconds before displaying the game over screen
       setTimeout(() => {
         displayGameOver(3, leaderboardData, message);
-      }, 3000);
+      }, 2000);
     }
   }, [])
 

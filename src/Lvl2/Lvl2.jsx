@@ -17,7 +17,7 @@ import soundEffect from "/assets/audio/background.mp3"; // Replace with the path
 import { Howl, Howler } from "howler"; // Import Howler
 import commander from "/assets/audio/Commander_voice_level_2.mp3"; // Replace with the path to your background music file
 import {Bridge} from "./bridge";
-import {BlackHole} from "./blackhole";
+import {BlackHole, extGameOverBlackHole} from "./blackhole";
 import { Stats } from "@react-three/drei";
 import { planePosition } from "./Lvl2SpaceShip";
 import {extGameOverEarth} from '../solarSystem/Earth'
@@ -53,7 +53,8 @@ function App() {
       extGameOverJupiter ||
       extGameOverSaturn ||
       extGameOverUranus ||
-      extGameOverNeptune
+      extGameOverNeptune ||
+      extGameOverBlackHole
     ) {
       setGameOver(true);
       masterGameOverLvl2 = true;

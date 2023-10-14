@@ -14,6 +14,8 @@ function randomPoint(scale) {
   ).multiply(scale || new Vector3(1, 1, 1));
 }
 
+export let externalGameOverAsteroid = false;
+
 const TARGET_RAD = 0.125 * 2;
 const SPAWN_DEPTH = -10; // Depth at which new asteroids are spawned
 const MAX_ASTEROIDS = 15; // Maximum number of asteroids
@@ -86,9 +88,13 @@ export function Asteroid() {
           { name: "Daggy", timeLasted: "90 seconds" },
         ];
         setGameOver(true);
+        externalGameOverAsteroid = true;
         //Msg For Game over Reason
         const message = "You hit an asteroid!";
-        displayGameOver(1, leaderboardData, message);
+        // Wait for 3 seconds before displaying the game over screen
+        setTimeout(() => {
+          displayGameOver(3, leaderboardData, message);
+        }, 2000);
       }
     });
 

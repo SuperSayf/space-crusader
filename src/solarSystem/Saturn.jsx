@@ -39,7 +39,7 @@ const Saturn = React.memo(() => {
     const distance = planePosition.distanceTo(saturnRef.current.position);
 
     // Check if the plane is inside the sphere
-    if (distance <= 5.5 && !gameOver) {
+    if (distance <= 6 && !gameOver) {
       const leaderboardData = [
         { name: "Sayf", timeLasted: "1 second" },
         { name: "Muz", timeLasted: "180 seconds" },
@@ -52,7 +52,7 @@ const Saturn = React.memo(() => {
       // Wait for 3 seconds before displaying the game over screen
       setTimeout(() => {
         displayGameOver(3, leaderboardData, message);
-      }, 3000);
+      }, 2000);
     }
   }, [])
 
