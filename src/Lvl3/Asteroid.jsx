@@ -73,7 +73,7 @@ export function Asteroid() {
 
       setTimeout(() => {
         displayGameOver(3, leaderboardData, message);
-      }, 2000);
+      }, 1000);
     }
   };
 

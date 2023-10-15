@@ -29,7 +29,7 @@ export function DeathStar(props) {
         "You went into the death star... BRUH have you not watched Star Wars?";
       setTimeout(() => {
         displayGameOver(3, leaderboardData, message);
-      }, 2000);
+      }, 1000);
     }
   };
 

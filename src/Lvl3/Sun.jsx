@@ -33,7 +33,7 @@ export function Sun(props) {
 
       setTimeout(() => {
         displayGameOver(3, leaderboardData, message);
-      }, 3000);
+      }, 1000);
     }
   };
 
