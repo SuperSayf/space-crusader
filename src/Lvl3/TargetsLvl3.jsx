@@ -36,22 +36,11 @@ export function Targets() {
 
   // Add a state variable for boost and its initial value
   const [boost, setBoost] = useState(100);
-  let boostUsedPerSecond = 2;
-
-  // Use useEffect to decrease boost every second
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // Decrease boost by 2 every second
-      setBoost((prevBoost) => prevBoost - boostUsedPerSecond);
-    }, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
 
   // Event listener to track Shift key press
   useEffect(() => {
+    let boostUsedPerSecond = 2;
+
     const handleKeyDown = (event) => {
       if (event.key === "Shift") {
         boostUsedPerSecond = 4;
@@ -64,10 +53,16 @@ export function Targets() {
       }
     };
 
+    const interval = setInterval(() => {
+      // Decrease boost by 2 every second
+      setBoost((prevBoost) => prevBoost - boostUsedPerSecond);
+    }, 1000);
+
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
 
     return () => {
+      clearInterval(interval);
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
     };
@@ -93,7 +88,7 @@ export function Targets() {
 
     // Check if boost has reached 0
     if (boost <= 0) {
-      
+      // Handle game over logic here
     }
 
     // Update the externalBoost variable

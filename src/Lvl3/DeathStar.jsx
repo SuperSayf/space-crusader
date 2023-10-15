@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { MeshStandardMaterial, Vector3 } from "three";
@@ -13,32 +13,30 @@ export function DeathStar(props) {
   const [gameOver, setGameOver] = useState(false);
   const [timeAlive, setTimeAlive] = useState(0);
 
-  // Define the center and radius of the green sphere
   const sphereCenter = new Vector3(5, 1, 1);
   const sphereRadius = 0.51;
 
-  // Use effect to set the time alive
-  useFrame(() => {
+  useEffect(() => {
     setTimeAlive(timeAliveExternal);
-  });
+  }, []);
 
-  // Use useFrame for continuous collision detection
-  useFrame(() => {
-    // Calculate the distance between the plane position and the sphere center
-    const distance = planePosition.distanceTo(sphereCenter);
-
-    // Check if the plane is inside the sphere
-    if (distance < sphereRadius && !gameOver) {
+  const handleGameEnd = () => {
+    if (!gameOver) {
       const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
       setGameOver(true);
       externalGameOverDeathStar = true;
-      //Msg For Game over Reason
       const message =
         "You went into the death star... BRUH have you not watched Star Wars?";
-      // Wait for 3 seconds before displaying the game over screen
       setTimeout(() => {
         displayGameOver(3, leaderboardData, message);
       }, 2000);
+    }
+  };
+
+  useFrame(() => {
+    const distance = planePosition.distanceTo(sphereCenter);
+    if (distance < sphereRadius) {
+      handleGameEnd();
     }
   });
 

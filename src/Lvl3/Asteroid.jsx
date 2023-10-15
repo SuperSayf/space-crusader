@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Quaternion, SphereGeometry, TextureLoader, Vector3 } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
@@ -15,7 +15,7 @@ function randomPoint(scale) {
 }
 
 const TARGET_RAD = 0.125 * 2;
-const MAX_ASTEROIDS = 20; // Maximum number of asteroids
+const MAX_ASTEROIDS = 20;
 
 export let externalGameOverAsteroid = false;
 
@@ -35,7 +35,6 @@ export function Asteroid() {
     return arr;
   });
 
-  //Game Over State Component
   const [gameOver, setGameOver] = useState(false);
   const [timeAlive, setTimeAlive] = useState(0);
 
@@ -61,10 +60,22 @@ export function Asteroid() {
     return geo;
   }, [targets]);
 
-  // Use effect to set the time alive
-  useFrame(() => {
+  useEffect(() => {
     setTimeAlive(timeAliveExternal);
-  });
+  }, []);
+
+  const handleGameEnd = () => {
+    if (!gameOver) {
+      const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
+      setGameOver(true);
+      externalGameOverAsteroid = true;
+      const message = "You hit an asteroid!, DUMMY!";
+
+      setTimeout(() => {
+        displayGameOver(3, leaderboardData, message);
+      }, 2000);
+    }
+  };
 
   useFrame(() => {
     // Find the closest asteroid to the player
@@ -74,25 +85,22 @@ export function Asteroid() {
     targets.forEach((target, i) => {
       const distance = planePosition.distanceTo(target.center);
 
-      // If the asteroid is not hit and it's closer than the previous closest
       if (!target.hit && distance < closestDistance) {
         closestAsteroid = target;
         closestDistance = distance;
       }
     });
 
-    // Move the closest asteroid toward the player
     if (closestAsteroid) {
       const directionToPlayer = planePosition
         .clone()
         .sub(closestAsteroid.center);
-      const speed = 0.008; // Adjust the speed as needed
+      const speed = 0.008;
       closestAsteroid.center.add(
         directionToPlayer.normalize().multiplyScalar(speed)
       );
     }
 
-    // Update the targets array with the closest asteroid information
     const updatedTargets = targets.map((target) => {
       return {
         ...target,
@@ -102,19 +110,10 @@ export function Asteroid() {
 
     setTargets(updatedTargets);
 
-    // Check for collisions with the player
     updatedTargets.forEach((target, i) => {
       const distance = planePosition.distanceTo(target.center);
-      if (distance < TARGET_RAD && !gameOver) {
-        const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
-        setGameOver(true);
-        externalGameOverAsteroid = true;
-        const message = "You hit an asteroid!, DUMMY!";
-
-        // Wait for 3 seconds before displaying the game over screen
-        setTimeout(() => {
-          displayGameOver(3, leaderboardData, message);
-        }, 2000);
+      if (distance < TARGET_RAD) {
+        handleGameEnd();
       }
     });
   });

@@ -198,7 +198,7 @@ export function AnimatedSpaceship(props) {
         </Html>
 
         {/* if showSubtitles */}
-        {showSubtitles && (
+        {/* {showSubtitles && (
           <Html position={[0, 0, 0]}>
             <div className="subtitles" style={{ width: 500, height: 100 }}>
               <TypeWriterEffect
@@ -213,7 +213,7 @@ export function AnimatedSpaceship(props) {
               />
             </div>
           </Html>
-        )}
+        )} */}
 
         <JustSpaceshhip />
 
