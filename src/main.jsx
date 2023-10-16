@@ -6,7 +6,7 @@ import Lvl3 from "./Lvl3/Lvl3.jsx";
 import { Canvas } from "@react-three/fiber";
 import "./index.css";
 import "./startScreen/game-menu.css";
-import {Html} from "@react-three/drei";
+import { Html } from "@react-three/drei";
 const rootContainer = document.getElementById("root");
 
 const App = () => {
@@ -24,19 +24,8 @@ const App = () => {
     }
   }, []);
 
-  const handleNewGameClick = () => {
-    setSelectedLevel("lvl1");
-    setStart(true);
-  };
-
   const handleLevelsButtonClick = () => {
     setShowLevelOptions(!showLevelOptions); // Toggle level options visibility
-  };
-
-  const handleLevelSelection = (level) => {
-    setSelectedLevel(level);
-    setStart(true);
-    setShowLevelOptions(false); // Close level options when a level is selected
   };
 
   const handleCreditsButtonClick = () => {
@@ -44,32 +33,31 @@ const App = () => {
     window.location.href = "credits.html";
   };
 
+  const handleLvl1Click = () => {
+    window.location.href = "lvl1.html";
+  };
+
+  const handleLvl2Click = () => {
+    window.location.href = "lvl2.html";
+  };
+
+  const handleLvl3Click = () => {
+    window.location.href = "lvl3.html";
+  };
+
   return (
     <div className="container">
       <div className="video-background">
-            <video playsInline="playsInline" autoPlay="autoplay" muted="muted" loop="loop">
-              <source src="../assets/audio/backgroundvideo.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-      {start && (
-        <Canvas className="full-screen-canvas" shadows>
-          {/* <color attach="background" args={["black"]} /> */}
-          {/* <Html>
-          <div className="video-background-loader">
-            <video playsInline="playsInline" autoPlay="autoplay" loop="loop">
-              <source src="../assets/audio/astronautplaying.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-          </Html> */}
-          <Suspense fallback={null}>
-            {selectedLevel === "lvl1" ? <Lvl1 /> : null}
-            {selectedLevel === "lvl2" ? <Lvl2 /> : null}
-            {selectedLevel === "lvl3" ? <Lvl3 /> : null}
-          </Suspense>
-        </Canvas>
-      )}
+        <video
+          playsInline="playsInline"
+          autoPlay="autoplay"
+          muted="muted"
+          loop="loop"
+        >
+          <source src="../assets/audio/backgroundvideo.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
       {!start && (
         <div className="overlay">
           <header>
@@ -77,7 +65,7 @@ const App = () => {
           </header>
           <ul className="threeD-button-set">
             <li>
-              <button id="newGameButton" onClick={handleNewGameClick}>
+              <button id="newGameButton" onClick={handleLvl1Click}>
                 New Game
               </button>
             </li>
@@ -88,21 +76,15 @@ const App = () => {
               {showLevelOptions && ( // Show level options if showLevelOptions is true
                 <ul className="level-options">
                   <li>
-                    <button onClick={() => handleLevelSelection("lvl1")}>
-                      Level 1
-                    </button>
+                    <button onClick={handleLvl1Click}>Level 1</button>
                   </li>
                   <br />
                   <li>
-                    <button onClick={() => handleLevelSelection("lvl2")}>
-                      Level 2
-                    </button>
+                    <button onClick={handleLvl2Click}>Level 2</button>
                   </li>
                   <br />
                   <li>
-                    <button onClick={() => handleLevelSelection("lvl3")}>
-                      Level 3
-                    </button>
+                    <button onClick={handleLvl3Click}>Level 3</button>
                   </li>
                 </ul>
               )}
