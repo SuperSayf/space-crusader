@@ -136,8 +136,7 @@ export function displayGameOver(level, leaderboardData, message) {
     document
       .getElementById("restartButton")
       .addEventListener("click", function () {
-        window.location.href = `game.html?level=lvl${level}`;
-        ;
+        window.location.href = `index.html?level=lvl${level}`;
       });
 
     document
@@ -236,7 +235,7 @@ export function displayLevelCompletion(level) {
       .getElementById("nextLevelButton")
       .addEventListener("click", function () {
         //Responsible to navigate to  the next level page by increamenting 1
-        window.location.href = `game.html?level=lvl${level + 1}`;
+        window.location.href = `index.html?level=lvl${level + 1}`;
       });
     //Logic for menuButton Navigation
     document

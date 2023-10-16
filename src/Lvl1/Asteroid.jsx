@@ -70,7 +70,7 @@ export function Asteroid() {
       externalGameOverAsteroid = true;
       const message = "You hit an asteroid!";
       setTimeout(() => {
-        displayGameOver(3, leaderboardData, message);
+        displayGameOver(1, leaderboardData, message);
       }, 2000);
     }
   };

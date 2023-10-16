@@ -1,81 +1,80 @@
-export function displayGameOver(level, leaderboardData,message) {
-    //Create a default leaderboardData
-    const defaultLeaderboardData = [
-      { name: "Sayf", timeLasted: "1 second" },
-      { name: "Muz", timeLasted: "180 seconds" },
-      { name: "Daggy", timeLasted: "90 seconds" }
-    ];
+export function displayGameOver(level, leaderboardData, message) {
+  //Create a default leaderboardData
+  const defaultLeaderboardData = [
+    { name: "Sayf", timeLasted: "1 second" },
+    { name: "Muz", timeLasted: "180 seconds" },
+    { name: "Daggy", timeLasted: "90 seconds" },
+  ];
 
-    //Then add the default leaderboardData to the leaderboardData
-    leaderboardData = leaderboardData.concat(defaultLeaderboardData);
-    
+  //Then add the default leaderboardData to the leaderboardData
+  leaderboardData = leaderboardData.concat(defaultLeaderboardData);
 
-    const gameScreen = document.createElement("div");
-    gameScreen.classList.add("game-screen");
-    gameScreen.id = "gameScreen";
-  
-    // Create the h2 element
-    const h2 = document.createElement("h2");
-    h2.textContent = "Game Over!";
-    gameScreen.appendChild(h2);
+  const gameScreen = document.createElement("div");
+  gameScreen.classList.add("game-screen");
+  gameScreen.id = "gameScreen";
 
-    // Create the h2 element with the dynamic message
-    const hmsg = document.createElement("h2");
-    hmsg.textContent = message; // Set the dynamic message
-    gameScreen.appendChild(hmsg);
-  
-    // Create the leaderboard table
-    const leaderboardTable = document.createElement("table");
-    leaderboardTable.classList.add("leaderboard-table");
-  
-    // Create the table header row
-    const tableHeaderRow = document.createElement("tr");
-    const nameHeader = document.createElement("th");
-    nameHeader.textContent = "Name";
-    const timeHeader = document.createElement("th");
-    timeHeader.textContent = "Time Lasted";
-  
-    tableHeaderRow.appendChild(nameHeader);
-    tableHeaderRow.appendChild(timeHeader);
-  
-    leaderboardTable.appendChild(tableHeaderRow);
-  
-    // Populate the table with leaderboard data
-    for (const entry of leaderboardData) {
-        const tableRow = document.createElement("tr");
-        const nameCell = document.createElement("td");
-        nameCell.textContent = entry.name;
-        const timeCell = document.createElement("td");
-        timeCell.textContent = entry.timeLasted;
-  
-        tableRow.appendChild(nameCell);
-        tableRow.appendChild(timeCell);
-  
-        leaderboardTable.appendChild(tableRow);
-    }
-  
-    gameScreen.appendChild(leaderboardTable);
-  
-    // Create the restart button
-    const restartButton = document.createElement("button");
-    restartButton.id = "restartButton";
-    restartButton.textContent = "Restart";
-    gameScreen.appendChild(restartButton);
-  
-    // Create the menu button
-    const menuButton = document.createElement("button");
-    menuButton.id = "menuButton";
-    menuButton.textContent = "Go to Main Menu";
-    gameScreen.appendChild(menuButton);
-  
-    // Add event listeners to buttons (if needed)
-  
-    // Append the game screen to the body
-    document.body.appendChild(gameScreen);
-  
-    // Create the style element
-    const style = document.createElement("style");
-    style.textContent = `
+  // Create the h2 element
+  const h2 = document.createElement("h2");
+  h2.textContent = "Game Over!";
+  gameScreen.appendChild(h2);
+
+  // Create the h2 element with the dynamic message
+  const hmsg = document.createElement("h2");
+  hmsg.textContent = message; // Set the dynamic message
+  gameScreen.appendChild(hmsg);
+
+  // Create the leaderboard table
+  const leaderboardTable = document.createElement("table");
+  leaderboardTable.classList.add("leaderboard-table");
+
+  // Create the table header row
+  const tableHeaderRow = document.createElement("tr");
+  const nameHeader = document.createElement("th");
+  nameHeader.textContent = "Name";
+  const timeHeader = document.createElement("th");
+  timeHeader.textContent = "Time Lasted";
+
+  tableHeaderRow.appendChild(nameHeader);
+  tableHeaderRow.appendChild(timeHeader);
+
+  leaderboardTable.appendChild(tableHeaderRow);
+
+  // Populate the table with leaderboard data
+  for (const entry of leaderboardData) {
+    const tableRow = document.createElement("tr");
+    const nameCell = document.createElement("td");
+    nameCell.textContent = entry.name;
+    const timeCell = document.createElement("td");
+    timeCell.textContent = entry.timeLasted;
+
+    tableRow.appendChild(nameCell);
+    tableRow.appendChild(timeCell);
+
+    leaderboardTable.appendChild(tableRow);
+  }
+
+  gameScreen.appendChild(leaderboardTable);
+
+  // Create the restart button
+  const restartButton = document.createElement("button");
+  restartButton.id = "restartButton";
+  restartButton.textContent = "Restart";
+  gameScreen.appendChild(restartButton);
+
+  // Create the menu button
+  const menuButton = document.createElement("button");
+  menuButton.id = "menuButton";
+  menuButton.textContent = "Go to Main Menu";
+  gameScreen.appendChild(menuButton);
+
+  // Add event listeners to buttons (if needed)
+
+  // Append the game screen to the body
+  document.body.appendChild(gameScreen);
+
+  // Create the style element
+  const style = document.createElement("style");
+  style.textContent = `
       .game-screen {
         display: block;
         position: fixed;
@@ -136,17 +135,15 @@ export function displayGameOver(level, leaderboardData,message) {
         background-color: #33ccff;
       }
     `;
-    document.head.appendChild(style);
-  
-    document
+  document.head.appendChild(style);
+
+  document
     .getElementById("restartButton")
     .addEventListener("click", function () {
-      window.location.href = `game.html?level=lvl${level}`;
+      window.location.href = `index.html?level=lvl${level}`;
     });
-  
-    document
-    .getElementById("menuButton")
-    .addEventListener("click", function () {
-      window.location.href = "index.html";
-    });
+
+  document.getElementById("menuButton").addEventListener("click", function () {
+    window.location.href = "index.html";
+  });
 }
