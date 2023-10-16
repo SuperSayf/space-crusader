@@ -9,7 +9,9 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: "./index.html",
-        level: "./level.html",
+        lvl1: "./lvl1.html",
+        lvl2: "./lvl2.html",
+        lvl3: "./lvl3.html",
         // ...
         // List all files you want in your build
       },

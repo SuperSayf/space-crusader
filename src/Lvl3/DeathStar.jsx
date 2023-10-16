@@ -3,7 +3,7 @@ import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { MeshStandardMaterial, Vector3 } from "three";
 import { planePosition } from "./Lvl3Spaceship";
-import { displayGameOver } from "../GameOver";
+import { displayGameOver } from "../Completion";
 import { timeAliveExternal } from "./Lvl3Spaceship";
 
 export let externalGameOverDeathStar = false;

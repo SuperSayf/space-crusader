@@ -136,13 +136,13 @@ export function displayGameOver(level, leaderboardData, message) {
     document
       .getElementById("restartButton")
       .addEventListener("click", function () {
-        window.location.href = `level.html?level=lvl${level}`;
+        window.location.href = `lvl${level}.html`;
       });
 
     document
       .getElementById("menuButton")
       .addEventListener("click", function () {
-        window.location.href = "level.html";
+        window.location.href = "index.html";
       });
   }
 }
