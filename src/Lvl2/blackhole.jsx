@@ -36,7 +36,7 @@ export function BlackHole(props) {
       const message = "You went into Black Hole... BRUH";
       // Wait for 3 seconds before displaying the game over screen
       setTimeout(() => {
-        displayGameOver(3, leaderboardData, message);
+        displayGameOver(2, leaderboardData, message);
       }, 3000);
     }
   }, [])

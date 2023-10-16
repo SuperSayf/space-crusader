@@ -51,7 +51,7 @@ const Saturn = React.memo(() => {
       const message = "You went into Saturn... BRUH";
       // Wait for 3 seconds before displaying the game over screen
       setTimeout(() => {
-        displayGameOver(3, leaderboardData, message);
+        displayGameOver(2, leaderboardData, message);
       }, 2000);
     }
   }, [])

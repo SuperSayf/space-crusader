@@ -55,7 +55,7 @@ const Earth = React.memo(({ displacementScale }) => {
       const message = "You went into Earth... BRUH";
       // Wait for 3 seconds before displaying the game over screen
       setTimeout(() => {
-        displayGameOver(3, leaderboardData, message);
+        displayGameOver(2, leaderboardData, message);
       }, 2000);
     }
   }, [])
