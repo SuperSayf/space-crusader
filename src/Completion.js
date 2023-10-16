@@ -136,13 +136,13 @@ export function displayGameOver(level, leaderboardData, message) {
     document
       .getElementById("restartButton")
       .addEventListener("click", function () {
-        window.location.href = `level.html?level=lvl${level}`;
+        window.location.href = `lvl${level}.html`;
       });
 
     document
       .getElementById("menuButton")
       .addEventListener("click", function () {
-        window.location.href = "level.html";
+        window.location.href = "index.html";
       });
   }
 }
@@ -235,13 +235,13 @@ export function displayLevelCompletion(level) {
       .getElementById("nextLevelButton")
       .addEventListener("click", function () {
         //Responsible to navigate to  the next level page by increamenting 1
-        window.location.href = `level.html?level=lvl${level + 1}`;
+        window.location.href = `lvl${level + 1}.html`;
       });
     //Logic for menuButton Navigation
     document
       .getElementById("menuButton")
       .addEventListener("click", function () {
-        window.location.href = "level.html"; // Assuming this is your main menu
+        window.location.href = "index.html"; // Assuming this is your main menu
       });
   }
 }

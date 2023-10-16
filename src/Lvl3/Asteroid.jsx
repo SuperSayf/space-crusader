@@ -3,7 +3,7 @@ import { Quaternion, SphereGeometry, TextureLoader, Vector3 } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl3Spaceship";
-import { displayGameOver } from "../GameOver";
+import { displayGameOver } from "../Completion";
 import { timeAliveExternal } from "./Lvl3Spaceship";
 
 function randomPoint(scale) {
@@ -59,8 +59,6 @@ export function Asteroid() {
 
     return geo;
   }, [targets]);
-
-
 
   const handleGameEnd = () => {
     if (!gameOver) {

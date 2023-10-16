@@ -3,7 +3,7 @@ import { useGLTF, useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Vector3 } from "three";
 import { planePosition } from "./Lvl3Spaceship";
-import { displayGameOver } from "../GameOver";
+import { displayGameOver } from "../Completion";
 import { timeAliveExternal } from "./Lvl3Spaceship";
 
 export let externalGameOverSun = false;
@@ -19,8 +19,6 @@ export function Sun(props) {
   const sphereRadius = 2.62;
 
   const sphereRef = useRef();
-
-
 
   const handleGameEnd = () => {
     if (!gameOver) {
