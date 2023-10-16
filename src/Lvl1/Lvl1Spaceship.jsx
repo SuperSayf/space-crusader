@@ -5,6 +5,7 @@ import { Matrix4, Quaternion, Vector3 } from "three";
 import { updatePlaneAxis } from "../controls";
 import { Flame } from "../flame";
 import { JustSpaceshhip } from "../justSpaceship";
+import { Reticle } from "../Reticle";
 
 const x = new Vector3(1, 0, 0);
 const y = new Vector3(0, 1, 0);
@@ -43,13 +44,44 @@ function useKeyPress(targetKey) {
   return isKeyPressed;
 }
 
+// Custom hook to detect the "P" key press
+function usePKeyPress() {
+  const [isPKeyPressed, setIsPKeyPressed] = useState(false);
+
+  function downHandler({ key }) {
+    if (key.toLowerCase() === "p") {
+      setIsPKeyPressed((prev) => !prev);
+    }
+  }
+
+  function upHandler({ key }) {
+    if (key.toLowerCase() === "p") {
+      setIsPKeyPressed((prev) => prev);
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("keydown", downHandler);
+    window.addEventListener("keyup", upHandler);
+
+    return () => {
+      window.removeEventListener("keydown", downHandler);
+      window.removeEventListener("keyup", upHandler);
+    };
+  }, []);
+
+  return isPKeyPressed;
+}
+
 export function AnimatedSpaceship(props) {
   const group = useRef();
-
   const groupRef = useRef();
 
   // Detect the shift key press
   const isShiftPressed = useKeyPress("Shift");
+
+  // Detect the "P" key press
+  const isPKeyPressed = usePKeyPress();
 
   useFrame(({ camera }) => {
     updatePlaneAxis(x, y, z, planePosition, camera);
@@ -72,11 +104,6 @@ export function AnimatedSpaceship(props) {
 
     var quaternionA = new Quaternion().copy(delayedQuaternion);
 
-    // warning! setting the quaternion from the rotation matrix will cause
-    // issues that resemble gimbal locks, instead, always use the quaternion notation
-    // throughout the slerping phase
-    // quaternionA.setFromRotationMatrix(delayedRotMatrix);
-
     var quaternionB = new Quaternion();
     quaternionB.setFromRotationMatrix(rotMatrix);
 
@@ -88,6 +115,10 @@ export function AnimatedSpaceship(props) {
     delayedRotMatrix.identity();
     delayedRotMatrix.makeRotationFromQuaternion(delayedQuaternion);
 
+    // Toggle the boolean value dynamically based on "P" key press
+    const translationValue = isPKeyPressed ? 0.01 : 0.015;
+    const translationZValue = isPKeyPressed ? 0.01 : 0.3;
+
     const cameraMatrix = new Matrix4()
       .multiply(
         new Matrix4().makeTranslation(
@@ -98,26 +129,26 @@ export function AnimatedSpaceship(props) {
       )
       .multiply(delayedRotMatrix)
       .multiply(new Matrix4().makeRotationX(-0.2))
-      .multiply(new Matrix4().makeTranslation(0, 0.015, 0.3));
+      .multiply(new Matrix4().makeTranslation(0, translationValue, translationZValue));
 
     camera.matrixAutoUpdate = false;
     camera.matrix.copy(cameraMatrix);
     camera.matrixWorldNeedsUpdate = true;
-
-    // helixMeshRef.current.rotation.z -= 1.0;
   });
 
   return (
     <group ref={groupRef}>
       <group ref={group} {...props} dispose={null} scale={0.01}>
-        <JustSpaceshhip />
+        {!isPKeyPressed && <JustSpaceshhip />}
+
+        {isPKeyPressed && <Reticle />}
 
         <group
           name="Flames"
           position={isShiftPressed ? [1, 0, 10] : [1, 0, 6]}
           scale={isShiftPressed ? 2 : 1}
         >
-          <Flame />
+          {!isPKeyPressed && <Flame />}
         </group>
 
         <group
@@ -125,7 +156,7 @@ export function AnimatedSpaceship(props) {
           position={isShiftPressed ? [-1, 0, 10] : [-1, 0, 6]}
           scale={isShiftPressed ? 2 : 1}
         >
-          <Flame />
+          {!isPKeyPressed && <Flame />}
         </group>
       </group>
     </group>
