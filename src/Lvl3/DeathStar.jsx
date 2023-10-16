@@ -16,10 +16,6 @@ export function DeathStar(props) {
   const sphereCenter = new Vector3(5, 1, 1);
   const sphereRadius = 0.51;
 
-  useEffect(() => {
-    setTimeAlive(timeAliveExternal);
-  }, []);
-
   const handleGameEnd = () => {
     if (!gameOver) {
       const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
@@ -34,6 +30,7 @@ export function DeathStar(props) {
   };
 
   useFrame(() => {
+    setTimeAlive(timeAliveExternal);
     const distance = planePosition.distanceTo(sphereCenter);
     if (distance < sphereRadius) {
       handleGameEnd();

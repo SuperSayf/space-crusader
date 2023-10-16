@@ -60,9 +60,7 @@ export function Asteroid() {
     return geo;
   }, [targets]);
 
-  useEffect(() => {
-    setTimeAlive(timeAliveExternal);
-  }, []);
+
 
   const handleGameEnd = () => {
     if (!gameOver) {
@@ -78,6 +76,7 @@ export function Asteroid() {
   };
 
   useFrame(() => {
+    setTimeAlive(timeAliveExternal);
     // Find the closest asteroid to the player
     let closestAsteroid = null;
     let closestDistance = Infinity;
