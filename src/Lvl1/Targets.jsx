@@ -103,6 +103,7 @@ import { displayLevelCompletion } from "../Completion";
 import { displayGameOver } from "../GameOver";
 import { StarWarsDatapad } from "./starWarsDatapad"; // Import the Model component
 import { StarWarsCubeCrate } from "./starWarsCubeCrate";
+import { Tesseract } from "./tesseract";
 
 const TARGET_RAD = 0.5;
 
@@ -156,7 +157,7 @@ export function Targets() {
       {targets.map(
         (target, index) =>
           !target.hit && (
-            <StarWarsCubeCrate
+            <Tesseract
               key={index}
               position={[target.center.x, target.center.y, target.center.z]}
               scale={1}
