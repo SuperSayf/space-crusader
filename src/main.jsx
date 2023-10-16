@@ -6,6 +6,7 @@ import Lvl3 from "./Lvl3/Lvl3.jsx";
 import { Canvas } from "@react-three/fiber";
 import "./index.css";
 import "./startScreen/game-menu.css";
+import {Html} from "@react-three/drei";
 const rootContainer = document.getElementById("root");
 
 const App = () => {
@@ -45,9 +46,23 @@ const App = () => {
 
   return (
     <div className="container">
+      <div className="video-background">
+            <video playsInline="playsInline" autoPlay="autoplay" muted="muted" loop="loop">
+              <source src="../assets/audio/backgroundvideo.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
       {start && (
         <Canvas className="full-screen-canvas" shadows>
-          <color attach="background" args={["black"]} />
+          {/* <color attach="background" args={["black"]} /> */}
+          {/* <Html>
+          <div className="video-background-loader">
+            <video playsInline="playsInline" autoPlay="autoplay" loop="loop">
+              <source src="../assets/audio/astronautplaying.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          </Html> */}
           <Suspense fallback={null}>
             {selectedLevel === "lvl1" ? <Lvl1 /> : null}
             {selectedLevel === "lvl2" ? <Lvl2 /> : null}
@@ -77,11 +92,13 @@ const App = () => {
                       Level 1
                     </button>
                   </li>
+                  <br />
                   <li>
                     <button onClick={() => handleLevelSelection("lvl2")}>
                       Level 2
                     </button>
                   </li>
+                  <br />
                   <li>
                     <button onClick={() => handleLevelSelection("lvl3")}>
                       Level 3
@@ -91,13 +108,7 @@ const App = () => {
               )}
             </li>
             <li>
-              <button>How to Play</button>
-            </li>
-            <li>
               <button onClick={handleCreditsButtonClick}>Credits</button>
-            </li>
-            <li>
-              <button>Quit</button>
             </li>
           </ul>
         </div>

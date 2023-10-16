@@ -7,7 +7,7 @@ header {
   align-items: center;
   width: 100%;
   padding: 0rem 0;
-  padding-left: 1rem;
+  padding-left: 0rem;
 
 }
 
@@ -191,11 +191,12 @@ header h1 {
   }
 }
 /*this adds the background*/
-body {
+/* body {
   perspective: 40vw;
-  /* Add the background image property */
   background-image: url('../../assets/textures/background.jpeg'); 
-  background-size: cover; /* This property ensures the image covers the entire background */
-  background-repeat: no-repeat; /* This property prevents the image from repeating */
-  margin: 0; /* Add this to remove default margin */
-}
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  margin: 0; 
+} */
+
+
