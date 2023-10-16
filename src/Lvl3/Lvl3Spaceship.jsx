@@ -11,6 +11,7 @@ import { externalShowSubtitles } from "./Lvl3";
 import TypeWriterEffect from "react-typewriter-effect";
 import { Flame } from "../flame";
 import { JustSpaceshhip } from "../justSpaceship";
+import { Reticle } from "../Reticle";
 
 const x = new Vector3(1, 0, 0);
 const y = new Vector3(0, 1, 0);
@@ -50,6 +51,35 @@ function useKeyPress(targetKey) {
   return isKeyPressed;
 }
 
+// Custom hook to detect the "P" key press
+function usePKeyPress() {
+  const [isPKeyPressed, setIsPKeyPressed] = useState(false);
+
+  function downHandler({ key }) {
+    if (key.toLowerCase() === "p") {
+      setIsPKeyPressed((prev) => !prev);
+    }
+  }
+
+  function upHandler({ key }) {
+    if (key.toLowerCase() === "p") {
+      setIsPKeyPressed((prev) => prev);
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("keydown", downHandler);
+    window.addEventListener("keyup", upHandler);
+
+    return () => {
+      window.removeEventListener("keydown", downHandler);
+      window.removeEventListener("keyup", upHandler);
+    };
+  }, []);
+
+  return isPKeyPressed;
+}
+
 export function AnimatedSpaceship(props) {
   const group = useRef();
 
@@ -61,6 +91,9 @@ export function AnimatedSpaceship(props) {
 
   // Detect the shift key press
   const isShiftPressed = useKeyPress("Shift");
+
+  // Detect the "P" key press
+  const isPKeyPressed = usePKeyPress();
 
   useFrame(({ camera }) => {
     updatePlaneAxis(x, y, z, planePosition, camera);
@@ -99,6 +132,10 @@ export function AnimatedSpaceship(props) {
     delayedRotMatrix.identity();
     delayedRotMatrix.makeRotationFromQuaternion(delayedQuaternion);
 
+    // Toggle the boolean value dynamically based on "P" key press
+    const translationValue = isPKeyPressed ? 0.01 : 0.015;
+    const translationZValue = isPKeyPressed ? 0.01 : 0.3;
+
     const cameraMatrix = new Matrix4()
       .multiply(
         new Matrix4().makeTranslation(
@@ -109,7 +146,7 @@ export function AnimatedSpaceship(props) {
       )
       .multiply(delayedRotMatrix)
       .multiply(new Matrix4().makeRotationX(-0.2))
-      .multiply(new Matrix4().makeTranslation(0, 0.015, 0.3));
+      .multiply(new Matrix4().makeTranslation(0, translationValue, translationZValue));
 
     camera.matrixAutoUpdate = false;
     camera.matrix.copy(cameraMatrix);
@@ -215,14 +252,16 @@ export function AnimatedSpaceship(props) {
           </Html>
         )} */}
 
-        <JustSpaceshhip />
+        {!isPKeyPressed && <JustSpaceshhip />}
+
+        {isPKeyPressed && <Reticle />}
 
         <group
           name="Flames"
           position={isShiftPressed ? [1, 0, 10] : [1, 0, 6]}
           scale={isShiftPressed ? 2 : 1}
         >
-          <Flame />
+          {!isPKeyPressed && <Flame />}
         </group>
 
         <group
@@ -230,7 +269,7 @@ export function AnimatedSpaceship(props) {
           position={isShiftPressed ? [-1, 0, 10] : [-1, 0, 6]}
           scale={isShiftPressed ? 2 : 1}
         >
-          <Flame />
+          {!isPKeyPressed && <Flame />}
         </group>
       </group>
     </group>
