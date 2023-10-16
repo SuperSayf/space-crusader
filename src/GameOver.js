@@ -140,10 +140,10 @@ export function displayGameOver(level, leaderboardData, message) {
   document
     .getElementById("restartButton")
     .addEventListener("click", function () {
-      window.location.href = `index.html?level=lvl${level}`;
+      window.location.href = `level.html?level=lvl${level}`;
     });
 
   document.getElementById("menuButton").addEventListener("click", function () {
-    window.location.href = "index.html";
+    window.location.href = "level.html";
   });
 }

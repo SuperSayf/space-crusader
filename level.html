@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="utf-8" />
+    <title>Space Crusaders</title>
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module">
+      // Parse the URL to extract the level parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const level = urlParams.get("level") || "lvl1"; // Default to "lvl1" if not provided
+
+      // Load the main.jsx script with the level parameter
+      const script = document.createElement("script");
+      script.type = "module";
+      script.src = `/src/main.jsx?level=${level}`;
+      document.body.appendChild(script);
+    </script>
+  </body>
+</html>
