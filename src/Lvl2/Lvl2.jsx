@@ -4,7 +4,7 @@ import {
   Environment,
   OrbitControls,
   Html,
-  useProgress
+  useProgress,
 } from "@react-three/drei";
 import { EffectComposer, HueSaturation } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
@@ -18,19 +18,19 @@ import SolarSystem from "../solarSystem/SolarSystem";
 import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file
 import { Howl, Howler } from "howler"; // Import Howler
 import commander from "/assets/audio/Commander_voice_level_2.mp3"; // Replace with the path to your background music file
-import {Bridge} from "./bridge";
-import {BlackHole, extGameOverBlackHole} from "./blackhole";
+import { Bridge } from "./bridge";
+import { BlackHole, extGameOverBlackHole } from "./blackhole";
 import { Stats } from "@react-three/drei";
 import { planePosition } from "./Lvl2SpaceShip";
-import {extGameOverEarth} from '../solarSystem/Earth'
-import {extGameOverMars} from '../solarSystem/Mars'
-import { extGameOverSun } from '../solarSystem/Sun'
-import {extGameOverMercury} from '../solarSystem/Mercury'
-import {extGameOverVenus} from '../solarSystem/Venus'
-import {extGameOverJupiter} from '../solarSystem/Jupiter'
-import {extGameOverSaturn} from '../solarSystem/Saturn'
-import {extGameOverUranus} from '../solarSystem/Uranus'
-import {extGameOverNeptune} from '../solarSystem/Neptune'
+import { extGameOverEarth } from "../solarSystem/Earth";
+import { extGameOverMars } from "../solarSystem/Mars";
+import { extGameOverSun } from "../solarSystem/Sun";
+import { extGameOverMercury } from "../solarSystem/Mercury";
+import { extGameOverVenus } from "../solarSystem/Venus";
+import { extGameOverJupiter } from "../solarSystem/Jupiter";
+import { extGameOverSaturn } from "../solarSystem/Saturn";
+import { extGameOverUranus } from "../solarSystem/Uranus";
+import { extGameOverNeptune } from "../solarSystem/Neptune";
 import { useFrame } from "@react-three/fiber";
 import { ShipExplosion } from "../shipExplosion";
 
@@ -61,7 +61,7 @@ const textStyle = {
   textAlign: "center",
   fontSize: "24px",
   margin: "20px 0",
-  color: "white",
+  color: "blue",
   width: "500px",
 };
 

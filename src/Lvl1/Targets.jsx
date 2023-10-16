@@ -97,12 +97,9 @@
 
 import { useState, useMemo, useEffect } from "react";
 import { Quaternion, TorusGeometry, Vector3 } from "three";
-// import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl1Spaceship";
-// import { displayLevelCompletion } from "../LevelComplete";
 import { displayLevelCompletion } from "../Completion";
-// import { displayLevelCompletion } from "../LevelComplete";
 import { displayGameOver } from "../GameOver";
 import { StarWarsDatapad } from "./starWarsDatapad"; // Import the Model component
 import { StarWarsCubeCrate } from "./starWarsCubeCrate";
@@ -132,15 +129,13 @@ export function Targets() {
   });
 
   const [collectedTargets, setCollectedTargets] = useState(0);
-  const [gameWon, setGameWon] = useState(false);
 
   useEffect(() => {
-    if (collectedTargets === CRATE_AMOUNT && !gameWon) {
-      setGameWon(true);
+    if (collectedTargets === CRATE_AMOUNT) {
       console.log("You win!");
       displayLevelCompletion(1);
     }
-  }, [collectedTargets, gameWon]);
+  }, [collectedTargets]);
 
   useFrame(() => {
     const updatedTargets = targets.map((target, i) => {
@@ -158,15 +153,16 @@ export function Targets() {
 
   return (
     <>
-      {targets.map((target, index) => (
-        !target.hit && (
-          <StarWarsCubeCrate
-            key={index}
-            position={[target.center.x, target.center.y, target.center.z]}
-            scale={1}
-          />
-        )
-      ))}
+      {targets.map(
+        (target, index) =>
+          !target.hit && (
+            <StarWarsCubeCrate
+              key={index}
+              position={[target.center.x, target.center.y, target.center.z]}
+              scale={1}
+            />
+          )
+      )}
     </>
   );
 }

@@ -56,7 +56,7 @@ const textStyle = {
   textAlign: "center",
   fontSize: "24px",
   margin: "20px 0",
-  color: "white",
+  color: "blue",
   width: "500px",
 };
 
@@ -168,8 +168,6 @@ function Lvl3() {
       <Targets />
       <Asteroid />
       <MiniMap />
-
-
     </Suspense>
   );
 }
