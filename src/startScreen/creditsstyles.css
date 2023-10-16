@@ -39,7 +39,7 @@ a:hover {
 /* Space background styling */
 body::before {
     content: "";
-    background: url('assets/textures/background.jpeg') no-repeat center center fixed;
+    background: url('../../assets/textures/background.jpeg') no-repeat center center fixed;
     background-size: cover;
     position: fixed;
     top: 0;

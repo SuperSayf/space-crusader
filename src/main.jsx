@@ -5,7 +5,7 @@ import Lvl2 from "./Lvl2/Lvl2.jsx";
 import Lvl3 from "./Lvl3/Lvl3.jsx";
 import { Canvas } from "@react-three/fiber";
 import "./index.css";
-import "./startScreen/game-menu.css"
+import "./startScreen/game-menu.css";
 const rootContainer = document.getElementById("root");
 
 const App = () => {
@@ -36,6 +36,11 @@ const App = () => {
     setSelectedLevel(level);
     setStart(true);
     setShowLevelOptions(false); // Close level options when a level is selected
+  };
+
+  const handleCreditsButtonClick = () => {
+    // Change the window.location.href
+    window.location.href = "credits.html";
   };
 
   return (
@@ -89,7 +94,7 @@ const App = () => {
               <button>How to Play</button>
             </li>
             <li>
-              <button>Credits</button>
+              <button onClick={handleCreditsButtonClick}>Credits</button>
             </li>
             <li>
               <button>Quit</button>
