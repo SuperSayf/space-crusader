@@ -5,7 +5,7 @@ import Lvl2 from "./Lvl2/Lvl2.jsx";
 import Lvl3 from "./Lvl3/Lvl3.jsx";
 import { Canvas } from "@react-three/fiber";
 import "./index.css";
-
+import "./startScreen/game-menu.css"
 const rootContainer = document.getElementById("root");
 
 const App = () => {

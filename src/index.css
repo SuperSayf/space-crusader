@@ -35,16 +35,25 @@ html, body {
   transform: translate(-50%, -50%);
   background: rgba(0, 0, 0, 0.7);
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 30px;
   text-align: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-header {
+/* header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0rem 0;
+  padding-left: 1rem;
+}
+
+header h1 {
+  font-family: Audiowide;
   font-size: 2rem;
-  color: #fff;
-  margin-bottom: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  color: white;
+  text-shadow: 0px 0px 20px var(--theme-shadow);
 }
 
 .threeD-button-set {
@@ -54,63 +63,4 @@ header {
 
 .threeD-button-set li {
   margin: 10px 0;
-}
-
-button {
-  background-color: #7E6B8E; /* Purple color */
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  font-size: 1rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-button:hover {
-  background-color: #5C4C73; /* Darker purple on hover */
-  transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-#newGameButton {
-  background-color: #8E6C8B; /* Lighter purple for New Game button */
-}
-
-#newGameButton:hover {
-  background-color: #7B5780; /* Darker purple on hover */
-}
-
-#levelButton {
-  background-color: #9B8DA0; /* Lighter purple for Levels button */
-}
-
-#levelButton:hover {
-  background-color: #78647A; /* Darker purple on hover */
-}
-
-.level-options {
-  list-style: none;
-  padding: 0;
-}
-
-.level-options li {
-  margin: 5px 0;
-}
-
-.level-options button {
-  background-color: #6B578E; /* Purple color for level options */
-  color: #fff;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.level-options button:hover {
-  background-color: #4C3E5C; /* Darker purple on hover for level options */
-  transform: scale(1.05);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-}
+} */
