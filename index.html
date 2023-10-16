@@ -1,40 +1,17 @@
-<!doctype html>
-<html lang="en" dir="ltr">
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="utf-8" />
+    <title>Space Crusaders</title>
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
 
-<head>
-  <title>Space Crusaders | Game Menu</title>
-  <meta charset="utf-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="theme-color" content="hsl(221 90% 98%)" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="Canvas" media="(prefers-color-scheme: dark)">
-  <meta name="description" content="🙂">
-  <link rel="stylesheet" href="./src/startScreen/style.css">
-  <script type="module" src="./src/startScreen/index.js"></script>
-</head>
-
-<body>
-  <header>
-    <h1>Space Crusaders</h1>
-  </header>
-  <ul class="threeD-button-set">
-    <li><button id="newGameButton">New Game</button></li>
-    <!-- <li><button id="lvl2Button">Level 2</button></li>
-    <li><button id="lvl3Button">Level 3</button></li> -->
-    <li><button id="levelButton">Levels</button></li>
-    <li><button>How to Play</button></li>
-    <li><button>Credits</button></li>
-    <li><button>Quit</button></li>
-  </ul>
-</body>
-<script>
-  document.getElementById("newGameButton").addEventListener("click", function () {
-    window.location.href = "game.html";
-  });
-  document.getElementById("levelButton").addEventListener("click", function () {
-      window.location.href = "level.html";
-    });
-</script>
-
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
