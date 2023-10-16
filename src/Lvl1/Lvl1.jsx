@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from "react";
+import React, { useEffect,useState, Suspense } from "react";
 import {
   PerspectiveCamera,
   Environment,
@@ -16,6 +16,10 @@ import { ShipExplosion } from "../shipExplosion";
 import { externalGameOverAsteroid } from "./Asteroid";
 import { useFrame } from "@react-three/fiber";
 import { Html, useProgress, Stats } from "@react-three/drei";
+
+import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file
+import { Howl, Howler } from "howler"; // Import Howler
+import commander from "/assets/audio/Commander_voice_level_1.mp3"; // Replace with the path to your background music file
 
 export let masterGameOverLvl1 = false;
 
@@ -91,6 +95,33 @@ function App() {
     // Update the plane position
     setPlanePos(planePosition);
   });
+
+  // Create an instance of the background music
+  const backgroundMusic = new Howl({
+    src: [soundEffect],
+    loop: true,
+  });
+  // Create an instance of the second audio
+  const secondAudio = new Howl({
+    src: [commander],
+    loop: false,
+  });
+
+  // Start playing the background music and the second audio when the component mounts
+  useEffect(() => {
+    backgroundMusic.volume(0.3); // Adjust the volume as needed
+    backgroundMusic.play();
+
+    secondAudio.volume(1.0); // Adjust the volume as needed
+    secondAudio.play();
+
+    // Clean up the audio and event listener when the component unmounts
+    return () => {
+      backgroundMusic.stop();
+      secondAudio.stop();
+      secondAudio.off("end"); // Remove the event listener to prevent memory leaks
+    };
+  }, []);
 
   return (
     <>
