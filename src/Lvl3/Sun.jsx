@@ -20,9 +20,7 @@ export function Sun(props) {
 
   const sphereRef = useRef();
 
-  useEffect(() => {
-    setTimeAlive(timeAliveExternal);
-  }, []);
+
 
   const handleGameEnd = () => {
     if (!gameOver) {
@@ -38,6 +36,7 @@ export function Sun(props) {
   };
 
   useFrame(() => {
+    setTimeAlive(timeAliveExternal);
     const distance = planePosition.distanceTo(sphereCenter);
 
     if (distance < sphereRadius) {
