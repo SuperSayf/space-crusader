@@ -10,7 +10,7 @@ export let extGameOverSun = false;
 export function Sun(props) {
   const { nodes, materials } = useGLTF("assets/models/Sun.glb");
 
-  const [sunTexture] = useTexture(['/assets/textures/sun.jpg']);
+  const [sunTexture] = useTexture(["assets/textures/sun.jpg"]);
   const [gameOver, setGameOver] = useState(false);
   const [timeAlive, setTimeAlive] = useState(0);
 
@@ -32,7 +32,7 @@ export function Sun(props) {
       const leaderboardData = [
         { name: "Player", timeLasted: `${timeAlive} seconds` },
         { name: "Muz", timeLasted: "180 seconds" },
-        { name: "Daggy", timeLasted: "90 seconds" }
+        { name: "Daggy", timeLasted: "90 seconds" },
       ];
       setGameOver(true);
       extGameOverSun = true;
@@ -54,13 +54,13 @@ export function Sun(props) {
         material={materials["Scene_-_Root"]}
         scale={2.633}
       >
-      <meshPhongMaterial
-        map={sunTexture}
-        emissiveMap={sunTexture}
-        emissiveIntensity={0.6}
-        emissive={0xffffff}
-      />
-      <pointLight castShadow />
+        <meshPhongMaterial
+          map={sunTexture}
+          emissiveMap={sunTexture}
+          emissiveIntensity={0.6}
+          emissive={0xffffff}
+        />
+        <pointLight castShadow />
       </mesh>
     </group>
   );

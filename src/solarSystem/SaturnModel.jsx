@@ -11,7 +11,9 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 
 export function SaturnModel(props) {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF("/assets/models/saturn_planet.glb");
+  const { nodes, materials, animations } = useGLTF(
+    "assets/models/saturn_planet.glb"
+  );
   const { actions } = useAnimations(animations, group);
   return (
     <group ref={group} {...props} dispose={null} scale={5}>
@@ -75,4 +77,4 @@ export function SaturnModel(props) {
   );
 }
 
-useGLTF.preload("/assets/models/saturn_planet.glb");
+useGLTF.preload("assets/models/saturn_planet.glb");

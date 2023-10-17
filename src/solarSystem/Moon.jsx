@@ -1,29 +1,29 @@
-import { useTexture } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'
-import React, { useRef, useCallback, useState } from 'react'
-import * as THREE from 'three'
+import { useTexture } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import React, { useRef, useCallback, useState } from "react";
+import * as THREE from "three";
 import { planePosition, timeAliveExternal } from "../Lvl2/Lvl2SpaceShip";
 import { displayGameOver } from "../Completion";
 
 export let extGameOverMoon = false;
 
 const Moon = React.memo(() => {
-  const moonRef = useRef()
-  const clockRef = useRef(new THREE.Clock()) // Create a reference to the clock
+  const moonRef = useRef();
+  const clockRef = useRef(new THREE.Clock()); // Create a reference to the clock
   const [gameOver, setGameOver] = useState(false);
   const [timeAlive, setTimeAlive] = useState(0);
-  
-  const [moonTexture] = useTexture(['/assets/textures/moon_map.jpg'])
-  const xAxis = 4
+
+  const [moonTexture] = useTexture(["assets/textures/moon_map.jpg"]);
+  const xAxis = 4;
   const updateMoonPosition = useCallback(() => {
     // Orbit Rotation
     moonRef.current.position.x =
-      Math.sin(clockRef.current.getElapsedTime() * 0.8) * xAxis
+      Math.sin(clockRef.current.getElapsedTime() * 0.8) * xAxis;
     moonRef.current.position.z =
-      Math.cos(clockRef.current.getElapsedTime() * 0.8) * xAxis
+      Math.cos(clockRef.current.getElapsedTime() * 0.8) * xAxis;
     // Axis Rotation
-    moonRef.current.rotation.y += 0.002
-  }, [])
+    moonRef.current.rotation.y += 0.002;
+  }, []);
 
   const collisionCheck = useCallback(() => {
     const distance = planePosition.distanceTo(moonRef.current.position);
@@ -33,7 +33,7 @@ const Moon = React.memo(() => {
       const leaderboardData = [
         { name: "Player", timeLasted: `${timeAlive} seconds` },
         { name: "Muz", timeLasted: "180 seconds" },
-        { name: "Daggy", timeLasted: "90 seconds" }
+        { name: "Daggy", timeLasted: "90 seconds" },
       ];
       setGameOver(true);
       extGameOverMoon = true;
@@ -44,13 +44,13 @@ const Moon = React.memo(() => {
         displayGameOver(2, leaderboardData, message);
       }, 2000);
     }
-  }, [])
+  }, []);
 
   useFrame(() => {
     setTimeAlive(timeAliveExternal);
-    updateMoonPosition()
-    collisionCheck()
-  })
+    updateMoonPosition();
+    collisionCheck();
+  });
 
   return (
     <mesh castShadow receiveShadow ref={moonRef} position={[xAxis, 0, 0]}>
@@ -63,7 +63,7 @@ const Moon = React.memo(() => {
         emissiveIntensity={0.05}
       />
     </mesh>
-  )
-})
+  );
+});
 
-export default Moon
+export default Moon;

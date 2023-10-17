@@ -1,35 +1,31 @@
-import { useTexture } from '@react-three/drei'
-import { useFrame, useThree } from '@react-three/fiber'
-import React, { useRef, useCallback, useEffect, useState } from 'react'
+import { useTexture } from "@react-three/drei";
+import { useFrame, useThree } from "@react-three/fiber";
+import React, { useRef, useCallback, useEffect, useState } from "react";
 import { planePosition, timeAliveExternal } from "../Lvl2/Lvl2SpaceShip";
 import { displayGameOver } from "../Completion";
 
-import * as THREE from 'three'
+import * as THREE from "three";
 
 export let extGameOverMars = false;
 
 const Mars = React.memo(() => {
-  const marsRef = useRef()
+  const marsRef = useRef();
 
-  const clockRef = useRef(new THREE.Clock()) // Create a reference to the clock
+  const clockRef = useRef(new THREE.Clock()); // Create a reference to the clock
   const [gameOver, setGameOver] = useState(false);
   const [timeAlive, setTimeAlive] = useState(0);
 
-  const [
-    marsTexture
-  ] = useTexture([
-    '/assets/textures/mars.jpg'
-  ])
+  const [marsTexture] = useTexture(["assets/textures/mars.jpg"]);
 
   const updateMarsPosition = useCallback(() => {
     // Calculate the Mars' position based on its angle from the Sun
-    const angle = 1 + clockRef.current.getElapsedTime() * 0.05
-    const distance = 40
-    const x = Math.sin(angle) * distance
-    const z = Math.cos(angle) * distance
-    marsRef.current.position.set(x, 0, z)
-    marsRef.current.rotation.y += 0.002
-  }, [])
+    const angle = 1 + clockRef.current.getElapsedTime() * 0.05;
+    const distance = 40;
+    const x = Math.sin(angle) * distance;
+    const z = Math.cos(angle) * distance;
+    marsRef.current.position.set(x, 0, z);
+    marsRef.current.rotation.y += 0.002;
+  }, []);
 
   const collisionCheck = useCallback(() => {
     const distance = planePosition.distanceTo(marsRef.current.position);
@@ -39,7 +35,7 @@ const Mars = React.memo(() => {
       const leaderboardData = [
         { name: "Player", timeLasted: `${timeAlive} seconds` },
         { name: "Muz", timeLasted: "180 seconds" },
-        { name: "Daggy", timeLasted: "90 seconds" }
+        { name: "Daggy", timeLasted: "90 seconds" },
       ];
       setGameOver(true);
       extGameOverMars = true;
@@ -50,27 +46,23 @@ const Mars = React.memo(() => {
         displayGameOver(2, leaderboardData, message);
       }, 2000);
     }
-  }, [])
+  }, []);
 
   useFrame(() => {
     setTimeAlive(timeAliveExternal);
-    updateMarsPosition()
-    collisionCheck()
-  })
+    updateMarsPosition();
+    collisionCheck();
+  });
 
   return (
     <group ref={marsRef}>
-      <mesh
-        castShadow
-        receiveShadow>
+      <mesh castShadow receiveShadow>
         {/* Radius , X-axis , Y-axis */}
         <sphereGeometry args={[1.1, 32, 32]} />
-        <meshPhongMaterial
-          map={marsTexture}
-        />
+        <meshPhongMaterial map={marsTexture} />
       </mesh>
     </group>
-  )
-})
+  );
+});
 
-export default Mars
+export default Mars;
