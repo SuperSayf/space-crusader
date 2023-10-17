@@ -4,8 +4,6 @@ import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl1Spaceship";
 import { displayLevelCompletion } from "../Completion";
 import { displayGameOver } from "../GameOver";
-import { StarWarsDatapad } from "./starWarsDatapad"; // Import the Model component
-import { StarWarsCubeCrate } from "./starWarsCubeCrate";
 import { Tesseract } from "./tesseract";
 
 const TARGET_RAD = 0.5;
