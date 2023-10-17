@@ -2,8 +2,9 @@ import React, { useRef, useState } from "react";
 import { useGLTF, useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Vector3 } from "three";
-import { planePosition } from "../Lvl2/Lvl2SpaceShip";
+import { planePosition, timeAliveExternal } from "../Lvl2/Lvl2SpaceShip";
 import { displayGameOver } from "../Completion";
+import { set } from "firebase/database";
 
 export let extGameOverSun = false;
 
@@ -12,6 +13,7 @@ export function Sun(props) {
 
   const [sunTexture] = useTexture(['/assets/textures/sun.jpg']);
   const [gameOver, setGameOver] = useState(false);
+  const [timeAlive, setTimeAlive] = useState(0);
 
   // Define the center and radius of the green sphere
   const sphereCenter = new Vector3(0, 0, 0);
@@ -24,11 +26,12 @@ export function Sun(props) {
   useFrame(() => {
     // Calculate the distance between the plane position and the sphere center
     const distance = planePosition.distanceTo(sphereCenter);
+    setTimeAlive(timeAliveExternal);
 
     // Check if the plane is inside the sphere
     if (distance < sphereRadius && !gameOver) {
       const leaderboardData = [
-        { name: "Sayf", timeLasted: "1 second" },
+        { name: "Player", timeLasted: `${timeAlive} seconds` },
         { name: "Muz", timeLasted: "180 seconds" },
         { name: "Daggy", timeLasted: "90 seconds" }
       ];

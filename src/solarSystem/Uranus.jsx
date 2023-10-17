@@ -1,7 +1,7 @@
 import { useTexture } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import React, { useRef, useCallback, useEffect, useState } from 'react'
-import { planePosition } from "../Lvl2/Lvl2SpaceShip";
+import { planePosition, timeAliveExternal } from "../Lvl2/Lvl2SpaceShip";
 import { displayGameOver } from "../Completion";
 
 import * as THREE from 'three'
@@ -13,6 +13,7 @@ const Uranus = React.memo(() => {
 
   const clockRef = useRef(new THREE.Clock()) // Create a reference to the clock
   const [gameOver, setGameOver] = useState(false);
+  const [timeAlive, setTimeAlive] = useState(0);
 
   const [
     uranusTexture
@@ -36,7 +37,7 @@ const Uranus = React.memo(() => {
     // Check if the plane is inside the sphere
     if (distance <= 2.5 && !gameOver) {
       const leaderboardData = [
-        { name: "Sayf", timeLasted: "1 second" },
+        { name: "Player", timeLasted: `${timeAlive} seconds` },
         { name: "Muz", timeLasted: "180 seconds" },
         { name: "Daggy", timeLasted: "90 seconds" }
       ];
@@ -52,6 +53,7 @@ const Uranus = React.memo(() => {
   }, [])
 
   useFrame(() => {
+    setTimeAlive(timeAliveExternal);
     updateuranusPosition()
     collisionCheck()
   })

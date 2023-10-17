@@ -11,7 +11,7 @@ export const NUM_TARGETS = 20; // Number of targets
 const TARGET_SPACING = 5.0; // Spacing between targets on the line
 const TARGET_RAD = 0.125; // Radius of the target
 const offset = 3;//adjusts the starting point of the targets
-const ChangeY = 0.5;//adjusts the height of the targets
+const ChangeY = 1;//adjusts the height of the targets
 const ChangeZ = 0;//adjusts the depth of the targets
 export var collectedObjs = 0; // Number of collected targets
 

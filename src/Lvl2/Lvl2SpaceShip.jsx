@@ -19,6 +19,7 @@ const y = new Vector3(0, 1, 0);
 const z = new Vector3(0, 0, 1);
 export const planePosition = new Vector3(1, 2, 110);
 // export const planePosition = new Vector3(10, 0, 0);
+export let timeAliveExternal = 0;
 
 const delayedRotMatrix = new Matrix4();
 const delayedQuaternion = new Quaternion();
@@ -204,8 +205,7 @@ export function AnimatedSpaceship(props) {
 
     // helixMeshRef.current.rotation.z -= 1.0;
 
-    // setBoost(externalBoost);
-    // setShowSubtitles(externalShowSubtitles);
+    timeAliveExternal = timeAlive;
 
   });
 
