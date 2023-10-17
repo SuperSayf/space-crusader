@@ -1,4 +1,4 @@
-import React, { useEffect,useState, Suspense } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import {
   PerspectiveCamera,
   Environment,
@@ -23,31 +23,27 @@ import commander from "/assets/audio/Commander_voice_level_1.mp3"; // Replace wi
 
 export let masterGameOverLvl1 = false;
 
-// Define a CSS class for the loading bar
-const loadingBarStyle = {
-  background: "white", // Blue background color
-  width: "500px", // Set the width to 80% to represent progress
-  height: "30px", // Set the height as needed
-  borderRadius: "50px", // Rounded border
-  border: "1px solid white", // Solid white border
-  position: "relative", // Position relative to the parent
-  margin: "0 auto", // Center horizontally
-  marginTop: "50px", // Add some top margin
-  boxShadow: "0 0 10px white", // Add a slight shadow
+const loadingBarContainerStyle = {
+  position: "fixed",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
 };
 
-const centerStyle = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
+const loadingBarStyle = {
+  background: "white",
+  width: "500px",
+  height: "30px",
+  borderRadius: "50px",
+  border: "1px solid white",
+  boxShadow: "0 0 10px white",
 };
 
 const textStyle = {
-  textAlign: "center",
-  fontSize: "24px",
-  margin: "20px 0",
-  color: "blue",
-  width: "500px",
+  color: "white",
+  marginTop: "10px", // Add some top margin
+  fontSize: "30px",
+  textAlign: "center", // Center the text horizontally
 };
 
 function Loader() {
@@ -55,24 +51,18 @@ function Loader() {
 
   return (
     <Html>
-      <div style={centerStyle}>
-        <div>
-          {/* <p style={textStyle}>
-            This is your commander speaking...Let's see how long you can stay
-            alive...Collect the fuel canisters to replenish your fuel
-          </p> */}
-          <div className="loading-bar" style={loadingBarStyle}>
-            <div
-              style={{
-                width: `${progress}%`,
-                height: "100%",
-                background: "blue",
-                borderRadius: "inherit",
-              }}
-            ></div>
-          </div>
-          <p style={textStyle}>{Math.round(progress)} %</p>
+      <div style={loadingBarContainerStyle}>
+        <div className="loading-bar" style={loadingBarStyle}>
+          <div
+            style={{
+              width: `${progress}%`,
+              height: "100%",
+              background: "blue",
+              borderRadius: "inherit",
+            }}
+          ></div>
         </div>
+        <p style={textStyle}>{Math.round(progress)} %</p>
       </div>
     </Html>
   );
