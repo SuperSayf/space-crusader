@@ -6,11 +6,15 @@ import { updatePlaneAxis } from "../controls";
 import { Flame } from "../flame";
 import { JustSpaceshhip } from "../justSpaceship";
 import { Reticle } from "../Reticle";
+import { buildStyles } from "react-circular-progressbar";
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 const x = new Vector3(1, 0, 0);
 const y = new Vector3(0, 1, 0);
 const z = new Vector3(0, 0, 1);
 export const planePosition = new Vector3(0, 3, 7);
+export let timeAliveExternal = 0;
 
 const delayedRotMatrix = new Matrix4();
 const delayedQuaternion = new Quaternion();
@@ -83,6 +87,8 @@ export function AnimatedSpaceship(props) {
   // Detect the "P" key press
   const isPKeyPressed = usePKeyPress();
 
+  const [timeAlive, setTimeAlive] = useState(0);
+
   useFrame(({ camera }) => {
     updatePlaneAxis(x, y, z, planePosition, camera);
 
@@ -129,12 +135,26 @@ export function AnimatedSpaceship(props) {
       )
       .multiply(delayedRotMatrix)
       .multiply(new Matrix4().makeRotationX(-0.2))
-      .multiply(new Matrix4().makeTranslation(0, translationValue, translationZValue));
+      .multiply(
+        new Matrix4().makeTranslation(0, translationValue, translationZValue)
+      );
 
     camera.matrixAutoUpdate = false;
     camera.matrix.copy(cameraMatrix);
     camera.matrixWorldNeedsUpdate = true;
+
+    timeAliveExternal = timeAlive;
   });
+
+  // Use setInterval to increase timeAlive every second
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeAlive((prevTimeAlive) => prevTimeAlive + 1);
+    }, 1000); // 1000 milliseconds = 1 second
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <group ref={groupRef}>
@@ -158,6 +178,37 @@ export function AnimatedSpaceship(props) {
         >
           {!isPKeyPressed && <Flame />}
         </group>
+
+        <Html position={[4, 1, 7]}>
+          <div style={{ width: 100, height: 100 }}>
+            <CircularProgressbar
+              value={timeAlive}
+              text={`${timeAlive}s`}
+              styles={buildStyles({
+                // Rotation of path and trail, in number of turns (0-1)
+                rotation: 0.25,
+
+                // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
+                strokeLinecap: "butt",
+
+                // Text size
+                textSize: "16px",
+
+                // How long animation takes to go from one percentage to another, in seconds
+                pathTransitionDuration: 0.5,
+
+                // Can specify path transition in more detail, or remove it entirely
+                // pathTransition: 'none',
+
+                // Colors
+                pathColor: "#66ff00",
+                textColor: "#ffffff",
+                trailColor: "#66ff00",
+                backgroundColor: "#3e98c7",
+              })}
+            />
+          </div>
+        </Html>
       </group>
     </group>
   );

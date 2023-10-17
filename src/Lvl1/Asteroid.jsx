@@ -4,6 +4,7 @@ import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl1Spaceship";
 import { displayGameOver } from "../Completion"; // Ensure you are importing the correct component here
+import { timeAliveExternal } from "./Lvl1Spaceship";
 
 function randomPoint(scale) {
   return new Vector3(
@@ -36,6 +37,7 @@ export function Asteroid() {
   });
 
   const [gameOver, setGameOver] = useState(false);
+  const [timeAlive, setTimeAlive] = useState(0);
 
   const textureLoader = new TextureLoader();
   const asteroidTexture = textureLoader.load("assets/textures/asteroid.jpg");
@@ -62,7 +64,7 @@ export function Asteroid() {
   const handleGameEnd = () => {
     if (!gameOver) {
       const leaderboardData = [
-        { name: "Sayf", timeLasted: "Didn't even put it in" },
+        { name: "Player", timeLasted: timeAlive + " seconds" },
         { name: "Muz", timeLasted: "180 seconds" },
         { name: "Daggy", timeLasted: "90 seconds" },
       ];
@@ -76,6 +78,7 @@ export function Asteroid() {
   };
 
   useFrame(() => {
+    setTimeAlive(timeAliveExternal);
     const updatedTargets = targets.map((target) => {
       target.center.y -= 0.01;
       if (target.center.y < SPAWN_DEPTH) {
