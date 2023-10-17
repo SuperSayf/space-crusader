@@ -4,7 +4,6 @@ import { useFrame } from "@react-three/fiber";
 import { Vector3 } from "three";
 import { planePosition, timeAliveExternal } from "../Lvl2/Lvl2SpaceShip";
 import { displayGameOver } from "../Completion";
-import { set } from "firebase/database";
 
 export let extGameOverSun = false;
 
