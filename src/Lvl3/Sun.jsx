@@ -11,7 +11,7 @@ export let externalGameOverSun = false;
 export function Sun(props) {
   const { nodes, materials } = useGLTF("assets/models/Sun.glb");
 
-  const [sunTexture] = useTexture(["/assets/textures/sun.jpg"]);
+  const [sunTexture] = useTexture(["assets/textures/sun.jpg"]);
   const [gameOver, setGameOver] = useState(false);
   const [timeAlive, setTimeAlive] = useState(0);
 

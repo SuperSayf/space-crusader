@@ -8,7 +8,6 @@ import {
 } from "@react-three/drei";
 import { EffectComposer, HueSaturation } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
-import { Landscape } from "../Landscape";
 import { SphereEnv } from "../SphereEnv";
 import { Targets } from "./TargetsLvl3";
 import { MotionBlur } from "../MotionBlur";

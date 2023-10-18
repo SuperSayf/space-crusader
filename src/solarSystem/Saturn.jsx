@@ -1,40 +1,36 @@
-import { useTexture } from '@react-three/drei'
-import { useFrame, useThree } from '@react-three/fiber'
-import React, { useRef, useCallback, useEffect, useState } from 'react'
-import { SaturnModel } from './SaturnModel'
+import { useTexture } from "@react-three/drei";
+import { useFrame, useThree } from "@react-three/fiber";
+import React, { useRef, useCallback, useEffect, useState } from "react";
+import { SaturnModel } from "./SaturnModel";
 import { planePosition, timeAliveExternal } from "../Lvl2/Lvl2SpaceShip";
 import { displayGameOver } from "../Completion";
 
-import * as THREE from 'three'
+import * as THREE from "three";
 
 export let extGameOverSaturn = false;
 
 const Saturn = React.memo(() => {
-  const saturnRef = useRef()
+  const saturnRef = useRef();
 
-  const clockRef = useRef(new THREE.Clock()) // Create a reference to the clock
+  const clockRef = useRef(new THREE.Clock()); // Create a reference to the clock
   const [gameOver, setGameOver] = useState(false);
   const [timeAlive, setTimeAlive] = useState(0);
 
-  const [
-    saturnTexture,
-    saturnRingTexture
-  ] = useTexture([
-    '/assets/textures/saturn.jpg',
-    '/assets/textures/saturn ring.png'
-  ])
-
+  const [saturnTexture, saturnRingTexture] = useTexture([
+    "assets/textures/saturn.jpg",
+    "assets/textures/saturn ring.png",
+  ]);
 
   const updatesaturnPosition = useCallback(() => {
     // Calculate the saturn' position based on its angle from the Sun
-    const angle = 30 + clockRef.current.getElapsedTime() * 0.12
-    const distance = 70
-    const x = Math.sin(angle) * distance
-    const z = Math.cos(angle) * distance
-    saturnRef.current.position.set(x, 0, z)
-    saturnRef.current.rotation.y += 0.002
-    saturnRef.current.rotation.z += 0.0003
-  }, [])
+    const angle = 30 + clockRef.current.getElapsedTime() * 0.12;
+    const distance = 70;
+    const x = Math.sin(angle) * distance;
+    const z = Math.cos(angle) * distance;
+    saturnRef.current.position.set(x, 0, z);
+    saturnRef.current.rotation.y += 0.002;
+    saturnRef.current.rotation.z += 0.0003;
+  }, []);
 
   const collisionCheck = useCallback(() => {
     const distance = planePosition.distanceTo(saturnRef.current.position);
@@ -44,7 +40,7 @@ const Saturn = React.memo(() => {
       const leaderboardData = [
         { name: "Player", timeLasted: `${timeAlive} seconds` },
         { name: "Muz", timeLasted: "180 seconds" },
-        { name: "Daggy", timeLasted: "90 seconds" }
+        { name: "Daggy", timeLasted: "90 seconds" },
       ];
       setGameOver(true);
       extGameOverSaturn = true;
@@ -55,19 +51,19 @@ const Saturn = React.memo(() => {
         displayGameOver(2, leaderboardData, message);
       }, 2000);
     }
-  }, [])
+  }, []);
 
   useFrame(() => {
     setTimeAlive(timeAliveExternal);
-    updatesaturnPosition()
-    collisionCheck()
-  })
+    updatesaturnPosition();
+    collisionCheck();
+  });
 
   return (
     <group ref={saturnRef}>
-        <SaturnModel />
+      <SaturnModel />
     </group>
-  )
-})
+  );
+});
 
-export default Saturn
+export default Saturn;
