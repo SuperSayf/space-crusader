@@ -3,7 +3,6 @@ import { Quaternion, TorusGeometry, Vector3 } from "three";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl1Spaceship";
 import { displayLevelCompletion } from "../Completion";
-import { displayGameOver } from "../GameOver";
 import { Tesseract } from "./tesseract";
 
 const TARGET_RAD = 0.5;
@@ -68,4 +67,3 @@ export function Targets() {
     </>
   );
 }
-
