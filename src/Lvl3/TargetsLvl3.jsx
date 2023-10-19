@@ -4,6 +4,10 @@ import { mergeBufferGeometries } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl3Spaceship";
 import { FuelShield } from "./FuelShield";
+import { displayGameOver } from "../Completion";
+import { timeAliveExternal } from "./Lvl3Spaceship";
+
+export let externalGameOverBoost = false;
 
 function randomPoint(scale) {
   return new Vector3(
@@ -36,6 +40,8 @@ export function Targets() {
 
   // Add a state variable for boost and its initial value
   const [boost, setBoost] = useState(100);
+  const [timeAlive, setTimeAlive] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
 
   // Event listener to track Shift key press
   useEffect(() => {
@@ -68,7 +74,21 @@ export function Targets() {
     };
   }, []);
 
+  const handleGameEnd = () => {
+    // console.log("Game over from boost");
+    if (!gameOver) {
+      const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
+      setGameOver(true);
+      externalGameOverBoost = true;
+      const message = "You ran out of boost! haiya";
+      setTimeout(() => {
+        displayGameOver(3, leaderboardData, message);
+      }, 2000);
+    }
+  };
+
   useFrame(() => {
+    setTimeAlive(timeAliveExternal);
     targets.forEach((target, i) => {
       // Target Collision Updated Logic
       const distance = planePosition.distanceTo(target.center);
@@ -89,6 +109,7 @@ export function Targets() {
     // Check if boost has reached 0
     if (boost <= 0) {
       // Handle game over logic here
+      handleGameEnd();
     }
 
     // Update the externalBoost variable

@@ -63,11 +63,7 @@ export function Asteroid() {
 
   const handleGameEnd = () => {
     if (!gameOver) {
-      const leaderboardData = [
-        { name: "Player", timeLasted: timeAlive + " seconds" },
-        { name: "Muz", timeLasted: "180 seconds" },
-        { name: "Daggy", timeLasted: "90 seconds" },
-      ];
+      const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
       setGameOver(true);
       externalGameOverAsteroid = true;
       const message = "You hit an asteroid!";

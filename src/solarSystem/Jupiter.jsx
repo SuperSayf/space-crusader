@@ -32,11 +32,7 @@ const Jupiter = React.memo(() => {
 
     // Check if the plane is inside the sphere
     if (distance <= 4 && !gameOver) {
-      const leaderboardData = [
-        { name: "Player", timeLasted: `${timeAlive} seconds` },
-        { name: "Muz", timeLasted: "180 seconds" },
-        { name: "Daggy", timeLasted: "90 seconds" },
-      ];
+      const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
       setGameOver(true);
       extGameOverJupiter = true;
       //Msg For Game over Reason

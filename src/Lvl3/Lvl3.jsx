@@ -26,6 +26,7 @@ import { planePosition } from "./Lvl3Spaceship";
 import { externalGameOverAsteroid } from "./Asteroid";
 import { externalGameOverDeathStar } from "./DeathStar";
 import { externalGameOverSun } from "./Sun";
+import { externalGameOverBoost } from "./TargetsLvl3";
 import { useFrame } from "@react-three/fiber";
 
 export let externalShowSubtitles = false;
@@ -89,7 +90,8 @@ function Lvl3() {
     if (
       externalGameOverAsteroid ||
       externalGameOverSun ||
-      externalGameOverDeathStar
+      externalGameOverDeathStar ||
+      externalGameOverBoost
     ) {
       setGameOver(true);
       masterGameOverLvl3 = true;

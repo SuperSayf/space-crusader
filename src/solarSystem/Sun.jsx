@@ -29,11 +29,7 @@ export function Sun(props) {
 
     // Check if the plane is inside the sphere
     if (distance < sphereRadius && !gameOver) {
-      const leaderboardData = [
-        { name: "Player", timeLasted: `${timeAlive} seconds` },
-        { name: "Muz", timeLasted: "180 seconds" },
-        { name: "Daggy", timeLasted: "90 seconds" },
-      ];
+      const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
       setGameOver(true);
       extGameOverSun = true;
       //Msg For Game over Reason

@@ -7,7 +7,7 @@ Title: Gargantua the Black Hole
 */
 
 import React, { useRef, useState, useCallback } from "react";
-import { useFrame } from '@react-three/fiber'
+import { useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import { planePosition, timeAliveExternal } from "../Lvl2/Lvl2SpaceShip";
 import { displayGameOver } from "../Completion";
@@ -15,9 +15,11 @@ import { displayGameOver } from "../Completion";
 export let extGameOverBlackHole = false;
 
 export function BlackHole(props) {
-  const holeRef = useRef()
+  const holeRef = useRef();
 
-  const { nodes, materials } = useGLTF("assets/models/gargantua_the_black_hole.glb");
+  const { nodes, materials } = useGLTF(
+    "assets/models/gargantua_the_black_hole.glb"
+  );
   const [gameOver, setGameOver] = useState(false);
   const [timeAlive, setTimeAlive] = useState(0);
 
@@ -26,11 +28,7 @@ export function BlackHole(props) {
 
     // Check if the plane is inside the sphere
     if (distance <= 0.2 && !gameOver) {
-      const leaderboardData = [
-        { name: "Player", timeLasted: `${timeAlive} seconds` },
-        { name: "Muz", timeLasted: "180 seconds" },
-        { name: "Daggy", timeLasted: "90 seconds" }
-      ];
+      const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
       setGameOver(true);
       extGameOverBlackHole = true;
       //Msg For Game over Reason
@@ -40,12 +38,12 @@ export function BlackHole(props) {
         displayGameOver(2, leaderboardData, message);
       }, 2000);
     }
-  }, [])
+  }, []);
 
   useFrame(() => {
     setTimeAlive(timeAliveExternal);
     collisionCheck();
-  })
+  });
 
   return (
     <group {...props} dispose={null} ref={holeRef}>
