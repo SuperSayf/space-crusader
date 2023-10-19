@@ -60,6 +60,10 @@ export let turbo = 0;
 const gamepadState = {
   leftStickX: 0,
   leftStickY: 0,
+  rightStickX: 0,
+  rightStickY: 0,
+  R2: false, // To track the R2 button state
+  X: false, // To track the X button state
 };
 
 // Handle gamepad input
@@ -71,12 +75,70 @@ function handleGamepadInput() {
     // Check if the gamepad object is not null before accessing its properties
     if (gamepad) {
       // Read left stick input for ship movement
-      gamepadState.leftStickX = gamepad.axes[0];
-      gamepadState.leftStickY = gamepad.axes[1];
+      const leftStickX = gamepad.axes[0];
+      const leftStickY = gamepad.axes[1];
+
+      // Read right stick input for additional ship control
+      const rightStickX = gamepad.axes[2];
+      const rightStickY = gamepad.axes[3];
+
+      // Calculate the average of left and right stick input
+      gamepadState.leftStickX = (leftStickX + rightStickX) / 2;
+      gamepadState.leftStickY = (leftStickY + rightStickY) / 2;
+
+      // Check R2 button
+      gamepadState.R2 = gamepad.buttons[7].pressed; // You may need to adjust the button index
+
+      // Check X button
+      gamepadState.X = gamepad.buttons[2].pressed; // You may need to adjust the button index
 
       // You can add more logic here to handle other gamepad buttons for actions
     }
   }
+}
+
+function simulateKeyboardEvent(key, type) {
+  const event = new KeyboardEvent(type, {
+    key: key,
+  });
+  window.dispatchEvent(event);
+}
+
+let isR2Pressed = false;
+
+function updateShiftKeyState() {
+  if (gamepadState.R2) {
+    if (!isR2Pressed) {
+      isR2Pressed = true;
+      simulateKeyboardEvent("Shift", "keydown");
+    }
+  } else {
+    if (isR2Pressed) {
+      isR2Pressed = false;
+      simulateKeyboardEvent("Shift", "keyup");
+    }
+  }
+}
+
+let isXPressed = false;
+let isXPressedPrev = false;
+
+function updateXKeyState() {
+  if (gamepadState.X) {
+    isXPressed = true;
+  } else {
+    isXPressed = false;
+  }
+
+  if (isXPressed && !isXPressedPrev) {
+    simulateKeyboardEvent("p", "keydown");
+  }
+
+  if (!isXPressed && isXPressedPrev) {
+    simulateKeyboardEvent("p", "keyup");
+  }
+
+  isXPressedPrev = isXPressed; // Update the previous state
 }
 
 export function updatePlaneAxis(x, y, z, planePosition, camera) {
@@ -94,6 +156,10 @@ export function updatePlaneAxis(x, y, z, planePosition, camera) {
   // Use gamepad input for ship movement
   jawVelocity += gamepadState.leftStickX * 0.0025;
   pitchVelocity -= gamepadState.leftStickY * 0.0025;
+
+  // Use right stick input for additional ship control
+  jawVelocity += gamepadState.rightStickX * 0.0025;
+  pitchVelocity -= gamepadState.rightStickY * 0.0025;
 
   if (controls["a"]) {
     jawVelocity += 0.0025;
@@ -138,6 +204,11 @@ export function updatePlaneAxis(x, y, z, planePosition, camera) {
   } else {
     turbo *= 0.95;
   }
+
+  updateXKeyState();
+
+  updateShiftKeyState();
+
   turbo = Math.min(Math.max(turbo, 0), 1);
 
   let turboSpeed = easeOutQuad(turbo) * 0.02;
