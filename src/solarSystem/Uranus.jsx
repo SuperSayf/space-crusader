@@ -13,13 +13,13 @@ const Uranus = React.memo(() => {
 
   const clockRef = useRef(new THREE.Clock()); // Create a reference to the clock
   const [gameOver, setGameOver] = useState(false);
-  const [timeAlive, setTimeAlive] = useState(0);
 
   const [uranusTexture] = useTexture(["assets/textures/uranus.jpg"]);
 
   const updateuranusPosition = useCallback(() => {
     // Calculate the uranus' position based on its angle from the Sun
-    const angle = clockRef.current.getElapsedTime() * 0.09;
+    // const angle = clockRef.current.getElapsedTime() * 0.09;
+    const angle = 0
     const distance = 80;
     const x = Math.sin(angle) * distance;
     const z = Math.cos(angle) * distance;
@@ -32,7 +32,7 @@ const Uranus = React.memo(() => {
 
     // Check if the plane is inside the sphere
     if (distance <= 2.5 && !gameOver) {
-      const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
+      const leaderboardData = [{ name: "Player", timeLasted: timeAliveExternal }];
       setGameOver(true);
       extGameOverUranus = true;
       //Msg For Game over Reason
@@ -45,7 +45,6 @@ const Uranus = React.memo(() => {
   }, []);
 
   useFrame(() => {
-    setTimeAlive(timeAliveExternal);
     updateuranusPosition();
     collisionCheck();
   });

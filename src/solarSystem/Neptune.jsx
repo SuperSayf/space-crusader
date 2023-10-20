@@ -13,13 +13,13 @@ const Neptune = React.memo(() => {
 
   const clockRef = useRef(new THREE.Clock()); // Create a reference to the clock
   const [gameOver, setGameOver] = useState(false);
-  const [timeAlive, setTimeAlive] = useState(0);
 
   const [neptuneTexture] = useTexture(["assets/textures/neptune.jpg"]);
 
   const updateneptunePosition = useCallback(() => {
     // Calculate the neptune' position based on its angle from the Sun
-    const angle = 5 + clockRef.current.getElapsedTime() * 0.07;
+    // const angle = 5 + clockRef.current.getElapsedTime() * 0.07;
+    const angle = 0;
     const distance = 90;
     const x = Math.sin(angle) * distance;
     const z = Math.cos(angle) * distance;
@@ -32,7 +32,7 @@ const Neptune = React.memo(() => {
 
     // Check if the plane is inside the sphere
     if (distance <= 3 && !gameOver) {
-      const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
+      const leaderboardData = [{ name: "Player", timeLasted: timeAliveExternal }];
       setGameOver(true);
       extGameOverNeptune = true;
       //Msg For Game over Reason
@@ -45,7 +45,6 @@ const Neptune = React.memo(() => {
   }, []);
 
   useFrame(() => {
-    setTimeAlive(timeAliveExternal);
     updateneptunePosition();
     collisionCheck();
   });

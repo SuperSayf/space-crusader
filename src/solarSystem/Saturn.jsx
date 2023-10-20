@@ -14,7 +14,6 @@ const Saturn = React.memo(() => {
 
   const clockRef = useRef(new THREE.Clock()); // Create a reference to the clock
   const [gameOver, setGameOver] = useState(false);
-  const [timeAlive, setTimeAlive] = useState(0);
 
   const [saturnTexture, saturnRingTexture] = useTexture([
     "assets/textures/saturn.jpg",
@@ -23,7 +22,8 @@ const Saturn = React.memo(() => {
 
   const updatesaturnPosition = useCallback(() => {
     // Calculate the saturn' position based on its angle from the Sun
-    const angle = 30 + clockRef.current.getElapsedTime() * 0.12;
+    // const angle = 30 + clockRef.current.getElapsedTime() * 0.12;
+    const angle = 0
     const distance = 70;
     const x = Math.sin(angle) * distance;
     const z = Math.cos(angle) * distance;
@@ -37,7 +37,7 @@ const Saturn = React.memo(() => {
 
     // Check if the plane is inside the sphere
     if (distance <= 6 && !gameOver) {
-      const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
+      const leaderboardData = [{ name: "Player", timeLasted: timeAliveExternal }];
       setGameOver(true);
       extGameOverSaturn = true;
       //Msg For Game over Reason
@@ -50,7 +50,6 @@ const Saturn = React.memo(() => {
   }, []);
 
   useFrame(() => {
-    setTimeAlive(timeAliveExternal);
     updatesaturnPosition();
     collisionCheck();
   });

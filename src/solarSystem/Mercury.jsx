@@ -13,13 +13,13 @@ const Mercury = React.memo(() => {
 
   const clockRef = useRef(new THREE.Clock()); // Create a reference to the clock
   const [gameOver, setGameOver] = useState(false);
-  const [timeAlive, setTimeAlive] = useState(0);
 
   const [mercuryTexture] = useTexture(["assets/textures/mercury.jpg"]);
 
   const updatemercuryPosition = useCallback(() => {
     // Calculate the mercury' position based on its angle from the Sun
-    const angle = 50 + clockRef.current.getElapsedTime() * 0.03;
+    // const angle = 50 + clockRef.current.getElapsedTime() * 0.03;
+    const angle = 0
     const distance = 10;
     const x = Math.sin(angle) * distance;
     const z = Math.cos(angle) * distance;
@@ -32,7 +32,7 @@ const Mercury = React.memo(() => {
 
     // Check if the plane is inside the sphere
     if (distance <= 0.3 && !gameOver) {
-      const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
+      const leaderboardData = [{ name: "Player", timeLasted: timeAliveExternal }];
       setGameOver(true);
       extGameOverMercury = true;
       //Msg For Game over Reason
@@ -45,7 +45,6 @@ const Mercury = React.memo(() => {
   }, []);
 
   useFrame(() => {
-    setTimeAlive(timeAliveExternal);
     updatemercuryPosition();
     collisionCheck();
   });

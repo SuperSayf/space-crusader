@@ -13,13 +13,13 @@ const Jupiter = React.memo(() => {
 
   const clockRef = useRef(new THREE.Clock()); // Create a reference to the clock
   const [gameOver, setGameOver] = useState(false);
-  const [timeAlive, setTimeAlive] = useState(0);
 
   const [jupiterTexture] = useTexture(["assets/textures/jupiter.jpg"]);
 
   const updatejupiterPosition = useCallback(() => {
     // Calculate the jupiter' position based on its angle from the Sun
-    const angle = 20 + clockRef.current.getElapsedTime() * 0.1;
+    // const angle = 20 + clockRef.current.getElapsedTime() * 0.1;
+    const angle = 0
     const distance = 55;
     const x = Math.sin(angle) * distance;
     const z = Math.cos(angle) * distance;
@@ -32,7 +32,7 @@ const Jupiter = React.memo(() => {
 
     // Check if the plane is inside the sphere
     if (distance <= 4 && !gameOver) {
-      const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
+      const leaderboardData = [{ name: "Player", timeLasted: timeAliveExternal }];
       setGameOver(true);
       extGameOverJupiter = true;
       //Msg For Game over Reason
@@ -45,7 +45,6 @@ const Jupiter = React.memo(() => {
   }, []);
 
   useFrame(() => {
-    setTimeAlive(timeAliveExternal);
     updatejupiterPosition();
     collisionCheck();
   });

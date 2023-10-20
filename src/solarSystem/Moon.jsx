@@ -11,7 +11,6 @@ const Moon = React.memo(() => {
   const moonRef = useRef();
   const clockRef = useRef(new THREE.Clock()); // Create a reference to the clock
   const [gameOver, setGameOver] = useState(false);
-  const [timeAlive, setTimeAlive] = useState(0);
 
   const [moonTexture] = useTexture(["assets/textures/moon_map.jpg"]);
   const xAxis = 4;
@@ -30,7 +29,7 @@ const Moon = React.memo(() => {
 
     // Check if the plane is inside the sphere
     if (distance <= 0.3 && !gameOver) {
-      const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
+      const leaderboardData = [{ name: "Player", timeLasted: timeAliveExternal }];
       setGameOver(true);
       extGameOverMoon = true;
       //Msg For Game over Reason
@@ -43,7 +42,6 @@ const Moon = React.memo(() => {
   }, []);
 
   useFrame(() => {
-    setTimeAlive(timeAliveExternal);
     updateMoonPosition();
     collisionCheck();
   });
