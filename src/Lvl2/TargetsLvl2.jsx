@@ -110,7 +110,7 @@ export function Targets() {
     targets.forEach((target, index) => {
       const distance = planePosition.distanceTo(target.center);
 
-      if (distance <= TARGET_RAD + 0.15) {
+      if (distance <= TARGET_RAD + 0.1) {
         console.log(`Target ${index} hit with distance:`, distance);
         collectedObjs++;
 

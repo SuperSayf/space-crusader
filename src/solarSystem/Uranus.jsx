@@ -18,8 +18,7 @@ const Uranus = React.memo(() => {
 
   const updateuranusPosition = useCallback(() => {
     // Calculate the uranus' position based on its angle from the Sun
-    // const angle = clockRef.current.getElapsedTime() * 0.09;
-    const angle = 0
+    const angle = clockRef.current.getElapsedTime() * 0.09;
     const distance = 80;
     const x = Math.sin(angle) * distance;
     const z = Math.cos(angle) * distance;
