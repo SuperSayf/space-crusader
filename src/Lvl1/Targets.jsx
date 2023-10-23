@@ -48,9 +48,21 @@ export function Targets() {
     }
   }, [collectedTargets]);
 
+  const scoreCalculator = () => {
+    let TotalScore = 0;
+    let timeScore = (1 / timeAliveExternal) * 50;
+    let targetScore = collectedObjs * 100;
+
+    TotalScore = timeScore + targetScore;
+
+    return Math.round(TotalScore);
+  };
+
   const handleGameCompletion = () => {
     if (!gameOver) {
-      const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
+      const leaderboardData = [
+        { name: "Player", timeLasted: scoreCalculator() },
+      ];
       setGameOver(true);
       const message = "You collected all the cubes!";
       setTimeout(() => {
