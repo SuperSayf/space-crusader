@@ -225,7 +225,7 @@ export function AnimatedSpaceship(props) {
          <Html position={[-15, 0, 7]}>
            <div style={{ width: 100, height: 100 }}>
              <CircularProgressbar
-               value={collectedObjs}
+               value={collectedObjs/NUM_TARGETS * 100}
                text={`${collectedObjs}/${NUM_TARGETS}`}
                styles={buildStyles({
                  // Rotation of path and trail, in number of turns (0-1)

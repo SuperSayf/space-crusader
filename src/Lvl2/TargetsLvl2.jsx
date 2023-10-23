@@ -10,7 +10,7 @@ import { Fragment } from 'react';
 export const NUM_TARGETS = 20; // Number of targets
 const TARGET_SPACING = 5.0; // Spacing between targets on the line
 const TARGET_RAD = 0.125; // Radius of the target
-const offset = 3;//adjusts the starting point of the targets
+const offset = 5;//adjusts the starting point of the targets
 const ChangeY = 1;//adjusts the height of the targets
 const ChangeZ = 0;//adjusts the depth of the targets
 export var collectedObjs = 0; // Number of collected targets
@@ -152,11 +152,11 @@ export function Targets() {
         <Fragment key={`fragment-${index}`}>
           {target.progress > 0 && (
             <>
-              <Astronaut
+              {/* <Astronaut
                 key={`astronaut-${index}`}
                 position={[target.center.x, target.center.y, target.center.z]}
                 scale={0.001} // Adjust scale as required
-              />
+              /> */}
               {/* adds the progress bar to each astronaut */}
               {/* <CircularProgressBar
                 key={`progress-bar-${index}`}

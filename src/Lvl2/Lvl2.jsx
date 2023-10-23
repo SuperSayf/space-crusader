@@ -31,6 +31,7 @@ import { extGameOverJupiter } from "../solarSystem/Jupiter";
 import { extGameOverSaturn } from "../solarSystem/Saturn";
 import { extGameOverUranus } from "../solarSystem/Uranus";
 import { extGameOverNeptune } from "../solarSystem/Neptune";
+import { extGameOverStargate } from "./Stargate";
 import { useFrame } from "@react-three/fiber";
 import { ShipExplosion } from "../shipExplosion";
 
@@ -102,11 +103,12 @@ function App() {
       extGameOverSaturn ||
       extGameOverUranus ||
       extGameOverNeptune ||
-      extGameOverBlackHole
+      extGameOverBlackHole ||
+      extGameOverStargate
     ) {
       setGameOver(true);
       masterGameOverLvl2 = true;
-    }
+    } 
 
     // Update the plane position
     setPlanePos(planePosition);
