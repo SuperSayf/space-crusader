@@ -222,7 +222,7 @@ export function AnimatedSpaceship(props) {
   return (
     <group ref={groupRef}>
       <group ref={group} {...props} dispose={null} scale={0.01}>
-         <Html position={[-15, 0, 7]}>
+         <Html position={[-7.5, 1, 7]}>
            <div style={{ width: 100, height: 100 }}>
              <CircularProgressbar
                value={collectedObjs/NUM_TARGETS * 100}
@@ -252,6 +252,36 @@ export function AnimatedSpaceship(props) {
              />
            </div>
          </Html>
+         <Html position={[4, 1, 7]}>
+          <div style={{ width: 100, height: 100 }}>
+            <CircularProgressbar
+              value={timeAlive}
+              text={`${timeAlive}s`}
+              styles={buildStyles({
+                // Rotation of path and trail, in number of turns (0-1)
+                rotation: 0.25,
+
+                // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
+                strokeLinecap: "butt",
+
+                // Text size
+                textSize: "16px",
+
+                // How long animation takes to go from one percentage to another, in seconds
+                pathTransitionDuration: 0.5,
+
+                // Can specify path transition in more detail, or remove it entirely
+                // pathTransition: 'none',
+
+                // Colors
+                pathColor: "#66ff00",
+                textColor: "#ffffff",
+                trailColor: "#66ff00",
+                backgroundColor: "#3e98c7",
+              })}
+            />
+          </div>
+        </Html>
 
         {!isPKeyPressed && <JustSpaceshhip />}
 

@@ -152,11 +152,11 @@ export function Targets() {
         <Fragment key={`fragment-${index}`}>
           {target.progress > 0 && (
             <>
-              {/* <Astronaut
+              <Astronaut
                 key={`astronaut-${index}`}
                 position={[target.center.x, target.center.y, target.center.z]}
                 scale={0.001} // Adjust scale as required
-              /> */}
+              />
               {/* adds the progress bar to each astronaut */}
               {/* <CircularProgressBar
                 key={`progress-bar-${index}`}

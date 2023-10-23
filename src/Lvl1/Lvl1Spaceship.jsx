@@ -185,7 +185,7 @@ export function AnimatedSpaceship(props) {
           {!isPKeyPressed && <Flame />}
         </group>
 
-        <Html position={[-6, 1, 7]}>
+        <Html position={[-7.5, 1, 7]}>
           <div style={{ width: 100, height: 100 }}>
             <CircularProgressbar
               value={InternalcollectedObjs*100/NUM_TARGETS}

@@ -172,7 +172,7 @@ export function AnimatedSpaceship(props) {
   return (
     <group ref={groupRef}>
       <group ref={group} {...props} dispose={null} scale={0.01}>
-        <Html position={[-6, 1, 7]}>
+        <Html position={[-7.5, 1, 7]}>
           <div style={{ width: 100, height: 100 }}>
             <CircularProgressbar
               value={boost}
