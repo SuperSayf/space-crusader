@@ -14,6 +14,7 @@ import { Asteroid } from "./Asteroid";
 import { AnimatedSpaceship, planePosition } from "./Lvl1Spaceship";
 import { ShipExplosion } from "../shipExplosion";
 import { externalGameOverAsteroid } from "./Asteroid";
+import { externalGameOverTargets } from "./Targets";
 import { useFrame } from "@react-three/fiber";
 import { Html, useProgress, Stats } from "@react-three/drei";
 
@@ -77,9 +78,12 @@ function App() {
 
   // Use frame to update the game over state
   useFrame(() => {
-    if (externalGameOverAsteroid) {
+    if (externalGameOverAsteroid || externalGameOverTargets) {
       setGameOver(true);
-      masterGameOverLvl1 = true;
+
+      if (!externalGameOverTargets) {
+        masterGameOverLvl1 = true;
+      }
     }
 
     // Update the plane position

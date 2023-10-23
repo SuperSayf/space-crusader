@@ -4,8 +4,11 @@ import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl1Spaceship";
 import { displayLevelCompletion } from "../Completion";
 import { Tesseract } from "./tesseract";
+import { timeAliveExternal } from "./Lvl1Spaceship";
 
 const TARGET_RAD = 0.5;
+
+export let externalGameOverTargets = false;
 
 function randomPointInCircle(radius, y) {
   const angle = Math.random() * Math.PI * 2;
@@ -18,6 +21,9 @@ const CRATE_RADIUS = 4;
 const CRATE_AMOUNT = 8;
 
 export function Targets() {
+  const [gameOver, setGameOver] = useState(false);
+  const [timeAlive, setTimeAlive] = useState(0);
+
   const [targets, setTargets] = useState(() => {
     const arr = [];
     for (let i = 0; i < CRATE_AMOUNT; i++) {
@@ -34,11 +40,25 @@ export function Targets() {
   useEffect(() => {
     if (collectedTargets === CRATE_AMOUNT) {
       console.log("You win!");
-      displayLevelCompletion(1);
+      setGameOver(true);
+      externalGameOverTargets = true;
+      handleGameCompletion();
     }
   }, [collectedTargets]);
 
+  const handleGameCompletion = () => {
+    if (!gameOver) {
+      const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
+      setGameOver(true);
+      const message = "You collected all the cubes!";
+      setTimeout(() => {
+        displayLevelCompletion(1, leaderboardData, message);
+      }, 1000);
+    }
+  };
+
   useFrame(() => {
+    setTimeAlive(timeAliveExternal);
     const updatedTargets = targets.map((target, i) => {
       const distance = planePosition.distanceTo(target.center);
       if (distance < TARGET_RAD && !target.hit) {
