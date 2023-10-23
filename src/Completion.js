@@ -13,11 +13,7 @@ async function getLeaderboardData(level) {
       // Sort the object by score (convert it to an array of objects for sorting)
       const sortedLeaderboardData = Object.entries(leaderboardData)
         .map(([name, timeLasted]) => ({ name, timeLasted }))
-        .sort((a, b) =>
-          level === 3
-            ? b.timeLasted - a.timeLasted
-            : a.timeLasted - b.timeLastLasted
-        );
+        .sort((a, b) => b.timeLasted - a.timeLasted);
 
       return sortedLeaderboardData;
     } else {
@@ -96,6 +92,7 @@ export async function displayGameOver(level, playerData, message) {
 
     submitButton.addEventListener("click", async () => {
       const playerName = nameInput.value;
+
       if (playerName) {
         // Remove the input elements
         gameScreen.removeChild(nameInput);
@@ -150,15 +147,17 @@ export async function displayGameOver(level, playerData, message) {
 
         const playerScore = playerData[0].timeLasted;
 
+        // Truncate the player name to 15 characters, and add an ellipsis if it's longer
+        const truncatedPlayerName =
+          playerName.length > 15
+            ? playerName.substring(0, 15) + "..."
+            : playerName;
+
         // Add the player's score to the leaderboard
-        await addScoreToLeaderboard(level, playerName, playerScore);
+        await addScoreToLeaderboard(level, truncatedPlayerName, playerScore);
 
         // Populate the table with leaderboard data
-        const leaderboardData = await getLeaderboardData(
-          level,
-          playerName,
-          playerScore
-        );
+        const leaderboardData = await getLeaderboardData(level);
 
         // Remove the loading spinner
         gameScreen.removeChild(loadingSpinner);
