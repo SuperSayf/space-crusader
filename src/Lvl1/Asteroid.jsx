@@ -5,6 +5,7 @@ import { useFrame } from "@react-three/fiber";
 import { planePosition } from "./Lvl1Spaceship";
 import { displayGameOver } from "../Completion"; // Ensure you are importing the correct component here
 import { timeAliveExternal } from "./Lvl1Spaceship";
+import { collectedObjs } from "./Targets";
 
 function randomPoint(scale) {
   return new Vector3(
@@ -61,9 +62,21 @@ export function Asteroid() {
     return geo;
   }, [targets]);
 
+  const scoreCalculator = () => {
+    let TotalScore = 0;
+    let timeScore = (1 / timeAliveExternal) * 50;
+    let targetScore = collectedObjs * 100;
+
+    TotalScore = timeScore + targetScore;
+
+    return Math.round(TotalScore);
+  };
+
   const handleGameEnd = () => {
     if (!gameOver) {
-      const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
+      const leaderboardData = [
+        { name: "Player", timeLasted: scoreCalculator() },
+      ];
       setGameOver(true);
       externalGameOverAsteroid = true;
       const message = "You hit an asteroid!";
