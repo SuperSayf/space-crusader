@@ -122,7 +122,7 @@ const MiniMap = () => {
     <OrthographicCamera
       ref={miniMapCameraRef}
       makeDefault={false}
-      zoom={100}
+      zoom={75}
       position={[0, 0, 100]}
       up={[0, 0, 1]}
       left={(frustumSize * aspect) / -2}
