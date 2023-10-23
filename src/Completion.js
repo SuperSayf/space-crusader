@@ -544,12 +544,6 @@ export function displayGamePause(level) {
     h2.style.color = "#00ff00";
     gamePauseScreen.appendChild(h2);
 
-    const image = document.createElement("img");
-    image.src = "/assets/textures/darksouls.jpeg"; // Set the correct path to your image
-    image.alt = "Darksouls Image"; // Set an appropriate alt text for accessibility
-
-    // Append the image to the game pause screen
-    gamePauseScreen.appendChild(image);
 
     // Create the restart button
     const restartButton = document.createElement("button");
@@ -584,12 +578,12 @@ export function displayGamePause(level) {
       .game-screen {
         display: block;
         position: fixed;
-        top: 50%;
+        top: 40%;
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: #000; /* Dark background for a space theme */
         border: 4px solid #fff;
-        padding: 40px;
+        padding: 10px;
         text-align: center;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
         z-index: 9999;

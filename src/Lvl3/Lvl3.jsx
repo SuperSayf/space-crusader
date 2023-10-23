@@ -28,11 +28,11 @@ import { externalGameOverDeathStar } from "./DeathStar";
 import { externalGameOverSun } from "./Sun";
 import { externalGameOverBoost } from "./TargetsLvl3";
 import { useFrame } from "@react-three/fiber";
-
+import { displayGamePause, hideGamePause } from "../Completion"; // For Game Pause
 export let externalShowSubtitles = false;
 
 export let masterGameOverLvl3 = false;
-
+let escKeytoggle = false;
 const loadingBarContainerStyle = {
   position: "fixed",
   top: "50%",
@@ -78,12 +78,63 @@ function Loader() {
   );
 }
 
+
+// Custom hook to detect the "Esc" key press to pause
+function useEscKeyPress() {
+  const [isEscKeyPressed, setEscPKeyPressed] = useState(false);
+
+  function downHandler({ key }) {
+    if (key.toLowerCase() === "escape") {
+      setEscPKeyPressed((prev) => !prev);
+      if(!escKeytoggle){
+        escKeytoggle = true
+        displayGamePause(1);
+      }
+      else{
+        escKeytoggle = false;
+        hideGamePause();
+      }
+    }
+  }
+
+  function upHandler({ key }) {
+    if (key.toLowerCase() === "escape") {
+      setEscPKeyPressed((prev) => prev);
+      if(!escKeytoggle){
+        escKeytoggle = true
+        displayGamePause(1);
+      }
+      else{
+        escKeytoggle = false;
+        hideGamePause();
+      }
+    }
+  }
+
+  useEffect(() => {
+    // window.addEventListener("keydown", downHandler);
+    window.addEventListener("keyup", upHandler);
+
+    return () => {
+      // window.removeEventListener("keydown", downHandler);
+      window.removeEventListener("keyup", upHandler);
+    };
+  }, []);
+
+
+  return isEscKeyPressed;
+}
+
+
 function Lvl3() {
   // Use state to set the external game over state
   const [gameOver, setGameOver] = useState(false);
 
   // Use state to set the plane position
   const [planePos, setPlanePos] = useState(planePosition);
+
+  // Detect the "ESC" key press
+  const isEscKeyPressed = useEscKeyPress();
 
   // Use frame to update the game over state
   useFrame(() => {
