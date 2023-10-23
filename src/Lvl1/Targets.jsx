@@ -19,6 +19,8 @@ function randomPointInCircle(radius, y) {
 
 const CRATE_RADIUS = 4;
 const CRATE_AMOUNT = 8;
+export const NUM_TARGETS = 8; // Number of targets
+export var collectedObjs = 0; // Number of collected targets
 
 export function Targets() {
   const [gameOver, setGameOver] = useState(false);
@@ -63,6 +65,7 @@ export function Targets() {
       const distance = planePosition.distanceTo(target.center);
       if (distance < TARGET_RAD && !target.hit) {
         console.log("Cube collected");
+        collectedObjs++;
         setCollectedTargets((prev) => prev + 1);
         return { ...target, hit: true };
       }
