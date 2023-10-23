@@ -66,11 +66,18 @@ async function addScoreToLeaderboard(level, inputName, score) {
 
 // Flag to track if a popup is currently displayed
 let isPopupDisplayed = false;
+let isEscDisplayed = false
 
 //Game Over
 export async function displayGameOver(level, playerData, message) {
   if (!isPopupDisplayed) {
     isPopupDisplayed = true;
+
+    //if pause menue displayed and  game over  just remove the in game-menue 
+    if(isEscDisplayed){
+      hideGamePause();
+    }
+
     const gameScreen = document.createElement("div");
     gameScreen.classList.add("game-screen");
     gameScreen.id = "gameScreen";
@@ -295,6 +302,11 @@ export async function displayGameOver(level, playerData, message) {
 export function displayLevelCompletion(level, playerData, message) {
   if (!isPopupDisplayed) {
     isPopupDisplayed = true;
+
+    //if pause menue displayed and completion done just remove the in game-menue 
+    if(isEscDisplayed){
+      hideGamePause();
+    }
     const gameScreen = document.createElement("div");
     gameScreen.classList.add("game-screen");
     gameScreen.id = "gameScreen";
@@ -511,5 +523,133 @@ export function displayLevelCompletion(level, playerData, message) {
       }
     `;
     document.head.appendChild(style);
+  }
+}
+
+
+//In game Pause
+export function displayGamePause(level) {
+
+  if (!isPopupDisplayed) {
+    // isPopupDisplayed = true;
+    isEscDisplayed = true
+    const gamePauseScreen = document.createElement("div");
+    gamePauseScreen.classList.add("game-screen");
+    gamePauseScreen.id = "gameScreen";
+
+    // Create the h2 element
+    const h2 = document.createElement("h2");
+    h2.textContent = "You are currently in pause menu but the game is on";
+    // Make it green
+    h2.style.color = "#00ff00";
+    gamePauseScreen.appendChild(h2);
+
+    const image = document.createElement("img");
+    image.src = "/assets/textures/darksouls.jpeg"; // Set the correct path to your image
+    image.alt = "Darksouls Image"; // Set an appropriate alt text for accessibility
+
+    // Append the image to the game pause screen
+    gamePauseScreen.appendChild(image);
+
+    // Create the restart button
+    const restartButton = document.createElement("button");
+    restartButton.id = "restartButton";
+    restartButton.textContent = "Restart Level";
+    gamePauseScreen.appendChild(restartButton);
+
+    // Create the menu button
+    const menuButton = document.createElement("button");
+    menuButton.id = "menuButton";
+    menuButton.textContent = "Go to Main Menu";
+    gamePauseScreen.appendChild(menuButton);
+
+    // Add event listeners for the buttons
+    restartButton.addEventListener("click", function () {
+      window.location.href = `lvl${level }.html`;
+    });
+
+    menuButton.addEventListener("click", function () {
+      window.location.href = "index.html";
+    });
+
+    // Append the game screen to the body
+    document.body.appendChild(gamePauseScreen);
+
+    // Append the game screen to the body
+    document.body.appendChild(gamePauseScreen);
+
+    // Create the style element
+    const style = document.createElement("style");
+    style.textContent = `
+      .game-screen {
+        display: block;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #000; /* Dark background for a space theme */
+        border: 4px solid #fff;
+        padding: 40px;
+        text-align: center;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+        z-index: 9999;
+        color: #fff;
+        font-family: 'Arial', sans-serif;
+      }
+  
+      .game-screen h2 {
+        color: #33ccff; /* Cosmic blue for the heading */
+      }
+  
+      .game-screen button {
+        background-color: #33ccff; /* Cosmic blue for buttons */
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        margin: 10px;
+        transition: background-color 0.3s ease;
+      }
+  
+      .game-screen button:hover {
+        background-color: #005580; /* Darker blue on hover */
+      }
+  
+      .leaderboard-table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+      }
+  
+      .leaderboard-table th, .leaderboard-table td {
+        border: 1px solid #fff;
+        padding: 8px;
+        text-align: left;
+      }
+  
+      .leaderboard-table th {
+        background-color: #33ccff;
+        color: #fff;
+      }
+  
+      .leaderboard-table tr:nth-child(even) {
+        background-color: #005580;
+      }
+  
+      .leaderboard-table tr:nth-child(odd) {
+        background-color: #33ccff;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}
+
+// Add a function to hide the pause menu when needed
+export function hideGamePause() {
+  const gameScreen = document.getElementById("gameScreen");
+  if (gameScreen) {
+    document.body.removeChild(gameScreen);
+    isEscDisplayed = false;
   }
 }

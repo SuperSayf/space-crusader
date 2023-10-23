@@ -18,6 +18,7 @@ import { externalGameOverTargets } from "./Targets";
 import { externalGameOverSun } from "./Sun";
 import { useFrame } from "@react-three/fiber";
 import { Html, useProgress, Stats } from "@react-three/drei";
+import { displayGamePause, hideGamePause } from "../Completion"; // For Game Pause
 import { Sun } from "./Sun";
 
 import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file
@@ -25,7 +26,7 @@ import { Howl, Howler } from "howler"; // Import Howler
 import commander from "/assets/audio/Commander_voice_level_1.mp3"; // Replace with the path to your background music file
 
 export let masterGameOverLvl1 = false;
-
+let escKeytoggle = false;
 const loadingBarContainerStyle = {
   position: "fixed",
   top: "50%",
@@ -71,12 +72,62 @@ function Loader() {
   );
 }
 
+
+// Custom hook to detect the "Esc" key press to pause
+function useEscKeyPress() {
+  const [isEscKeyPressed, setEscPKeyPressed] = useState(false);
+
+  function downHandler({ key }) {
+    if (key.toLowerCase() === "escape") {
+      setEscPKeyPressed((prev) => !prev);
+      if(!escKeytoggle){
+        escKeytoggle = true
+        displayGamePause(1);
+      }
+      else{
+        escKeytoggle = false;
+        hideGamePause();
+      }
+    }
+  }
+
+  function upHandler({ key }) {
+    if (key.toLowerCase() === "escape") {
+      setEscPKeyPressed((prev) => prev);
+      if(!escKeytoggle){
+        escKeytoggle = true
+        displayGamePause(1);
+      }
+      else{
+        escKeytoggle = false;
+        hideGamePause();
+      }
+    }
+  }
+
+  useEffect(() => {
+    // window.addEventListener("keydown", downHandler);
+    window.addEventListener("keyup", upHandler);
+
+    return () => {
+      // window.removeEventListener("keydown", downHandler);
+      window.removeEventListener("keyup", upHandler);
+    };
+  }, []);
+
+
+  return isEscKeyPressed;
+}
+
 function App() {
   // Use state to set the external game over state
   const [gameOver, setGameOver] = useState(false);
 
   // Use state to set the plane position
   const [planePos, setPlanePos] = useState(planePosition);
+
+  // Detect the "ESC" key press
+  const isEscKeyPressed = useEscKeyPress();
 
   // Use frame to update the game over state
   useFrame(() => {
