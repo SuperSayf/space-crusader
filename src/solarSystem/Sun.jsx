@@ -4,7 +4,7 @@ import { useFrame } from "@react-three/fiber";
 import { Vector3 } from "three";
 import { planePosition, timeAliveExternal } from "../Lvl2/Lvl2SpaceShip";
 import { displayGameOver } from "../Completion";
-
+import { collectedObjs } from "../Lvl2/TargetsLvl2";
 export let extGameOverSun = false;
 
 export function Sun(props) {
@@ -14,6 +14,21 @@ export function Sun(props) {
   const [gameOver, setGameOver] = useState(false);
   const [timeAlive, setTimeAlive] = useState(0);
 
+
+  const scoreCalculator = () => {
+    let score = 0;
+  
+    if (timeAliveExternal <= 75) {
+      score = 50 * (1 / timeAliveExternal) + (5 * collectedObjs);
+    } else if (timeAliveExternal > 75 && timeAliveExternal <= 150) {
+      score = 500 * (1 / timeAliveExternal) + (10 * collectedObjs);
+    } else if (timeAliveExternal > 150) {
+      score = 500 * (1 / timeAliveExternal) + (5 * collectedObjs);
+    }
+  
+    return Math.round(score);
+  };
+  
   // Define the center and radius of the green sphere
   const sphereCenter = new Vector3(0, 0, 0);
   const sphereRadius = 2.62;
@@ -29,7 +44,7 @@ export function Sun(props) {
 
     // Check if the plane is inside the sphere
     if (distance < sphereRadius && !gameOver) {
-      const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
+      const leaderboardData = [{ name: "Player", timeLasted: scoreCalculator() }];
       setGameOver(true);
       extGameOverSun = true;
       //Msg For Game over Reason

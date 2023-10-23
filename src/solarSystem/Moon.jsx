@@ -4,7 +4,7 @@ import React, { useRef, useCallback, useState } from "react";
 import * as THREE from "three";
 import { planePosition, timeAliveExternal } from "../Lvl2/Lvl2SpaceShip";
 import { displayGameOver } from "../Completion";
-
+import { collectedObjs } from "../Lvl2/TargetsLvl2";
 export let extGameOverMoon = false;
 
 const Moon = React.memo(() => {
@@ -14,6 +14,22 @@ const Moon = React.memo(() => {
 
   const [moonTexture] = useTexture(["assets/textures/moon_map.jpg"]);
   const xAxis = 4;
+
+  const scoreCalculator = () => {
+    let score = 0;
+  
+    if (timeAliveExternal <= 75) {
+      score = 50 * (1 / timeAliveExternal) + (5 * collectedObjs);
+    } else if (timeAliveExternal > 75 && timeAliveExternal <= 150) {
+      score = 500 * (1 / timeAliveExternal) + (10 * collectedObjs);
+    } else if (timeAliveExternal > 150) {
+      score = 500 * (1 / timeAliveExternal) + (5 * collectedObjs);
+    }
+  
+    return Math.round(score);
+  };
+  
+
   const updateMoonPosition = useCallback(() => {
     // Orbit Rotation
     moonRef.current.position.x =
@@ -29,7 +45,7 @@ const Moon = React.memo(() => {
 
     // Check if the plane is inside the sphere
     if (distance <= 0.3 && !gameOver) {
-      const leaderboardData = [{ name: "Player", timeLasted: timeAliveExternal }];
+      const leaderboardData = [{ name: "Player", timeLasted: scoreCalculator() }];
       setGameOver(true);
       extGameOverMoon = true;
       //Msg For Game over Reason

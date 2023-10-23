@@ -4,7 +4,7 @@ import React, { useRef, useCallback, useEffect, useState } from "react";
 import { planePosition, timeAliveExternal } from "../Lvl2/Lvl2SpaceShip";
 import Moon from "./Moon";
 import { displayGameOver } from "../Completion";
-
+import { collectedObjs } from "../Lvl2/TargetsLvl2";
 import * as THREE from "three";
 
 export let extGameOverEarth = false;
@@ -14,6 +14,23 @@ const Earth = React.memo(({ displacementScale }) => {
 
   const clockRef = useRef(new THREE.Clock()); // Create a reference to the clock
   const [gameOver, setGameOver] = useState(false);
+
+  //this calculates the score when you hit earth
+  const scoreCalculator = () => {
+    let score = 0;
+  
+    if (timeAliveExternal <= 75) {
+      score = 50 * (1 / timeAliveExternal) + (5 * collectedObjs);
+    } else if (timeAliveExternal > 75 && timeAliveExternal <= 150) {
+      score = 500 * (1 / timeAliveExternal) + (10 * collectedObjs);
+    } else if (timeAliveExternal > 150) {
+      score = 500 * (1 / timeAliveExternal) + (5 * collectedObjs);
+    }
+  
+    return Math.round(score);
+  };
+  
+
 
   const [
     earthTexture,
@@ -44,7 +61,7 @@ const Earth = React.memo(({ displacementScale }) => {
 
     // Check if the plane is inside the sphere
     if (distance <= 1.5 && !gameOver) {
-      const leaderboardData = [{ name: "Player", timeLasted: timeAliveExternal }];
+      const leaderboardData = [{ name: "Player", timeLasted: scoreCalculator() }];
       setGameOver(true);
       extGameOverEarth = true;
       //Msg For Game over Reason

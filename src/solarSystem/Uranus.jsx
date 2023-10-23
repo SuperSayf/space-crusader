@@ -3,7 +3,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import React, { useRef, useCallback, useEffect, useState } from "react";
 import { planePosition, timeAliveExternal } from "../Lvl2/Lvl2SpaceShip";
 import { displayGameOver } from "../Completion";
-
+import { collectedObjs } from "../Lvl2/TargetsLvl2";
 import * as THREE from "three";
 
 export let extGameOverUranus = false;
@@ -15,6 +15,21 @@ const Uranus = React.memo(() => {
   const [gameOver, setGameOver] = useState(false);
 
   const [uranusTexture] = useTexture(["assets/textures/uranus.jpg"]);
+
+  const scoreCalculator = () => {
+    let score = 0;
+  
+    if (timeAliveExternal <= 75) {
+      score = 50 * (1 / timeAliveExternal) + (5 * collectedObjs);
+    } else if (timeAliveExternal > 75 && timeAliveExternal <= 150) {
+      score = 500 * (1 / timeAliveExternal) + (10 * collectedObjs);
+    } else if (timeAliveExternal > 150) {
+      score = 500 * (1 / timeAliveExternal) + (5 * collectedObjs);
+    }
+  
+    return Math.round(score);
+  };
+  
 
   const updateuranusPosition = useCallback(() => {
     // Calculate the uranus' position based on its angle from the Sun
@@ -31,7 +46,7 @@ const Uranus = React.memo(() => {
 
     // Check if the plane is inside the sphere
     if (distance <= 2.5 && !gameOver) {
-      const leaderboardData = [{ name: "Player", timeLasted: timeAliveExternal }];
+      const leaderboardData = [{ name: "Player", timeLasted: scoreCalculator() }];
       setGameOver(true);
       extGameOverUranus = true;
       //Msg For Game over Reason

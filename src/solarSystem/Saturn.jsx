@@ -4,7 +4,7 @@ import React, { useRef, useCallback, useEffect, useState } from "react";
 import { SaturnModel } from "./SaturnModel";
 import { planePosition, timeAliveExternal } from "../Lvl2/Lvl2SpaceShip";
 import { displayGameOver } from "../Completion";
-
+import { collectedObjs } from "../Lvl2/TargetsLvl2";
 import * as THREE from "three";
 
 export let extGameOverSaturn = false;
@@ -19,6 +19,21 @@ const Saturn = React.memo(() => {
     "assets/textures/saturn.jpg",
     "assets/textures/saturn ring.png",
   ]);
+
+  const scoreCalculator = () => {
+    let score = 0;
+  
+    if (timeAliveExternal <= 75) {
+      score = 50 * (1 / timeAliveExternal) + (5 * collectedObjs);
+    } else if (timeAliveExternal > 75 && timeAliveExternal <= 150) {
+      score = 500 * (1 / timeAliveExternal) + (10 * collectedObjs);
+    } else if (timeAliveExternal > 150) {
+      score = 500 * (1 / timeAliveExternal) + (5 * collectedObjs);
+    }
+  
+    return Math.round(score);
+  };
+  
 
   const updatesaturnPosition = useCallback(() => {
     // Calculate the saturn' position based on its angle from the Sun
@@ -36,7 +51,7 @@ const Saturn = React.memo(() => {
 
     // Check if the plane is inside the sphere
     if (distance <= 6 && !gameOver) {
-      const leaderboardData = [{ name: "Player", timeLasted: timeAliveExternal }];
+      const leaderboardData = [{ name: "Player", timeLasted: scoreCalculator() }];
       setGameOver(true);
       extGameOverSaturn = true;
       //Msg For Game over Reason
