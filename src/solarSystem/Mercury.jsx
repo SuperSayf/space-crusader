@@ -20,7 +20,7 @@ const Mercury = React.memo(() => {
     let score = 0;
   
     if (timeAliveExternal <= 75) {
-      score = 50 * (1 / timeAliveExternal) + (5 * collectedObjs);
+      score = 200 * (1 / timeAliveExternal) + (5 * collectedObjs);
     } else if (timeAliveExternal > 75 && timeAliveExternal <= 150) {
       score = 500 * (1 / timeAliveExternal) + (10 * collectedObjs);
     } else if (timeAliveExternal > 150) {

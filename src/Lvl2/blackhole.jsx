@@ -10,6 +10,7 @@ import React, { useRef, useState, useCallback } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import { planePosition, timeAliveExternal } from "../Lvl2/Lvl2SpaceShip";
+import { collectedObjs } from "./TargetsLvl2";
 import { displayGameOver } from "../Completion";
 
 export let extGameOverBlackHole = false;
@@ -21,14 +22,28 @@ export function BlackHole(props) {
     "assets/models/gargantua_the_black_hole.glb"
   );
   const [gameOver, setGameOver] = useState(false);
-  const [timeAlive, setTimeAlive] = useState(0);
+
+  //this calculates the score when you hit earth
+  const scoreCalculator = () => {
+    let score = 0;
+  
+    if (timeAliveExternal <= 75) {
+      score = 100 * (1 / timeAliveExternal) + (5 * collectedObjs);
+    } else if (timeAliveExternal > 75 && timeAliveExternal <= 150) {
+      score = 500 * (1 / timeAliveExternal) + (10 * collectedObjs);
+    } else if (timeAliveExternal > 150) {
+      score = 500 * (1 / timeAliveExternal) + (5 * collectedObjs);
+    }
+  
+    return Math.round(score);
+  };
 
   const collisionCheck = useCallback(() => {
     const distance = planePosition.distanceTo(holeRef.current.position);
 
     // Check if the plane is inside the sphere
     if (distance <= 0.2 && !gameOver) {
-      const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
+      const leaderboardData = [{ name: "Player", timeLasted: scoreCalculator() }];
       setGameOver(true);
       extGameOverBlackHole = true;
       //Msg For Game over Reason
@@ -41,7 +56,6 @@ export function BlackHole(props) {
   }, []);
 
   useFrame(() => {
-    setTimeAlive(timeAliveExternal);
     collisionCheck();
   });
 

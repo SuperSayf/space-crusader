@@ -6,11 +6,14 @@ Source: https://sketchfab.com/3d-models/stargate-5ddae865059443b988f3fa51b8c1531
 Title: Stargate
 */
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { planePosition } from "./Lvl2SpaceShip";
+import { planePosition, timeAliveExternal } from "./Lvl2SpaceShip";
+import { collectedObjs } from "./TargetsLvl2";
 import { displayLevelCompletion } from "../Completion";
+
+export let extGameOverStargate = false;
 
 export function Stargate(props) {
   const group = useRef();
@@ -19,14 +22,37 @@ export function Stargate(props) {
   const [collectedTargets, setCollectedTargets] = useState(0); // state to keep track of the number of collected targets
   const [gameWon, setGameWon] = useState(false); //  state to track if game has been won
 
+  const scoreCalculator = () => {
+    let score = 0;
+    if (timeAliveExternal <= 75) {
+      score =   200 * (1 / timeAliveExternal) + (5 * collectedObjs); 
+    } else if (timeAliveExternal > 75 && timeAliveExternal <= 150) {
+      score =  500 * (1 / timeAliveExternal) + (10 * collectedObjs); 
+    } else if (timeAliveExternal > 150) {
+      score =  500 * (1 / timeAliveExternal) + (5 * collectedObjs);
+    }
+    return Math.round(score);
+  };
+
   useFrame(() => {
+      const handleGameCompletion = () => {
+        if (!gameWon) {
+          const leaderboardData = [{ name: "Player", timeLasted: scoreCalculator() }];
+          setGameWon(true);
+          const message = `Congrats! You've saved ${collectedObjs} astronauts!`;
+          setTimeout(() => {
+            displayLevelCompletion(1, leaderboardData, message);
+          }, 1000);
+        }
+      };
+
       //Target Collision Updated Logic
       const distance = planePosition.distanceTo(group.current.position);
       //if the ship hits the target/ring
       if (distance <= 0.4) {
-        setGameWon(true);
         console.log("u win");
-        displayLevelCompletion(2);// Increase collected targets count
+        extGameOverStargate = true;
+        handleGameCompletion();
       }
   });
 
