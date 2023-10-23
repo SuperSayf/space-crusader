@@ -15,8 +15,10 @@ import { AnimatedSpaceship, planePosition } from "./Lvl1Spaceship";
 import { ShipExplosion } from "../shipExplosion";
 import { externalGameOverAsteroid } from "./Asteroid";
 import { externalGameOverTargets } from "./Targets";
+import { externalGameOverSun } from "./Sun";
 import { useFrame } from "@react-three/fiber";
 import { Html, useProgress, Stats } from "@react-three/drei";
+import { Sun } from "./Sun";
 
 import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file
 import { Howl, Howler } from "howler"; // Import Howler
@@ -78,7 +80,7 @@ function App() {
 
   // Use frame to update the game over state
   useFrame(() => {
-    if (externalGameOverAsteroid || externalGameOverTargets) {
+    if (externalGameOverAsteroid || externalGameOverTargets || externalGameOverSun) {
       setGameOver(true);
 
       if (!externalGameOverTargets) {
@@ -135,6 +137,7 @@ function App() {
 
         {/* If not game over, show animated ship */}
         {!gameOver && <AnimatedSpaceship />}
+        <Sun />
         <Targets />
         <Asteroid />
 
