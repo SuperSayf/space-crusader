@@ -13,7 +13,8 @@ async function getLeaderboardData(level) {
       // Sort the object by score (convert it to an array of objects for sorting)
       const sortedLeaderboardData = Object.entries(leaderboardData)
         .map(([name, timeLasted]) => ({ name, timeLasted }))
-        .sort((a, b) => b.timeLasted - a.timeLasted);
+        .sort((a, b) => b.timeLasted - a.timeLasted)
+        .slice(0, 5); // Slice to get only the top 5 entries
 
       return sortedLeaderboardData;
     } else {
@@ -77,6 +78,8 @@ export async function displayGameOver(level, playerData, message) {
     // Create the h2 element
     const h2 = document.createElement("h2");
     h2.textContent = "Game Over!";
+    // Make it red
+    h2.style.color = "#ff0000";
     gameScreen.appendChild(h2);
 
     // Create the input box for entering the player's name
@@ -102,6 +105,18 @@ export async function displayGameOver(level, playerData, message) {
         const hmsg = document.createElement("h2");
         hmsg.textContent = message; // Set the dynamic message
         gameScreen.appendChild(hmsg);
+
+        // Create the h2 element with the text "Your Score"
+        const yourScore = document.createElement("h2");
+        yourScore.textContent = "Your Score: " + playerData[0].timeLasted;
+        // Make it green
+        yourScore.style.color = "#00ff00";
+        gameScreen.appendChild(yourScore);
+
+        // Create the h2 element with the text "Top 5 Scores"
+        const top5Scores = document.createElement("h2");
+        top5Scores.textContent = "Top 5 Scores";
+        gameScreen.appendChild(top5Scores);
 
         // Create the leaderboard table
         const leaderboardTable = document.createElement("table");
