@@ -6,7 +6,8 @@ import { planePosition } from "./Lvl1Spaceship";
 import { displayGameOver } from "../Completion"; // Ensure you are importing the correct component here
 import { timeAliveExternal } from "./Lvl1Spaceship";
 import { collectedObjs } from "./Targets";
-
+import {sphereCenter} from "./Sun"
+import {sphereRadius} from "./Sun"
 // Define a function to generate a random point within a specified scale
 function randomPoint(scale) {
   return new Vector3(
@@ -111,7 +112,11 @@ export function Asteroid() {
         );
         target.hit = false;
       }
-
+      const distanceToSun = sphereCenter.distanceTo(target.center);
+      const sumOfRadii = sphereRadius + TARGET_RAD;
+      if (distanceToSun <= sumOfRadii) {
+        target.hit = true; // Mark the asteroid as hit
+      }
       const distance = planePosition.distanceTo(target.center);
 
       if (distance < TARGET_RAD) {

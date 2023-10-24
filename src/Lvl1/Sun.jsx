@@ -9,6 +9,8 @@ import { collectedObjs } from "./Targets";
 
 // Define a variable to track the game over state for the Sun component
 export let externalGameOverSun = false;
+export const sphereCenter = new Vector3(0, 0, 0);
+export const sphereRadius = 2;
 
 // Define the Sun component
 export function Sun(props) {
@@ -19,8 +21,8 @@ export function Sun(props) {
   const [timeAlive, setTimeAlive] = useState(0);
 
   // Define the center and radius of the sphere representing the Sun
-  const sphereCenter = new Vector3(0, 0, 0);
-  const sphereRadius = 2;
+  // const sphereCenter = new Vector3(0, 0, 0);
+  // const sphereRadius = 2;
 
   const sphereRef = useRef();
 
