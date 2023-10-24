@@ -9,8 +9,9 @@ Title: Sci Fi Bridge (Seamless) (LowPoly)
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
+// Function to load the bridge model
 export function Bridge(props) {
-  const { nodes, materials } = useGLTF("assets/models/sci_fi_bridge.glb");
+  const { nodes, materials } = useGLTF("assets/models/sci_fi_bridge.glb"); // Import the model
   return (
     <group {...props} dispose={null}>
       <mesh

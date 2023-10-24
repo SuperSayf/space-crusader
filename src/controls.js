@@ -97,6 +97,7 @@ function handleGamepadInput() {
   }
 }
 
+// Define a function to simulate keyboard events
 function simulateKeyboardEvent(key, type) {
   const event = new KeyboardEvent(type, {
     key: key,
@@ -104,7 +105,7 @@ function simulateKeyboardEvent(key, type) {
   window.dispatchEvent(event);
 }
 
-let isR2Pressed = false;
+let isR2Pressed = false; 
 
 function updateShiftKeyState() {
   if (gamepadState.R2) {

@@ -6,16 +6,17 @@ import { planePosition } from "./Lvl3Spaceship";
 import { displayGameOver } from "../Completion";
 import { timeAliveExternal } from "./Lvl3Spaceship";
 
-export let externalGameOverDeathStar = false;
+export let externalGameOverDeathStar = false; // Global game over state for Death Star
 
 export function DeathStar(props) {
-  const { nodes, materials } = useGLTF("assets/models/deathStar.glb");
-  const [gameOver, setGameOver] = useState(false);
-  const [timeAlive, setTimeAlive] = useState(0);
+  const { nodes, materials } = useGLTF("assets/models/deathStar.glb"); // Load the death star model
+  const [gameOver, setGameOver] = useState(false); // Use state to set the game over state
+  const [timeAlive, setTimeAlive] = useState(0); // Use state to set the time alive
 
-  const sphereCenter = new Vector3(5, 1, 1);
+  const sphereCenter = new Vector3(5, 1, 1); 
   const sphereRadius = 0.51;
 
+  // Defines game over logic
   const handleGameEnd = () => {
     if (!gameOver) {
       const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];

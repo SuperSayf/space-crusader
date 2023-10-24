@@ -27,11 +27,13 @@ async function getLeaderboardData(level) {
   }
 }
 
+// Add a function to add a score to the leaderboard
 async function addScoreToLeaderboard(level, inputName, score) {
   try {
     const docRef = doc(db, "Leaderboard", `Level${level}`);
     const leaderboardSnapshot = await getDoc(docRef);
 
+    // Check if the document exists
     if (leaderboardSnapshot.exists()) {
       const leaderboardData = leaderboardSnapshot.data().Scores || {};
 

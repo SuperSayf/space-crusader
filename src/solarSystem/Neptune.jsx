@@ -6,17 +6,18 @@ import { displayGameOver } from "../Completion";
 import { collectedObjs } from "../Lvl2/TargetsLvl2";
 import * as THREE from "three";
 
-export let extGameOverNeptune = false;
+export let extGameOverNeptune = false; // Global game over state for Neptune
 
+// Neptune component
 const Neptune = React.memo(() => {
-  const neptuneRef = useRef();
+  const neptuneRef = useRef(); // Create a reference to the Neptune
 
   const clockRef = useRef(new THREE.Clock()); // Create a reference to the clock
-  const [gameOver, setGameOver] = useState(false);
+  const [gameOver, setGameOver] = useState(false); // Use state to set the game over state
 
-  const [neptuneTexture] = useTexture(["assets/textures/neptune.jpg"]);
+  const [neptuneTexture] = useTexture(["assets/textures/neptune.jpg"]); // Load the Neptune's textures
 
-
+  // this calculates the score when you hit neptune
   const scoreCalculator = () => {
     let score = 0;
   
@@ -31,6 +32,7 @@ const Neptune = React.memo(() => {
     return Math.round(score);
   };
   
+  // Update the Neptune's position
   const updateneptunePosition = useCallback(() => {
     // Calculate the neptune' position based on its angle from the Sun
     const angle = 5 + clockRef.current.getElapsedTime() * 0.07;
@@ -41,6 +43,7 @@ const Neptune = React.memo(() => {
     neptuneRef.current.rotation.y += 0.002;
   }, []);
 
+  // Check for collisions used in useFrame and triggers game over state
   const collisionCheck = useCallback(() => {
     const distance = planePosition.distanceTo(neptuneRef.current.position);
 

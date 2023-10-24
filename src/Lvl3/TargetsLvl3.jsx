@@ -7,8 +7,9 @@ import { FuelShield } from "./FuelShield";
 import { displayGameOver } from "../Completion";
 import { timeAliveExternal } from "./Lvl3Spaceship";
 
-export let externalGameOverBoost = false;
+export let externalGameOverBoost = false; // Global game over state for boost
 
+// Define a function to generate a random point within a specified scale
 function randomPoint(scale) {
   return new Vector3(
     Math.random() * 2 - 1,
@@ -17,7 +18,7 @@ function randomPoint(scale) {
   ).multiply(scale || new Vector3(1, 1, 1));
 }
 
-const TARGET_RAD = 0.125;
+const TARGET_RAD = 0.125; // Radius of the target
 
 export let externalBoost = 100; // Export the boost value
 
@@ -25,6 +26,7 @@ export function Targets() {
   const TargetAmt = 10;
   const [targets, setTargets] = useState(() => {
     const arr = [];
+    // Create a loop to generate the targets
     for (let i = 0; i < TargetAmt; i++) {
       arr.push({
         center: randomPoint(new Vector3(4, 1, 4)).add(
@@ -74,6 +76,7 @@ export function Targets() {
     };
   }, []);
 
+  // Define a function to handle game over
   const handleGameEnd = () => {
     // console.log("Game over from boost");
     if (!gameOver) {

@@ -9,6 +9,7 @@ Title: Saturn (planet)
 import React, { useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 
+// Function to load the saturn model
 export function SaturnModel(props) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF(

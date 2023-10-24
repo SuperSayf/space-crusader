@@ -7,19 +7,22 @@ import { displayGameOver } from "../Completion";
 import { collectedObjs } from "../Lvl2/TargetsLvl2";
 import * as THREE from "three";
 
-export let extGameOverSaturn = false;
+export let extGameOverSaturn = false; // Global game over state for Saturn
 
+// Saturn component
 const Saturn = React.memo(() => {
-  const saturnRef = useRef();
+  const saturnRef = useRef(); // Create a reference to the Saturn
 
   const clockRef = useRef(new THREE.Clock()); // Create a reference to the clock
-  const [gameOver, setGameOver] = useState(false);
+  const [gameOver, setGameOver] = useState(false); // Use state to set the game over state
 
+  // Load the Saturn's textures
   const [saturnTexture, saturnRingTexture] = useTexture([
     "assets/textures/saturn.jpg",
     "assets/textures/saturn ring.png",
   ]);
 
+  // this calculates the score when you hit saturn
   const scoreCalculator = () => {
     let score = 0;
   
@@ -34,7 +37,7 @@ const Saturn = React.memo(() => {
     return Math.round(score);
   };
   
-
+  // Update the Saturn's position
   const updatesaturnPosition = useCallback(() => {
     // Calculate the saturn' position based on its angle from the Sun
     const angle = 30 + clockRef.current.getElapsedTime() * 0.12;
@@ -46,6 +49,7 @@ const Saturn = React.memo(() => {
     saturnRef.current.rotation.z += 0.0003;
   }, []);
 
+  // Check for collisions used in useFrame and triggers game over state
   const collisionCheck = useCallback(() => {
     const distance = planePosition.distanceTo(saturnRef.current.position);
 

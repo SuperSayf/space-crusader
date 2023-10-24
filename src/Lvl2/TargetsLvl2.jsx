@@ -16,7 +16,6 @@ const ChangeZ = 0;//adjusts the depth of the targets
 export var collectedObjs = 0; // Number of collected targets
 
 export function Targets() {
-  const [collectedTargets, setCollectedTargets] = useState(0); // state to keep track of the number of collected targets
   const [progress, setProgress] = useState(100); // New state for the progress bar
 
   // Update the progress bar every frame
@@ -46,62 +45,6 @@ export function Targets() {
     return arr;
   });
 
-
-  /*Handles Level Completion
-  -Called everytime the collectedTagets value changes
-  -Sets GameWon to true
-  -Calls diplayLevelCompletion function , parses 1 to it
-  -See LevelComplete.js Page for more on what diplayLevelCompletion function does
-  */
-  // useEffect(() => {
-  //   console.log("Collected Targets: ", collectedTargets);
-  // }, [collectedTargets]);
-
-  // useFrame((delta) => {
-  //   targets.forEach((target, i) => {
-  //     //Target Collision Updated Logic
-  //     const distance = planePosition.distanceTo(target.center);
-  //     //if the ship hits the target/ring
-  //     if (distance <= TARGET_RAD + 0.15) {
-  //       target.hit = true;
-  //       console.log("Ring hit");
-  //       setCollectedTargets(prev => prev + 1); // Increase collected targets count
-  //       collectedObjs = collectedTargets + 1;
-  //     }
-  //   });
-
-  //   const atLeastOneHit = targets.find((target) => target.hit);
-  //   if (atLeastOneHit) {
-  //     setTargets(targets.filter((target) => !target.hit));
-  //   }
-
-  //   // Update progress based on elapsed time
-  //   const decrement = (delta * 100) / (PROGRESS_DURATION / 1000);
-  //   setProgress((prev) => Math.max(prev - decrement, 0));
-
-  //   // Optionally, if you want the astronaut to disappear once progress reaches 0
-  //   if (progress <= 0) {
-  //     setTargets([]);
-  //   }
-
-  //   // For each astronaut, decrease the progress by a certain amount on every frame (or every few frames) until it reaches 0. 
-  //   let updatedTargets = [...targets];
-  //   let needUpdate = false;
-  //   updatedTargets.forEach((target) => {
-  //       if (target.progress > 0) {
-  //           target.progress -= 0.01;  // Adjust the rate of progress reduction as needed
-  //           if (target.progress <= 0) {
-  //               target.hit = true;
-  //           }
-  //           needUpdate = true;
-  //       }
-  //   });
-
-  //   if (needUpdate) {
-  //       setTargets(updatedTargets.filter(target => !target.hit));
-  //   }
-  // });
-
   //working code for hitting targets but progress bar not working
   useFrame((delta) => {
     const decrement = (delta * 100) / (PROGRESS_DURATION / 1000);
@@ -111,7 +54,7 @@ export function Targets() {
       const distance = planePosition.distanceTo(target.center);
 
       if (distance <= TARGET_RAD + 0.1) {
-        console.log(`Target ${index} hit with distance:`, distance);
+        // console.log(`Target ${index} hit with distance:`, distance);
         collectedObjs++;
 
         // Directly update the state by filtering out the hit target

@@ -5,16 +5,18 @@ import { Vector3 } from "three";
 import { planePosition, timeAliveExternal } from "../Lvl2/Lvl2SpaceShip";
 import { displayGameOver } from "../Completion";
 import { collectedObjs } from "../Lvl2/TargetsLvl2";
-export let extGameOverSun = false;
 
+export let extGameOverSun = false; // Global game over state for Sun
+
+// Function to load the sun model and check for collisions
 export function Sun(props) {
-  const { nodes, materials } = useGLTF("assets/models/Sun.glb");
+  const { nodes, materials } = useGLTF("assets/models/Sun.glb"); // Load the sun model
 
-  const [sunTexture] = useTexture(["assets/textures/sun.jpg"]);
-  const [gameOver, setGameOver] = useState(false);
-  const [timeAlive, setTimeAlive] = useState(0);
+  const [sunTexture] = useTexture(["assets/textures/sun.jpg"]); // Load the sun's textures
+  const [gameOver, setGameOver] = useState(false); // Use state to set the game over state
+  const [timeAlive, setTimeAlive] = useState(0); // Use state to set the time alive
 
-
+  // Scoring Algorithm logic
   const scoreCalculator = () => {
     let score = 0;
   

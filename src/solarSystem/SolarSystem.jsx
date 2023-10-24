@@ -12,6 +12,7 @@ import Uranus from "./Uranus";
 import Neptune from "./Neptune";
 import { Stargate } from "../Lvl2/Stargate";
 
+// Solar system component with all the planets - hierarchical modelling
 const SolarSystem = React.memo(() => {
   const solarRef = useRef();
 

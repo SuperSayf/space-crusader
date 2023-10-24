@@ -17,11 +17,10 @@ export let extGameOverStargate = false;
 
 export function Stargate(props) {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF("assets/models/stargate.glb");
-  const { actions } = useAnimations(animations, group);
-  const [collectedTargets, setCollectedTargets] = useState(0); // state to keep track of the number of collected targets
+  const { nodes, materials} = useGLTF("assets/models/stargate.glb");
   const [gameWon, setGameWon] = useState(false); //  state to track if game has been won
 
+  // Scoring Algorithm logic
   const scoreCalculator = () => {
     let score = 0;
     if (timeAliveExternal <= 75) {
@@ -35,6 +34,7 @@ export function Stargate(props) {
   };
 
   useFrame(() => {
+    // Check level completion and implement scoring logic
       const handleGameCompletion = () => {
         if (!gameWon) {
           const leaderboardData = [{ name: "Player", timeLasted: scoreCalculator() }];
@@ -46,9 +46,10 @@ export function Stargate(props) {
         }
       };
 
-      //Target Collision Updated Logic
+      // Target Collision Updated Logic
       const distance = planePosition.distanceTo(group.current.position);
-      //if the ship hits the target/ring
+
+      // if the ship hits the target/ring
       if (distance <= 0.4) {
         console.log("u win");
         extGameOverStargate = true;

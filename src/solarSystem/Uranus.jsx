@@ -6,16 +6,18 @@ import { displayGameOver } from "../Completion";
 import { collectedObjs } from "../Lvl2/TargetsLvl2";
 import * as THREE from "three";
 
-export let extGameOverUranus = false;
+export let extGameOverUranus = false; // Global game over state for Uranus
 
+// Uranus component
 const Uranus = React.memo(() => {
-  const uranusRef = useRef();
+  const uranusRef = useRef(); // Create a reference to the Uranus
 
   const clockRef = useRef(new THREE.Clock()); // Create a reference to the clock
-  const [gameOver, setGameOver] = useState(false);
+  const [gameOver, setGameOver] = useState(false); // Use state to set the game over state
 
-  const [uranusTexture] = useTexture(["assets/textures/uranus.jpg"]);
+  const [uranusTexture] = useTexture(["assets/textures/uranus.jpg"]); // Load the Uranus's textures
 
+  // this calculates the score when you hit uranus
   const scoreCalculator = () => {
     let score = 0;
   
@@ -30,7 +32,7 @@ const Uranus = React.memo(() => {
     return Math.round(score);
   };
   
-
+  // Update the Uranus's position
   const updateuranusPosition = useCallback(() => {
     // Calculate the uranus' position based on its angle from the Sun
     const angle = clockRef.current.getElapsedTime() * 0.09;
@@ -41,6 +43,7 @@ const Uranus = React.memo(() => {
     uranusRef.current.rotation.y += 0.002;
   }, []);
 
+  // Check for collisions used in useFrame and triggers game over state
   const collisionCheck = useCallback(() => {
     const distance = planePosition.distanceTo(uranusRef.current.position);
 

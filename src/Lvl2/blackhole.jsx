@@ -15,6 +15,7 @@ import { displayGameOver } from "../Completion";
 
 export let extGameOverBlackHole = false;
 
+// Function to load the black hole model and check for collisions
 export function BlackHole(props) {
   const holeRef = useRef();
 
@@ -23,7 +24,7 @@ export function BlackHole(props) {
   );
   const [gameOver, setGameOver] = useState(false);
 
-  //this calculates the score when you hit earth
+  // Scoring Algorithm logic
   const scoreCalculator = () => {
     let score = 0;
   
@@ -38,6 +39,7 @@ export function BlackHole(props) {
     return Math.round(score);
   };
 
+  // Check for collisions used in useFrame and triggers game over state
   const collisionCheck = useCallback(() => {
     const distance = planePosition.distanceTo(holeRef.current.position);
 
@@ -64,37 +66,27 @@ export function BlackHole(props) {
       <group rotation={[-1.493, -0.212, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <mesh
-            // castShadow
-            // receiveShadow
             geometry={nodes.Object_4.geometry}
             material={materials.black}
             scale={0.748}
           />
           <mesh
-            // castShadow
-            // receiveShadow
             geometry={nodes.Object_6.geometry}
             material={materials.accretion_disk}
             scale={0.91}
           />
           <mesh
-            // castShadow
-            // receiveShadow
             geometry={nodes.Object_8.geometry}
             material={materials.Einstein_ring}
           />
           <mesh
-            // castShadow
-            // receiveShadow
             geometry={nodes.Object_10.geometry}
             material={materials.black}
             scale={1.048}
           />
           <mesh
-            // castShadow
-            // receiveShadow
             geometry={nodes.Object_12.geometry}
-            material={materials.glowing}
+            material={materials.glowing} // Example of a glowing material - emmisive property
             scale={1.065}
           />
         </group>

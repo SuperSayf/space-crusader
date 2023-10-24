@@ -4,19 +4,20 @@ import React, { useRef, useCallback, useEffect, useState } from "react";
 import { planePosition, timeAliveExternal } from "../Lvl2/Lvl2SpaceShip";
 import { displayGameOver } from "../Completion";
 import { collectedObjs } from "../Lvl2/TargetsLvl2";
-
 import * as THREE from "three";
 
-export let extGameOverVenus = false;
+export let extGameOverVenus = false; // Global game over state for Venus
 
+// Venus component
 const Venus = React.memo(() => {
-  const venusRef = useRef();
+  const venusRef = useRef(); // Create a reference to the Venus
 
   const clockRef = useRef(new THREE.Clock()); // Create a reference to the clock
-  const [gameOver, setGameOver] = useState(false);
+  const [gameOver, setGameOver] = useState(false); // Use state to set the game over state
 
-  const [venusTexture] = useTexture(["assets/textures/venus.jpg"]);
+  const [venusTexture] = useTexture(["assets/textures/venus.jpg"]); // Load the Venus's textures
 
+  // this calculates the score when you hit venus
   const scoreCalculator = () => {
     let score = 0;
   
@@ -31,7 +32,7 @@ const Venus = React.memo(() => {
     return Math.round(score);
   };
   
-
+  // Update the Venus's position
   const updatevenusPosition = useCallback(() => {
     // Calculate the venus' position based on its angle from the Sun
     const angle = clockRef.current.getElapsedTime() * 0.065;
@@ -42,6 +43,7 @@ const Venus = React.memo(() => {
     venusRef.current.rotation.y += 0.002;
   }, []);
 
+  // Check for collisions used in useFrame and triggers game over state
   const collisionCheck = useCallback(() => {
     const distance = planePosition.distanceTo(venusRef.current.position);
 

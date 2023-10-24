@@ -5,16 +5,19 @@ import * as THREE from "three";
 import { planePosition, timeAliveExternal } from "../Lvl2/Lvl2SpaceShip";
 import { displayGameOver } from "../Completion";
 import { collectedObjs } from "../Lvl2/TargetsLvl2";
-export let extGameOverMoon = false;
 
+export let extGameOverMoon = false; // Global game over state for Moon
+
+// Moon component
 const Moon = React.memo(() => {
-  const moonRef = useRef();
+  const moonRef = useRef(); // Create a reference to the Moon
   const clockRef = useRef(new THREE.Clock()); // Create a reference to the clock
-  const [gameOver, setGameOver] = useState(false);
+  const [gameOver, setGameOver] = useState(false); // Use state to set the game over state
 
-  const [moonTexture] = useTexture(["assets/textures/moon_map.jpg"]);
+  const [moonTexture] = useTexture(["assets/textures/moon_map.jpg"]); // Load the Moon's textures
   const xAxis = 4;
 
+  // this calculates the score when you hit moon
   const scoreCalculator = () => {
     let score = 0;
   
@@ -29,7 +32,7 @@ const Moon = React.memo(() => {
     return Math.round(score);
   };
   
-
+  // Update the Moon's position
   const updateMoonPosition = useCallback(() => {
     // Orbit Rotation
     moonRef.current.position.x =
@@ -40,6 +43,7 @@ const Moon = React.memo(() => {
     moonRef.current.rotation.y += 0.002;
   }, []);
 
+  // Check for collisions used in useFrame and triggers game over state
   const collisionCheck = useCallback(() => {
     const distance = planePosition.distanceTo(moonRef.current.position);
 

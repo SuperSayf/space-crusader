@@ -6,16 +6,17 @@ import { displayGameOver } from "../Completion";
 import { collectedObjs } from "../Lvl2/TargetsLvl2";
 import * as THREE from "three";
 
-export let extGameOverMercury = false;
+export let extGameOverMercury = false; // Global game over state for Mercury
 
 const Mercury = React.memo(() => {
-  const mercuryRef = useRef();
+  const mercuryRef = useRef(); // Create a reference to the Mercury
 
   const clockRef = useRef(new THREE.Clock()); // Create a reference to the clock
-  const [gameOver, setGameOver] = useState(false);
+  const [gameOver, setGameOver] = useState(false); // Use state to set the game over state
 
-  const [mercuryTexture] = useTexture(["assets/textures/mercury.jpg"]);
+  const [mercuryTexture] = useTexture(["assets/textures/mercury.jpg"]); // Load the Mercury's textures
 
+  // this calculates the score when you hit mercury
   const scoreCalculator = () => {
     let score = 0;
   
@@ -30,7 +31,7 @@ const Mercury = React.memo(() => {
     return Math.round(score);
   };
   
-
+  // Update the Mercury's position
   const updatemercuryPosition = useCallback(() => {
     // Calculate the mercury' position based on its angle from the Sun
     const angle = 50 + clockRef.current.getElapsedTime() * 0.03;
@@ -41,6 +42,7 @@ const Mercury = React.memo(() => {
     mercuryRef.current.rotation.y += 0.002;
   }, []);
 
+  // Check for collisions used in useFrame and triggers game over state
   const collisionCheck = useCallback(() => {
     const distance = planePosition.distanceTo(mercuryRef.current.position);
 

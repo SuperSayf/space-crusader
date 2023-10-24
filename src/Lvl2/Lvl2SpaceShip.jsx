@@ -3,12 +3,9 @@ import { useGLTF, useAnimations, Html } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Matrix4, Quaternion, Vector3 } from "three";
 import { updatePlaneAxis } from "../controls";
-// import { externalBoost } from "./TargetsLvl2";
 import { buildStyles } from "react-circular-progressbar";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-// import { externalShowSubtitles } from "./Lvl3";
-import TypeWriterEffect from "react-typewriter-effect";
 import { Flame } from "../flame";
 import { JustSpaceshhip } from "../justSpaceship";
 import { NUM_TARGETS, collectedObjs } from "./TargetsLvl2";
@@ -82,14 +79,13 @@ function usePKeyPress() {
   return isPKeyPressed;
 }
 
+// Hierarchical modelling of the spaceship
 export function AnimatedSpaceship(props) {
   const group = useRef();
 
   const groupRef = useRef();
 
-  const [boost, setBoost] = useState(100);
   const [timeAlive, setTimeAlive] = useState(0);
-  const [showSubtitles, setShowSubtitles] = useState(false);
 
   // Detect the shift key press
   const isShiftPressed = useKeyPress("Shift");
@@ -99,7 +95,7 @@ export function AnimatedSpaceship(props) {
 
   useFrame(({ camera }) => {
 
-    //black hole 1 gravitational pull
+    //black hole 1 gravitational pull logic
     const blackHolePosition = new Vector3(3, 2, 65);
     const spacecraftPosition = planePosition; // assuming planePosition is the position of the spacecraft
 
@@ -115,7 +111,7 @@ export function AnimatedSpaceship(props) {
       spacecraftPosition.add(force);
     }
 
-    //black hole 2 gravitational pull
+    //black hole 2 gravitational pull logic
     const blackHolePosition2 = new Vector3(2, 3, 80);
     const spacecraftPosition2 = planePosition; // assuming planePosition is the position of the spacecraft
 
@@ -131,7 +127,7 @@ export function AnimatedSpaceship(props) {
       spacecraftPosition2.add(force);
     }
 
-    //black hole 3 gravitational pull
+    //black hole 3 gravitational pull logic
     const blackHolePosition3 = new Vector3(0, 2, 42.5);
     const spacecraftPosition3 = planePosition; // assuming planePosition is the position of the spacecraft
 

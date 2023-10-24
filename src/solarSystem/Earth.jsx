@@ -7,15 +7,16 @@ import { displayGameOver } from "../Completion";
 import { collectedObjs } from "../Lvl2/TargetsLvl2";
 import * as THREE from "three";
 
-export let extGameOverEarth = false;
+export let extGameOverEarth = false; // Global game over state for Earth
 
+// Earth component
 const Earth = React.memo(({ displacementScale }) => {
-  const earthRef = useRef();
+  const earthRef = useRef(); // Create a reference to the Earth
 
   const clockRef = useRef(new THREE.Clock()); // Create a reference to the clock
-  const [gameOver, setGameOver] = useState(false);
+  const [gameOver, setGameOver] = useState(false); // Use state to set the game over state
 
-  //this calculates the score when you hit earth
+  // this calculates the score when you hit earth
   const scoreCalculator = () => {
     let score = 0;
   
@@ -30,8 +31,7 @@ const Earth = React.memo(({ displacementScale }) => {
     return Math.round(score);
   };
   
-
-
+  // Load the Earth's textures
   const [
     earthTexture,
     earthNormalMap,
@@ -46,6 +46,7 @@ const Earth = React.memo(({ displacementScale }) => {
     "assets/textures/earth_night.jpg",
   ]);
 
+  // Update the Earth's position
   const updateEarthPosition = useCallback(() => {
     // Calculate the Earth's position based on its angle from the Sun
     const angle = 10 + clockRef.current.getElapsedTime() * 0.01;
@@ -56,6 +57,7 @@ const Earth = React.memo(({ displacementScale }) => {
     earthRef.current.rotation.y += 0.002;
   }, []);
 
+  // Check for collisions used in useFrame and triggers game over state
   const collisionCheck = useCallback(() => {
     const distance = planePosition.distanceTo(earthRef.current.position);
 

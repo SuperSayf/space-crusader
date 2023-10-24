@@ -125,7 +125,7 @@ function useEscKeyPress() {
   return isEscKeyPressed;
 }
 
-
+// Encapsulates OOP concepts for lvl2
 function Lvl3() {
   // Use state to set the external game over state
   const [gameOver, setGameOver] = useState(false);

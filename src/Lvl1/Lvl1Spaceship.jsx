@@ -78,6 +78,7 @@ function usePKeyPress() {
   return isPKeyPressed;
 }
 
+// Hierarchical model of the spaceship
 export function AnimatedSpaceship(props) {
   const group = useRef();
   const groupRef = useRef();

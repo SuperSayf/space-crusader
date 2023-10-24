@@ -6,20 +6,21 @@ import { planePosition } from "./Lvl3Spaceship";
 import { displayGameOver } from "../Completion";
 import { timeAliveExternal } from "./Lvl3Spaceship";
 
-export let externalGameOverSun = false;
+export let externalGameOverSun = false; // Global game over state for Sun
 
 export function Sun(props) {
-  const { nodes, materials } = useGLTF("assets/models/Sun.glb");
+  const { nodes, materials } = useGLTF("assets/models/Sun.glb"); // Load the sun model
 
-  const [sunTexture] = useTexture(["assets/textures/sun.jpg"]);
-  const [gameOver, setGameOver] = useState(false);
-  const [timeAlive, setTimeAlive] = useState(0);
+  const [sunTexture] = useTexture(["assets/textures/sun.jpg"]); // Load the sun texture
+  const [gameOver, setGameOver] = useState(false); // Use state to set the game over state
+  const [timeAlive, setTimeAlive] = useState(0); // Use state to set the time alive
 
-  const sphereCenter = new Vector3(0, 0, 0);
+  const sphereCenter = new Vector3(0, 0, 0); 
   const sphereRadius = 2.62;
 
-  const sphereRef = useRef();
+  const sphereRef = useRef(); // Create a reference to the sun
 
+  // Defines game over logic
   const handleGameEnd = () => {
     if (!gameOver) {
       const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];

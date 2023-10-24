@@ -6,22 +6,25 @@ import { planePosition } from "./Lvl3Spaceship";
 import { displayGameOver } from "../Completion";
 import { timeAliveExternal } from "./Lvl3Spaceship";
 
+// Define a function to generate a random point within a specified scale
 function randomPoint(scale) {
   return new Vector3(
-    Math.random() * 2 - 1,
-    Math.random() * 2 - 1,
-    Math.random() * 2 - 1
-  ).multiply(scale || new Vector3(1, 1, 1));
+    Math.random() * 2 - 1, // X-component (depth position)
+    Math.random() * 2 - 1, // Y-component (vertical position)
+    Math.random() * 2 - 1 // Z-component (horizontal position)
+  ).multiply(scale || new Vector3(1, 1, 1)); // Scale the random point by the specified scale
 }
 
-const TARGET_RAD = 0.125 * 2;
-const MAX_ASTEROIDS = 20;
+const TARGET_RAD = 0.125 * 2; // Radius of the target
+const MAX_ASTEROIDS = 20; // Maximum number of asteroids
 
-export let externalGameOverAsteroid = false;
+export let externalGameOverAsteroid = false; // Global game over state for asteroids
+
 
 export function Asteroid() {
   const [targets, setTargets] = useState(() => {
     const arr = [];
+    // Create a loop to generate the asteroids
     for (let i = 0; i < MAX_ASTEROIDS; i++) {
       arr.push({
         center: randomPoint(new Vector3(4, 1, 4)).add(
@@ -35,11 +38,12 @@ export function Asteroid() {
     return arr;
   });
 
-  const [gameOver, setGameOver] = useState(false);
-  const [timeAlive, setTimeAlive] = useState(0);
+  const [gameOver, setGameOver] = useState(false); // Use state to set the game over state
+  const [timeAlive, setTimeAlive] = useState(0); // Use state to set the time alive
 
   const textureLoader = new TextureLoader();
-  const asteroidTexture = textureLoader.load("assets/textures/asteroid.jpg");
+  const asteroidTexture = textureLoader.load("assets/textures/asteroid.jpg"); // Load the asteroid's textures
+  // Calculate asteroid geometry using useMemo
   const geometry = useMemo(() => {
     let geo;
 
@@ -60,6 +64,7 @@ export function Asteroid() {
     return geo;
   }, [targets]);
 
+  // Defines a function to handle player collisions with asteroids
   const handleGameEnd = () => {
     if (!gameOver) {
       const leaderboardData = [{ name: "Player", timeLasted: timeAlive }];
@@ -79,6 +84,7 @@ export function Asteroid() {
     let closestAsteroid = null;
     let closestDistance = Infinity;
 
+    // Loop through the asteroids to find the closest one
     targets.forEach((target, i) => {
       const distance = planePosition.distanceTo(target.center);
 
@@ -88,6 +94,7 @@ export function Asteroid() {
       }
     });
 
+    // Move the closest asteroid towards the player
     if (closestAsteroid) {
       const directionToPlayer = planePosition
         .clone()
@@ -98,6 +105,7 @@ export function Asteroid() {
       );
     }
 
+    // Update the asteroid's hit state
     const updatedTargets = targets.map((target) => {
       return {
         ...target,
@@ -105,8 +113,9 @@ export function Asteroid() {
       };
     });
 
-    setTargets(updatedTargets);
+    setTargets(updatedTargets); // Update the targets state
 
+    // Check for collisions with the player
     updatedTargets.forEach((target, i) => {
       const distance = planePosition.distanceTo(target.center);
       if (distance < TARGET_RAD) {

@@ -6,16 +6,17 @@ import { displayGameOver } from "../Completion";
 import { collectedObjs } from "../Lvl2/TargetsLvl2";
 import * as THREE from "three";
 
-export let extGameOverMars = false;
+export let extGameOverMars = false; // Global game over state for Mars
 
 const Mars = React.memo(() => {
-  const marsRef = useRef();
+  const marsRef = useRef(); // Create a reference to the Mars
 
   const clockRef = useRef(new THREE.Clock()); // Create a reference to the clock
-  const [gameOver, setGameOver] = useState(false);
+  const [gameOver, setGameOver] = useState(false); // Use state to set the game over state
 
-  const [marsTexture] = useTexture(["assets/textures/mars.jpg"]);
+  const [marsTexture] = useTexture(["assets/textures/mars.jpg"]); // Load the Mars' textures
 
+  // this calculates the score when you hit mars
   const scoreCalculator = () => {
     let score = 0;
   
@@ -30,7 +31,7 @@ const Mars = React.memo(() => {
     return Math.round(score);
   };
   
-
+  // Update the Mars' position
   const updateMarsPosition = useCallback(() => {
     // Calculate the Mars' position based on its angle from the Sun
     const angle = 1 + clockRef.current.getElapsedTime() * 0.05;
@@ -41,6 +42,7 @@ const Mars = React.memo(() => {
     marsRef.current.rotation.y += 0.002;
   }, []);
 
+  // Check for collisions used in useFrame and triggers game over state
   const collisionCheck = useCallback(() => {
     const distance = planePosition.distanceTo(marsRef.current.position);
 

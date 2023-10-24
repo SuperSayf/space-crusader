@@ -6,16 +6,18 @@ import { displayGameOver } from "../Completion";
 import { collectedObjs } from "../Lvl2/TargetsLvl2";
 import * as THREE from "three";
 
-export let extGameOverJupiter = false;
+export let extGameOverJupiter = false; // Global game over state for Jupiter
 
+// Jupiter component
 const Jupiter = React.memo(() => {
   const jupiterRef = useRef();
 
   const clockRef = useRef(new THREE.Clock()); // Create a reference to the clock
-  const [gameOver, setGameOver] = useState(false);
+  const [gameOver, setGameOver] = useState(false); // Use state to set the game over state
 
-  const [jupiterTexture] = useTexture(["assets/textures/jupiter.jpg"]);
+  const [jupiterTexture] = useTexture(["assets/textures/jupiter.jpg"]); // Load the Jupiter's textures
 
+  // this calculates the score when you hit jupiter
   const scoreCalculator = () => {
     let score = 0;
   
@@ -30,7 +32,7 @@ const Jupiter = React.memo(() => {
     return Math.round(score);
   };
   
-
+  // Update the Jupiter's position
   const updatejupiterPosition = useCallback(() => {
     // Calculate the jupiter' position based on its angle from the Sun
     const angle = 20 + clockRef.current.getElapsedTime() * 0.1;
@@ -41,6 +43,7 @@ const Jupiter = React.memo(() => {
     jupiterRef.current.rotation.y += 0.002;
   }, []);
 
+  // Check for collisions used in useFrame and triggers game over state
   const collisionCheck = useCallback(() => {
     const distance = planePosition.distanceTo(jupiterRef.current.position);
 

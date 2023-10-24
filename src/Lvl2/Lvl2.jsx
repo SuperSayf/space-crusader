@@ -6,13 +6,9 @@ import {
   Html,
   useProgress,
 } from "@react-three/drei";
-import { EffectComposer, HueSaturation } from "@react-three/postprocessing";
-import { BlendFunction } from "postprocessing";
 import { SphereEnv } from "../SphereEnv";
 import { MiniMap } from "./MiniMap";
 import { Targets } from "./TargetsLvl2";
-import { MotionBlur } from "../MotionBlur";
-import { Asteroid } from "../Lvl1/Asteroid";
 import { AnimatedSpaceship } from "./Lvl2SpaceShip";
 import SolarSystem from "../solarSystem/SolarSystem";
 import soundEffect from "/assets/audio/background.mp3"; // Replace with the path to your background music file
@@ -35,9 +31,12 @@ import { extGameOverStargate } from "./Stargate";
 import { useFrame } from "@react-three/fiber";
 import { ShipExplosion } from "../shipExplosion";
 import { displayGamePause, hideGamePause } from "../Completion"; // For Game Pause
-export let externalShowSubtitles = false;
 
+
+export let externalShowSubtitles = false;
 export let masterGameOverLvl2 = false;
+
+// Game pause styling
 let escKeytoggle = false;
 const loadingBarContainerStyle = {
   position: "fixed",
@@ -62,6 +61,7 @@ const textStyle = {
   textAlign: "center", // Center the text horizontally
 };
 
+// Custom loader implementation
 function Loader() {
   const { active, progress, errors, item, loaded, total } = useProgress();
 
@@ -130,6 +130,7 @@ function useEscKeyPress() {
   return isEscKeyPressed;
 }
 
+// Encapsulates OOP concepts for lvl2
 function App() {
   // Use state to set the external game over state
   const [gameOver, setGameOver] = useState(false);
