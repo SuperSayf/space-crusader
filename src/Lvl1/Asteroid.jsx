@@ -7,6 +7,7 @@ import { displayGameOver } from "../Completion"; // Ensure you are importing the
 import { timeAliveExternal } from "./Lvl1Spaceship";
 import { collectedObjs } from "./Targets";
 
+// Define a function to generate a random point within a specified scale
 function randomPoint(scale) {
   return new Vector3(
     Math.random() * 2 - 1,
@@ -15,13 +16,17 @@ function randomPoint(scale) {
   ).multiply(scale || new Vector3(1, 1, 1));
 }
 
+// Define a variable to keep track of the game over state for asteroids
 export let externalGameOverAsteroid = false;
 
+// Define constants for asteroid size, initial spawn depth, and maximum asteroids
 const TARGET_RAD = 0.125 * 2;
 const SPAWN_DEPTH = -10;
 const MAX_ASTEROIDS = 15;
 
+// Define the Asteroid component
 export function Asteroid() {
+  // Initialize state for asteroid targets
   const [targets, setTargets] = useState(() => {
     const arr = [];
     for (let i = 0; i < MAX_ASTEROIDS; i++) {
@@ -37,11 +42,13 @@ export function Asteroid() {
     return arr;
   });
 
+  // Initialize state for game over, time alive, and load asteroid texture
   const [gameOver, setGameOver] = useState(false);
   const [timeAlive, setTimeAlive] = useState(0);
-
   const textureLoader = new TextureLoader();
   const asteroidTexture = textureLoader.load("assets/textures/asteroid.jpg");
+
+  // Calculate asteroid geometry using useMemo
   const geometry = useMemo(() => {
     let geo;
 
@@ -62,6 +69,7 @@ export function Asteroid() {
     return geo;
   }, [targets]);
 
+  // Function to calculate the player's score
   const scoreCalculator = () => {
     let TotalScore = 0;
     let timeScore = (1 / timeAliveExternal) * 50;
@@ -72,6 +80,7 @@ export function Asteroid() {
     return Math.round(TotalScore);
   };
 
+  // Function to handle the game end
   const handleGameEnd = () => {
     if (!gameOver) {
       const leaderboardData = [
@@ -86,8 +95,12 @@ export function Asteroid() {
     }
   };
 
+  // Use the useFrame hook for animation and game logic
   useFrame(() => {
+    // Update the time alive
     setTimeAlive(timeAliveExternal);
+    
+    // Update asteroid positions and check for collisions with the player's plane
     const updatedTargets = targets.map((target) => {
       target.center.y -= 0.01;
       if (target.center.y < SPAWN_DEPTH) {
@@ -107,7 +120,10 @@ export function Asteroid() {
       return target;
     });
 
+    // Filter out the asteroids that were hit
     const newTargets = updatedTargets.filter((target) => !target.hit);
+
+    // Add new asteroids if there are fewer than the maximum allowed
     if (newTargets.length < MAX_ASTEROIDS) {
       newTargets.push({
         center: randomPoint(new Vector3(4, 1, 4)).add(new Vector3(0, 5, 0)),
@@ -118,6 +134,7 @@ export function Asteroid() {
     setTargets(newTargets);
   });
 
+  // Return the asteroid mesh with its material
   return (
     <mesh geometry={geometry} castShadow receiveShadow>
       <meshStandardMaterial

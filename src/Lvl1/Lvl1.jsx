@@ -4,12 +4,9 @@ import {
   Environment,
   OrbitControls,
 } from "@react-three/drei";
-import { EffectComposer, HueSaturation } from "@react-three/postprocessing";
-import { BlendFunction } from "postprocessing";
 import { SphereEnv } from "../SphereEnv";
 import { MiniMap } from "./MiniMap";
 import { Targets } from "./Targets";
-import { MotionBlur } from "../MotionBlur";
 import { Asteroid } from "./Asteroid";
 import { AnimatedSpaceship, planePosition } from "./Lvl1Spaceship";
 import { ShipExplosion } from "../shipExplosion";

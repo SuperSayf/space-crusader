@@ -6,10 +6,13 @@ import { displayLevelCompletion } from "../Completion";
 import { Tesseract } from "./tesseract";
 import { timeAliveExternal } from "./Lvl1Spaceship";
 
+// Define the radius of the targets
 const TARGET_RAD = 0.5;
 
+// Create a variable to track the game over state for the Targets component
 export let externalGameOverTargets = false;
 
+// Function to generate a random point within a circle
 function randomPointInCircle(radius, y) {
   const angle = Math.random() * Math.PI * 2;
   const x = Math.cos(angle) * radius;
@@ -17,11 +20,15 @@ function randomPointInCircle(radius, y) {
   return new Vector3(x, y, z);
 }
 
+// Define the radius and amount of crates
 const CRATE_RADIUS = 4;
 const CRATE_AMOUNT = 8;
-export const NUM_TARGETS = 8; // Number of targets
-export var collectedObjs = 0; // Number of collected targets
 
+// Define the total number of targets and the number of collected targets
+export const NUM_TARGETS = 8;
+export var collectedObjs = 0;
+
+// Define the Targets component
 export function Targets() {
   const [gameOver, setGameOver] = useState(false);
   const [timeAlive, setTimeAlive] = useState(0);
@@ -39,6 +46,7 @@ export function Targets() {
 
   const [collectedTargets, setCollectedTargets] = useState(0);
 
+  // Check for game completion when all targets are collected
   useEffect(() => {
     if (collectedTargets === CRATE_AMOUNT) {
       console.log("You win!");
@@ -48,6 +56,7 @@ export function Targets() {
     }
   }, [collectedTargets]);
 
+  // Function to calculate the player's score
   const scoreCalculator = () => {
     let TotalScore = 0;
     let timeScore = (1 / timeAliveExternal) * 50;
@@ -58,6 +67,7 @@ export function Targets() {
     return Math.round(TotalScore);
   };
 
+  // Function to handle game completion
   const handleGameCompletion = () => {
     if (!gameOver) {
       const leaderboardData = [
@@ -71,8 +81,11 @@ export function Targets() {
     }
   };
 
+  // Use the useFrame hook for animation and game logic
   useFrame(() => {
     setTimeAlive(timeAliveExternal);
+
+    // Update the state of the targets and check for collisions with the player
     const updatedTargets = targets.map((target, i) => {
       const distance = planePosition.distanceTo(target.center);
       if (distance < TARGET_RAD && !target.hit) {
