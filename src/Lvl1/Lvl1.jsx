@@ -72,25 +72,11 @@ function Loader() {
 
 // Custom hook to detect the "Esc" key press to pause
 function useEscKeyPress() {
-  const [isEscKeyPressed, setEscPKeyPressed] = useState(false);
+  // const [isEscKeyPressed, setEscPKeyPressed] = useState(false);
 
-  function downHandler({ key }) {
-    if (key.toLowerCase() === "escape") {
-      setEscPKeyPressed((prev) => !prev);
-      if(!escKeytoggle){
-        escKeytoggle = true
-        displayGamePause(1);
-      }
-      else{
-        escKeytoggle = false;
-        hideGamePause();
-      }
-    }
-  }
 
   function upHandler({ key }) {
     if (key.toLowerCase() === "escape") {
-      setEscPKeyPressed((prev) => prev);
       if(!escKeytoggle){
         escKeytoggle = true
         displayGamePause(1);
@@ -113,7 +99,7 @@ function useEscKeyPress() {
   }, []);
 
 
-  return isEscKeyPressed;
+  return ;
 }
 
 function App() {
@@ -124,7 +110,7 @@ function App() {
   const [planePos, setPlanePos] = useState(planePosition);
 
   // Detect the "ESC" key press
-  const isEscKeyPressed = useEscKeyPress();
+  useEscKeyPress();
 
   // Use frame to update the game over state
   useFrame(() => {
