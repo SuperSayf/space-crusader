@@ -2,17 +2,22 @@ import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { OrthographicCamera } from "@react-three/drei";
 
+// Define the MiniMap component
 const MiniMap = () => {
+  // Create a reference to the MiniMap camera
   const miniMapCameraRef = useRef();
 
+  // Define the frustum size and aspect ratio
   const frustumSize = 500;
   const aspect = window.innerWidth / window.innerHeight;
 
-  const miniMapLocationLeftPixels =
-    window.innerWidth - 8 - window.innerWidth * 0.2;
+  // Define the position of the MiniMap in pixels
+  const miniMapLocationLeftPixels = window.innerWidth - 8 - window.innerWidth * 0.2;
   const miniMapLocationBottomPixels = 8;
 
+  // Use the useFrame hook for rendering the MiniMap
   useFrame(({ gl, scene, camera }) => {
+    // Clear the full screen for the main camera view
     gl.autoClear = true;
     gl.setViewport(0, 0, window.innerWidth, window.innerHeight);
     gl.setScissor(0, 0, window.innerWidth, window.innerHeight);
@@ -21,7 +26,7 @@ const MiniMap = () => {
     gl.autoClear = false;
     gl.clearDepth();
 
-    // render mini camera
+    // Render the MiniMap camera view
     gl.setViewport(
       miniMapLocationLeftPixels,
       miniMapLocationBottomPixels,
@@ -36,7 +41,7 @@ const MiniMap = () => {
     );
     gl.setScissorTest(true);
 
-    // Update MiniMap camera position
+    // Update MiniMap camera position to match the main camera
     miniMapCameraRef.current.position.x = camera.position.x;
     miniMapCameraRef.current.position.y = camera.position.y;
     miniMapCameraRef.current.position.z = 100; // Adjust the Z position as needed
@@ -47,6 +52,7 @@ const MiniMap = () => {
     gl.render(scene, miniMapCameraRef.current);
   }, 1);
 
+  // Return the OrthographicCamera for the MiniMap
   return (
     <OrthographicCamera
       ref={miniMapCameraRef}
@@ -64,4 +70,5 @@ const MiniMap = () => {
   );
 };
 
+// Export the MiniMap component
 export { MiniMap };
