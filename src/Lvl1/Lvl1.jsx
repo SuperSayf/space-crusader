@@ -70,17 +70,16 @@ function Loader() {
 }
 
 
-// Custom hook to detect the "Esc" key press to pause
+// Custom hook to detect the "Esc" key press to pause or hide pause
 function useEscKeyPress() {
-  // const [isEscKeyPressed, setEscPKeyPressed] = useState(false);
-
-
   function upHandler({ key }) {
     if (key.toLowerCase() === "escape") {
+      //esc not pressed
       if(!escKeytoggle){
         escKeytoggle = true
-        displayGamePause(1);
+        displayGamePause(1); //Pass in current level parameter
       }
+      //esc pressed
       else{
         escKeytoggle = false;
         hideGamePause();
@@ -89,11 +88,9 @@ function useEscKeyPress() {
   }
 
   useEffect(() => {
-    // window.addEventListener("keydown", downHandler);
     window.addEventListener("keyup", upHandler);
 
     return () => {
-      // window.removeEventListener("keydown", downHandler);
       window.removeEventListener("keyup", upHandler);
     };
   }, []);

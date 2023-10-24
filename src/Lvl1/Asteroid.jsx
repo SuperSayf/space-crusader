@@ -101,7 +101,7 @@ export function Asteroid() {
     // Update the time alive
     setTimeAlive(timeAliveExternal);
     
-    // Update asteroid positions and check for collisions with the player's plane
+    // Update asteroid positions and check for collisions with the player's plane and Sun
     const updatedTargets = targets.map((target) => {
       target.center.y -= 0.01;
       if (target.center.y < SPAWN_DEPTH) {
@@ -112,11 +112,13 @@ export function Asteroid() {
         );
         target.hit = false;
       }
+      //Sun Collision
       const distanceToSun = sphereCenter.distanceTo(target.center);
       const sumOfRadii = sphereRadius + TARGET_RAD;
       if (distanceToSun <= sumOfRadii) {
         target.hit = true; // Mark the asteroid as hit
       }
+      //Plane Collision
       const distance = planePosition.distanceTo(target.center);
 
       if (distance < TARGET_RAD) {

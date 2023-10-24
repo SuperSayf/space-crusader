@@ -68,6 +68,7 @@ async function addScoreToLeaderboard(level, inputName, score) {
 
 // Flag to track if a popup is currently displayed
 let isPopupDisplayed = false;
+// Flag to track if Esc  is currently pressed
 let isEscDisplayed = false
 
 //Game Over
@@ -537,7 +538,7 @@ export function displayGamePause(level) {
     isEscDisplayed = true
     const gamePauseScreen = document.createElement("div");
     gamePauseScreen.classList.add("game-screen");
-    gamePauseScreen.id = "gameScreen";
+    gamePauseScreen.id = "gamePauseScreen";
 
     // Create the h2 element
     const h2 = document.createElement("h2");
@@ -641,9 +642,9 @@ export function displayGamePause(level) {
   }
 }
 
-// Add a function to hide the pause menu when needed
+// function to hide the pause menu 
 export function hideGamePause() {
-  const gameScreen = document.getElementById("gameScreen");
+  const gameScreen = document.getElementById("gamePauseScreen");
   if (gameScreen) {
     document.body.removeChild(gameScreen);
     isEscDisplayed = false;
