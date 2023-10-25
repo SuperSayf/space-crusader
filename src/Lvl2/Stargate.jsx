@@ -17,49 +17,53 @@ export let extGameOverStargate = false;
 
 export function Stargate(props) {
   const group = useRef();
-  const { nodes, materials, animations} = useGLTF("assets/models/stargate.glb");
+  const { nodes, materials, animations } = useGLTF(
+    "assets/models/stargate.glb"
+  );
   const [gameWon, setGameWon] = useState(false); //  state to track if game has been won
   const { actions, mixer } = useAnimations(animations, group);
 
   useEffect(() => {
-    actions["Take 001"].play(); 
+    actions["Take 001"].play();
   }, [mixer]);
 
   // Scoring Algorithm logic
   const scoreCalculator = () => {
     let score = 0;
     if (timeAliveExternal <= 75) {
-      score =   200 * (1 / timeAliveExternal) + (5 * collectedObjs); 
+      score = 200 * (1 / timeAliveExternal) + 5 * collectedObjs;
     } else if (timeAliveExternal > 75 && timeAliveExternal <= 150) {
-      score =  500 * (1 / timeAliveExternal) + (10 * collectedObjs); 
+      score = 500 * (1 / timeAliveExternal) + 10 * collectedObjs;
     } else if (timeAliveExternal > 150) {
-      score =  500 * (1 / timeAliveExternal) + (5 * collectedObjs);
+      score = 500 * (1 / timeAliveExternal) + 5 * collectedObjs;
     }
     return Math.round(score);
   };
 
   useFrame(() => {
     // Check level completion and implement scoring logic
-      const handleGameCompletion = () => {
-        if (!gameWon) {
-          const leaderboardData = [{ name: "Player", timeLasted: scoreCalculator() }];
-          setGameWon(true);
-          const message = `Congrats! You've saved ${collectedObjs} astronauts!`;
-          setTimeout(() => {
-            displayLevelCompletion(1, leaderboardData, message);
-          }, 1000);
-        }
-      };
-
-      // Target Collision Updated Logic
-      const distance = planePosition.distanceTo(group.current.position);
-
-      // if the ship hits the target/ring
-      if (distance <= 0.4) {
-        console.log("u win");
-        extGameOverStargate = true;
-        handleGameCompletion();
+    const handleGameCompletion = () => {
+      if (!gameWon) {
+        const leaderboardData = [
+          { name: "Player", timeLasted: scoreCalculator() },
+        ];
+        setGameWon(true);
+        const message = `Congrats! You've saved ${collectedObjs} astronauts!`;
+        setTimeout(() => {
+          displayLevelCompletion(2, leaderboardData, message);
+        }, 1000);
       }
+    };
+
+    // Target Collision Updated Logic
+    const distance = planePosition.distanceTo(group.current.position);
+
+    // if the ship hits the target/ring
+    if (distance <= 0.4) {
+      console.log("u win");
+      extGameOverStargate = true;
+      handleGameCompletion();
+    }
   });
 
   return (
