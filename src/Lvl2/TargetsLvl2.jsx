@@ -13,7 +13,7 @@ const TARGET_RAD = 0.125; // Radius of the target
 const offset = 5;//adjusts the starting point of the targets
 const ChangeY = 1;//adjusts the height of the targets
 const ChangeZ = 0;//adjusts the depth of the targets
-export var collectedObjs = 0; // Number of collected targets
+export let collectedObjs = 0; // Number of collected targets
 
 export function Targets() {
   const [progress, setProgress] = useState(100); // New state for the progress bar

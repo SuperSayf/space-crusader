@@ -86,6 +86,7 @@ export function AnimatedSpaceship(props) {
   const groupRef = useRef();
 
   const [timeAlive, setTimeAlive] = useState(0);
+  const [InternalcollectedObjs, setcollectedObjs] = useState(20);
 
   // Detect the shift key press
   const isShiftPressed = useKeyPress("Shift");
@@ -202,6 +203,8 @@ export function AnimatedSpaceship(props) {
     // helixMeshRef.current.rotation.z -= 1.0;
 
     timeAliveExternal = timeAlive;
+    
+    setcollectedObjs(collectedObjs);
 
   });
 
@@ -221,8 +224,8 @@ export function AnimatedSpaceship(props) {
          <Html position={[-7.5, 1, 7]}>
            <div style={{ width: 100, height: 100 }}>
              <CircularProgressbar
-               value={collectedObjs/NUM_TARGETS * 100}
-               text={`${collectedObjs}/${NUM_TARGETS}`}
+              value={InternalcollectedObjs/NUM_TARGETS * 100}
+              text={`${InternalcollectedObjs}/${NUM_TARGETS}`}
                styles={buildStyles({
                  // Rotation of path and trail, in number of turns (0-1)
                  rotation: 0.25,
