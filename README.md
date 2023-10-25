@@ -5,7 +5,8 @@ This readme.md file outlines the evaluation criteria for a 3D game project. Thes
 
 **Viewing (10%)**
 
-Loading 3D Scene: Does the game successfully initialize and load a 3D scene? Affirmative.
+Loading 3D Scene: Does the game successfully initialize and load a 3D scene?
+- Affirmative.
 
 Scene Animation: Is dynamic animation present within the 3D environment? 
 - Indeed, animation is evident through the movement of asteroids and the rotation of planets around the sun.
@@ -84,7 +85,7 @@ Version Control: Is the code version-controlled using Git or a comparable system
 Object-Oriented Programming: Is Object-Oriented Programming appropriately employed where relevant?
 //TODO: Add more detail here
 
-Design Style (25%)
+**Design Style (25%)**
 
 Hierarchical Modeling: Assess the quality of hierarchical modeling and the rationale behind the design approach.
 - Hierarchical modeling can be seen when add effects to the space ship such a flame is created which is added to the space ship.
