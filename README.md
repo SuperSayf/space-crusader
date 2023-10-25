@@ -1,68 +1,136 @@
-# space-crusader
-Structure of the Project
-
-Root Directory
-- node_modules: Contains all the dependencies and libraries required for the project.
-- public/assets: Stores all the static assets required for the game such ad images, modules and audio    files.
-- .eslintrc.js: Configuration file for ESLint, ensuring code quality.
-- .gitignore: Specifies which files or directories Git should ignore.
-- index.html: Main HTML entry point for the game.
-- package-lock.json & package.json: Provide information about the project dependencies and scripts.
-- vite.config.js: Configuration file for Vite, a build tool.
-- credits.html: Contains the HTML for the game's credits screen.
-- lvl1.html: Contains the HTML for level 1.
-- lvl2.html: Contains the HTML for level 2.
-- lvl3.html: Contains the HTML for level 3.
-
-Src Directory
-Level Directories Overview
-Lvl1 Directory
-•	Asteroid.jsx: Component representing asteroids in level 1.
-•	Lvl1.jsx: Main file containing the structure and logic specific to level 1 gameplay.
-•	Lvl1Spaceship.jsx: Component related to the spaceship's features or behaviour in level 1.
-•	MiniMap.jsx: Mini-map representation tailored for level 1.
-•	tesseract.jsx: A model representing a tesseract in level 1.
-•	Sun.jsx: Component representing the sun in level 1.
-•	Targets.jsx: Contains targets that players need to collect in level 1.
-
-Lvl2 Directory
-•	astronaut.jsx: A model depicting astronauts in level 2.
-•	blackhole.jsx: Represents the blackhole model in level 2.
-•	bridge.jsx: Model for a bridge used in level 2.
-•	Lvl2.jsx: Main file for level 2, containing specific structure and gameplay logic.
-•	Lvl2Spaceship.jsx: Spaceship component tailored for level 2 features or behavior.
-•	MiniMap.jsx: Mini-map representation for level 2.
-•	Stargate.jsx: A model used as a finish line in level 2.
-•	TargetsLvl2.jsx: Targets specific to level 2 gameplay.
-
-Lvl3 Directory
-•	Asteroid.jsx: Asteroid component for level 3.
-•	DeathStar.jsx: A model from Star Wars, representing the iconic Death Star.
-•	FuelShield.jsx: Model related to fuel or protective shields in level 3.
-•	Lvl3.jsx: Main structure and logic file for level 3 gameplay.
-•	Lvl3Spaceship.jsx: Spaceship component designed for level 3 interactions or features.
-•	MiniMap.jsx: Level 3's mini-map representation.
-•	Sun.jsx: Component representing the sun in level 3.
-•	TargetsLvl3.jsx: Specific targets players need to engage with in level 3.
-
-- solarSystem: Contains components or assets related to the representation of the solar system.
-- startScreen: Contains files relevant css files for the game’s main menu.
-- Completion.js: Handles logic or view related to the completion of certain game tasks or levels.
-- controls.js: Contains the game's control logic, capturing and processing user inputs.
-- firebase.js: Contains the logic for connecting to Firebase to link the leaderboard to the database.
-- flame.jsx: Represents the visual or logic for flame effects in the game.
-- index.css: Main CSS file for styling main menu.
-- LevelComplete.js: Manages logic or displays related to the completion of a game level.
-- main.jsx: The main entry point for the game and contains the html for setting up the main menu.
-- mainlvl1.jsx: Contains the main structure and loads level 1 gameplay.
-- mainlvl2.jsx: Contains the main structure and loads level 2 gameplay.
-- mainlvl3.jsx: Contains the main structure and loads level 3 gameplay.
-- MiniMap.jsx: Represents the game's mini-map feature.
-- MotionBlur.jsx: Contains effect and logic for the boost for the ship.
-- shipExplosion.jsx: Handles the visual and logic for spaceship explosion effects in the game.
-- spaceStation.jsx: Contains components and logic related to the space station's representation in the game.
-- SphereEnv.jsx: Manages spherical environmental elements or effects in the game.
-- useExplode.jsx: A utility or hook to handle explosion effects or interactions in the game.
+Game Evaluation Criteria
+========================
+This readme.md file outlines the evaluation criteria for a 3D game project. These criteria are used to assess different aspects of the game, including viewing, control, playability, 3D effects, coding style, design style, polish, and innovation. Each criterion is associated with a percentage weight that contributes to the final grade.
 
 
-This structure provides an organized overview of the project's files and directories. This format allows team members or contributors to easily navigate and understand the project's structure.
+**Viewing (10%)**
+
+Loading 3D Scene: Does the game successfully initialize and load a 3D scene?
+- Affirmative.
+
+Scene Animation: Is dynamic animation present within the 3D environment? 
+- Indeed, animation is evident through the movement of asteroids and the rotation of planets around the sun.
+
+User View Control: Can players manipulate their perspective in-game? 
+- Absolutely, users have the option to switch between first-person and third-person views.
+
+Camera Movement: Is there any capability for camera movement within the game world? 
+- Yes, but camera movement is restricted to the minimap, enabling users to navigate the world indirectly.
+
+Animation Glitches: Are there any observable animation irregularities? 
+- Notably, there are no noticeable glitches, though there might be a minor issue with the asteroids' animation.
+
+3D Avatars: Are 3D avatars featured for main characters or other elements in the game? 
+- Certainly, every element in the game, from spaceships to planets and even the sun, is represented in 3D.
+
+Moving Objects: Do objects move in conjunction with the world, and are there items that follow the camera's movement?
+- Objects such as planets and asteroids move with the world, while items like the collection counter and time counter are linked to the spaceship and move with the camera.
+
+Multiple Views: Does the game offer various viewing perspectives, such as first-person, third-person, or a minimap?
+- Users can seamlessly switch between first-person and third-person views.
+
+Picture-in-Picture: Is there a picture-in-picture feature?
+- Yes, the bottom-right minimap provides this functionality.
+
+**Control (10%)**
+
+Keyboard and Mouse Controls: Are keyboard and mouse controls integrated, and do they offer smooth gameplay? 
+- Players navigate the spaceship using WASD controls, which provide a seamless experience.
+
+Control Logic: Are the controls intuitively designed and aligned with the game's mechanics?
+//TODO: Add more detail here
+
+Effective Control: Do the controls effectively govern scene manipulation, viewpoint adjustments, and avatar interactions as required?
+//TODO: Add more detail here
+
+**Playability (10%)**
+
+Objective: Does the game entail clear objectives, such as item collection or specific tasks? 
+- Each level features objectives communicated by the commander.
+
+Success and Failure: Can players achieve success or fail to meet the game's objectives? 
+- Certainly, success or failure prompts a pop-up notification.
+
+Competitive and Fun: Is the game competitive and enjoyable?
+- There is a leaderboard on each level that shows how other players did in that level. The game is fun to play, and the leaderboard adds a competitive element.
+
+3D Gameplay: Does the game effectively utilize all three dimensions, with controls appropriately responsive?
+//TODO: Add more detail here
+
+Physics Model: Does the game incorporate a functioning physics model, including collision and explosion mechanics?
+- Collisions with non-objective items result in spaceship explosions and accompanying animations.
+
+**3D Effects (15%)**
+
+Graphical and 3D Effects: Does the game showcase various graphical and 3D effects such as anti-aliasing, depth tests, color utilization, multiple light sources, shading techniques, curves, surfaces, skyboxes, shadows, reflections, and refractions?
+//TODO: Add more detail here
+
+Creative Use of Effects: Are these effects employed creatively and in an aesthetically pleasing manner?
+//TODO: Add more detail here
+
+**Coding Style (10%)**
+
+Best Coding Practices: Is the code adhering to best coding practices, including meaningful variable, function, object, and file naming?
+//TODO: Add more detail here
+
+Indentation and Comments: Is the code correctly indented and sufficiently documented?
+//TODO: Add more detail here
+
+Documentation: Is the code well-documented, offering insight into its functionality?
+//TODO: Add more detail here
+
+Version Control: Is the code version-controlled using Git or a comparable system?
+//TODO: Add more detail here
+
+Object-Oriented Programming: Is Object-Oriented Programming appropriately employed where relevant?
+//TODO: Add more detail here
+
+**Design Style (25%)**
+
+Hierarchical Modeling: Assess the quality of hierarchical modeling and the rationale behind the design approach.
+- Hierarchical modeling can be seen when add effects to the space ship such a flame is created which is added to the space ship.
+
+Modeling Explanation: Elaborate on how the world, objects, and sub-objects were modeled and the reasoning behind these choices.
+//TODO: Add more detail here
+
+Advantages and Disadvantages: Discuss the strengths and weaknesses of the chosen design approach.
+
+**Polish (10%)**
+
+Game Quality: Evaluate the overall aesthetics and user experience.
+//TODO: Add more detail here
+
+Restart Feature: Can the game be restarted without needing a page refresh?
+- Using the in-game pause menu, users can restart the game without refreshing the page.
+
+Performance: Does the game exhibit lag or performance issues?
+- The game does not lag nor does it have any performance issues.
+
+Dashboard/Menu: Is there an in-game dashboard or menu for user convenience?
+- The escape button is used to pause the game and the user can restart the game from the pause menu.
+
+Color Scheme: Is there a consistent and visually pleasing color scheme throughout the game?
+//TODO: Add more detail here
+
+Extra Features: Are there supplementary features or enhancements that elevate the gameplay?
+//TODO: Add more detail here
+
+**Innovation (10%)**
+
+New Ideas: Evaluate the presence of innovative concepts within the game.
+//TODO: Add more detail here
+
+Unique Elements: Assess whether the game explores novel ideas, employs custom models and textures, incorporates unconventional effects or techniques, introduces networking or multiplayer elements, and utilizes sound, efficiency, speed, or other distinctive aspects.
+//TODO: Add more detail here
+
+Memorability: Determine if the game possesses unique qualities that make it memorable and distinguish it from others.
+//TODO: Add more detail here
+
+Controller Compatibility: Consider whether controller compatibility has been integrated.
+- Controller functionality has been implemented.
+
+Blender Usage: Take into account the utilization of Blender for modeling and texturing.
+- Each and every model in the game has been created using Blender.
+
+Explosions: Evaluate the implementation of explosive elements within the game.
+- Explosions are implemented when the spaceship collides with an asteroid and when the spaceship collides with a   non-objective item such as black holes, planets and the sun.
