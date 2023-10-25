@@ -6,7 +6,7 @@ Source: https://sketchfab.com/3d-models/stargate-5ddae865059443b988f3fa51b8c1531
 Title: Stargate
 */
 
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { planePosition, timeAliveExternal } from "./Lvl2SpaceShip";
@@ -17,8 +17,13 @@ export let extGameOverStargate = false;
 
 export function Stargate(props) {
   const group = useRef();
-  const { nodes, materials} = useGLTF("assets/models/stargate.glb");
+  const { nodes, materials, animations} = useGLTF("assets/models/stargate.glb");
   const [gameWon, setGameWon] = useState(false); //  state to track if game has been won
+  const { actions, mixer } = useAnimations(animations, group);
+
+  useEffect(() => {
+    actions["Take 001"].play(); 
+  }, [mixer]);
 
   // Scoring Algorithm logic
   const scoreCalculator = () => {
