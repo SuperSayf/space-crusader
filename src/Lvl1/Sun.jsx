@@ -50,7 +50,7 @@ export function Sun(props) {
 
       // Display the game over screen after a delay
       setTimeout(() => {
-        displayGameOver(3, leaderboardData, message);
+        displayGameOver(1, leaderboardData, message);
       }, 1000);
     }
   };
