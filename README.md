@@ -12,10 +12,10 @@ Scene Animation: Is dynamic animation present within the 3D environment?
 - Indeed, animation is evident through the movement of asteroids and the rotation of planets around the sun.
 
 User View Control: Can players manipulate their perspective in-game? 
-- Absolutely, users have the option to switch between first-person and third-person views.
+- Absolutely, users have the option to switch between first-person and third-person views, using the p key we can change the views.
 
 Camera Movement: Is there any capability for camera movement within the game world? 
-- Yes, but camera movement is restricted to the minimap, enabling users to navigate the world indirectly.
+- Yes, we have one camera attached to a moving spaceship and another camera used as a minimap of the scene. 
 
 Animation Glitches: Are there any observable animation irregularities? 
 - Notably, there are no noticeable glitches, though there might be a minor issue with the asteroids' animation.
@@ -38,10 +38,10 @@ Keyboard and Mouse Controls: Are keyboard and mouse controls integrated, and do 
 - Players navigate the spaceship using WASD controls, which provide a seamless experience.
 
 Control Logic: Are the controls intuitively designed and aligned with the game's mechanics?
-//TODO: Add more detail here
+- Yes the controls are intuitively designed and aligned with the game's mechanics as it is a flying game where you use WASD to move around, shift to boost and p to change views
 
 Effective Control: Do the controls effectively govern scene manipulation, viewpoint adjustments, and avatar interactions as required?
-//TODO: Add more detail here
+- Yes, the spaceship can interact and move about the scene using the keys and the world interacts/changes based on the spaceships position
 
 **Playability (10%)**
 
@@ -55,7 +55,7 @@ Competitive and Fun: Is the game competitive and enjoyable?
 - There is a leaderboard on each level that shows how other players did in that level. The game is fun to play, and the leaderboard adds a competitive element.
 
 3D Gameplay: Does the game effectively utilize all three dimensions, with controls appropriately responsive?
-//TODO: Add more detail here
+- Yes it does, you can move, up down left and right in terms of the planets and asteriods they do move in three dimensions as they are moving around and rotating. 
 
 Physics Model: Does the game incorporate a functioning physics model, including collision and explosion mechanics?
 - Collisions with non-objective items result in spaceship explosions and accompanying animations.
@@ -63,17 +63,18 @@ Physics Model: Does the game incorporate a functioning physics model, including 
 **3D Effects (15%)**
 
 Graphical and 3D Effects: Does the game showcase various graphical and 3D effects such as anti-aliasing, depth tests, color utilization, multiple light sources, shading techniques, curves, surfaces, skyboxes, shadows, reflections, and refractions?
-//TODO: Add more detail here
+- Yes it does, the game has depth tests as the objects appear smaller when far and bigger when closer. The astronauts have a shade of blue overlay on them In terms of shadows the objects have different shades based if the light source is blocked or not. The light bounces off the spaceship to show reflection. 
 
 Creative Use of Effects: Are these effects employed creatively and in an aesthetically pleasing manner?
-//TODO: Add more detail here
+- Yes the game looks complete and aesthetically pleasing with no flaws in the overrall design/view of the game
 
 **Coding Style (10%)**
 
 Best Coding Practices: Is the code adhering to best coding practices, including meaningful variable, function, object, and file naming?
-//TODO: Add more detail here
+Yes, all code is in functions which allow reuse. We have meaningful names for the varaibles and functions and all them are in use effectivly. The file names are correclty named with its purpose or reason as to what they do. 
 
 Indentation and Comments: Is the code correctly indented and sufficiently documented?
+- Yes the code is formatted and Indented correctly 
 //TODO: Add more detail here
 
 Documentation: Is the code well-documented, offering insight into its functionality?
