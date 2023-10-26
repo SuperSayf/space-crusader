@@ -1,6 +1,40 @@
+**</Syntax Sorcerers>**
+========================
+This readme.md file outlines the team details and our contributions the evaluation criteria for a 3D game project.
+
+
+Team Details and Contributions
+==============================
+
+Name, Surname and Student Number:               Contribution Split:
+Mu'aaz Bassa (2435368)                          16.67%
+Hamdullah Dadabhoy (2441030)                    16.67%
+Sayfullah Jumoorty (2430888)                    16.67%
+Muhammed Muaaz Dawood (2425639)                 16.67%
+Altaaf Ally (2424551)                           16.67%
+Mujammil Sakhidas (2436109)                     16.67%
+
+We split the Level up and 2 people were assigned per level for the main split
+**Level 1**
+Mu'aaz + Mujammil
+
+**Level 2**
+Hamdullah + Altaaf
+
+**Level 3**
+Sayfullah + Muhammed
+
+In terms of other splits we did it on a case by case baisis for exmaple here is some memorable work
+- MiniMap: Mu'aaz
+- Ship Explosion and Boost: Sayfullah
+- In Game Menu: Mujammil
+- Main Menu: Altaaf
+- Asteriods: Muhammed 
+- 1st Person View of Spaceship: Hamdullah
+
 Game Evaluation Criteria
 ========================
-This readme.md file outlines the evaluation criteria for a 3D game project. These criteria are used to assess different aspects of the game, including viewing, control, playability, 3D effects, coding style, design style, polish, and innovation. Each criterion is associated with a percentage weight that contributes to the final grade.
+These criteria are used to assess different aspects of the game, including viewing, control, playability, 3D effects, coding style, design style, polish, and innovation. Each criterion is associated with a percentage weight that contributes to the final grade.
 
 
 **Viewing (10%)**
@@ -74,24 +108,26 @@ Best Coding Practices: Is the code adhering to best coding practices, including 
 Yes, all code is in functions which allow reuse. We have meaningful names for the varaibles and functions and all them are in use effectivly. The file names are correclty named with its purpose or reason as to what they do. 
 
 Indentation and Comments: Is the code correctly indented and sufficiently documented?
-- Yes the code is formatted and Indented correctly 
-//TODO: Add more detail here
+- Yes, the code is formatted and Indented correctly we also have enough comments throughout the files.
 
 Documentation: Is the code well-documented, offering insight into its functionality?
-//TODO: Add more detail here
+- Yes, we have enough comments to understand what each part of our program is doing 
 
 Version Control: Is the code version-controlled using Git or a comparable system?
-//TODO: Add more detail here
+Yes, we have used Git/Github to do version-control. It helped us track different versions of our code and collaborate with each otehr. Since we were working on the project for a while, it helped us keep track of which chnages were made, by whom and when those changes were made.
 
 Object-Oriented Programming: Is Object-Oriented Programming appropriately employed where relevant?
-//TODO: Add more detail here
+- Yes, we have employed OOP into our game, we have different files
 
 **Design Style (25%)**
 
 Hierarchical Modeling: Assess the quality of hierarchical modeling and the rationale behind the design approach.
-- Hierarchical modeling can be seen when add effects to the space ship such a flame is created which is added to the space ship.
+- Hierarchical modeling can be seen when add effects to the space ship such a flame is created which is added to the space ship. All the planets are also Hierarchical modeling as each planet in Level 2 rotates around the Sun and some planets like Earth has a moon which rotatesa round the earth.
 
 Modeling Explanation: Elaborate on how the world, objects, and sub-objects were modeled and the reasoning behind these choices.
+- All the objects were modeled based off the space theme of our game. 
+- Our main environment used is just a big sphere with 
+- We used a lot of free models from sketchfab.com which are licensed under C-BY-4.0 and all credit for the used models are on our Credits page. 
 //TODO: Add more detail here
 
 Advantages and Disadvantages: Discuss the strengths and weaknesses of the chosen design approach.
@@ -99,27 +135,34 @@ Advantages and Disadvantages: Discuss the strengths and weaknesses of the chosen
 **Polish (10%)**
 
 Game Quality: Evaluate the overall aesthetics and user experience.
-//TODO: Add more detail here
+- In terms of Graphics and Visuals, all our objects and well detailed, seem realistic and are visually appealing. The style of these fit the space theme we are going for. 
+We have sound for each level as well which gives intructions to each level as well as music. 
+- The UI also has a certain theme and is easy to use. We have a storyline in a sense as well.
+- The game is overall visually appealing and sticks to a theme besides being easy to use and play.
 
 Restart Feature: Can the game be restarted without needing a page refresh?
-- Using the in-game pause menu, users can restart the game without refreshing the page.
+- Using the in-game pause menu, users can restart the game without refreshing the page.  By clicking the "esc" key and clicking restart.The game also can be restarted when you die.
 
 Performance: Does the game exhibit lag or performance issues?
-- The game does not lag nor does it have any performance issues.
+- The game does not lag nor does it have any performance issues. 
 
 Dashboard/Menu: Is there an in-game dashboard or menu for user convenience?
 - The escape button is used to pause the game and the user can restart the game from the pause menu.
 
 Color Scheme: Is there a consistent and visually pleasing color scheme throughout the game?
-//TODO: Add more detail here
+- Yes there is a specific colour scheme and theme throughout the game, it is visually pleasing as well. 
 
 Extra Features: Are there supplementary features or enhancements that elevate the gameplay?
-//TODO: Add more detail here
+- We added a social feature to the game where after every time you play you are given a score which is stored in a Firebase database and the top 5 of each level is displayed.
 
 **Innovation (10%)**
 
 New Ideas: Evaluate the presence of innovative concepts within the game.
-//TODO: Add more detail here
+- Each level has a purpose and isn't meaningless. 
+- We have a unique yet reaslitic design for all the objects.
+- You can also use a controller in the game. 
+- We added a leaderboard with the top 5 scores, and if someone decides to decrease your score they can't as if you have the same name then the higher score is taken. 
+
 
 Unique Elements: Assess whether the game explores novel ideas, employs custom models and textures, incorporates unconventional effects or techniques, introduces networking or multiplayer elements, and utilizes sound, efficiency, speed, or other distinctive aspects.
 //TODO: Add more detail here
@@ -131,7 +174,7 @@ Controller Compatibility: Consider whether controller compatibility has been int
 - Controller functionality has been implemented.
 
 Blender Usage: Take into account the utilization of Blender for modeling and texturing.
-- Each and every model in the game has been created using Blender.
+- Each and every model in the game has been created using Blender. As well as notably the Spaceship explosion when you die was done in Blender as well, Sayfullah broke the spaceship into smaller segments and made it expand out when you die.
 
 Explosions: Evaluate the implementation of explosive elements within the game.
 - Explosions are implemented when the spaceship collides with an asteroid and when the spaceship collides with a   non-objective item such as black holes, planets and the sun.
