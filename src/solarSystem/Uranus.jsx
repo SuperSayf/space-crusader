@@ -20,7 +20,7 @@ const Uranus = React.memo(() => {
   // this calculates the score when you hit uranus
   const scoreCalculator = () => {
     let score = 0;
-  
+    const penalty = 50;
     if (timeAliveExternal <= 75) {
       score = 100 * (1 / timeAliveExternal) + (50 * collectedObjs);
     } else if (timeAliveExternal > 75 && timeAliveExternal <= 150) {
@@ -28,7 +28,7 @@ const Uranus = React.memo(() => {
     } else if (timeAliveExternal > 150) {
       score = 500 * (1 / timeAliveExternal) + (50 * collectedObjs);
     }
-  
+    score -= penalty;
     return Math.round(score);
   };
   

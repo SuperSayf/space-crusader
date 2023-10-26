@@ -19,15 +19,15 @@ const Mars = React.memo(() => {
   // this calculates the score when you hit mars
   const scoreCalculator = () => {
     let score = 0;
-  
+    const penalty = 50;
     if (timeAliveExternal <= 75) {
-      score = 200 * (1 / timeAliveExternal) + (50 * collectedObjs);
+      score = 100 * (1 / timeAliveExternal) + (50 * collectedObjs);
     } else if (timeAliveExternal > 75 && timeAliveExternal <= 150) {
       score = 500 * (1 / timeAliveExternal) + (100 * collectedObjs);
     } else if (timeAliveExternal > 150) {
       score = 500 * (1 / timeAliveExternal) + (50 * collectedObjs);
     }
-  
+    score -= penalty;
     return Math.round(score);
   };
   
