@@ -4,15 +4,16 @@ This readme.md file outlines the team details and our contributions the evaluati
 
 # Team Details and Contributions
 
-Name, Surname and Student Number: Contribution Split:
-Mu'aaz Bassa (2435368) 16.67%
-Hamdullah Dadabhoy (2441030) 16.67%
-Sayfullah Jumoorty (2430888) 16.67%
-Muhammed Muaaz Dawood (2425639) 16.67%
-Altaaf Ally (2424551) 16.67%
-Mujammil Sakhidas (2436109) 16.67%
+| Name, Surname, and Student Number | Contribution Split |
+| --------------------------------- | ------------------ |
+| Mu'aaz Bassa (2435368)            | 16.67%             |
+| Hamdullah Dadabhoy (2441030)      | 16.67%             |
+| Sayfullah Jumoorty (2430888)      | 16.67%             |
+| Muhammed Muaaz Dawood (2425639)   | 16.67%             |
+| Altaaf Ally (2424551)             | 16.67%             |
+| Mujammil Sakhidas (2436109)       | 16.67%             |
 
-We split the Level up and 2 people were assigned per level for the main split
+We split the Level up and 2 people were assigned per level for the main split:
 <br>
 
 **Level 1**
