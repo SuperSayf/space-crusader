@@ -25,13 +25,13 @@ Hamdullah + Altaaf
 **Level 3**
 Sayfullah + Muhammed
 
-In terms of other splits we did it on a case by case baisis for exmaple here is some memorable work
+In terms of other splits we did it on a case by case baisis for example here is some memorable work
 
 - MiniMap: Mu'aaz
 - Ship Explosion and Boost: Sayfullah
 - In Game Menu: Mujammil
 - Main Menu: Altaaf
-- Asteriods: Muhammed
+- Asteroids: Muhammed
 - 1st Person View of Spaceship: Hamdullah
 
 # Game Evaluation Criteria
@@ -106,7 +106,7 @@ Competitive and Fun: Is the game competitive and enjoyable?
 
 3D Gameplay: Does the game effectively utilize all three dimensions, with controls appropriately responsive?
 
-- Yes it does, you can move, up down left and right in terms of the planets and asteriods they do move in three dimensions as they are moving around and rotating.
+- Yes it does, you can move, up down left and right in terms of the planets and asteroids they do move in three dimensions as they are moving around and rotating.
 
 Physics Model: Does the game incorporate a functioning physics model, including collision and explosion mechanics?
 
@@ -120,12 +120,13 @@ Graphical and 3D Effects: Does the game showcase various graphical and 3D effect
 
 Creative Use of Effects: Are these effects employed creatively and in an aesthetically pleasing manner?
 
-- Yes the game looks complete and aesthetically pleasing with no flaws in the overrall design/view of the game
+- Yes the game looks complete and aesthetically pleasing with no flaws in the overall design/view of the game
 
 **Coding Style (10%)**
 
 Best Coding Practices: Is the code adhering to best coding practices, including meaningful variable, function, object, and file naming?
-Yes, all code is in functions which allow reuse. We have meaningful names for the varaibles and functions and all them are in use effectivly. The file names are correclty named with its purpose or reason as to what they do.
+
+- Yes, all code is in functions which allow reuse. We have meaningful names for the variables and functions and all them are in use effectively. The file names are correctly named with its purpose or reason as to what they do.
 
 Indentation and Comments: Is the code correctly indented and sufficiently documented?
 
@@ -136,7 +137,8 @@ Documentation: Is the code well-documented, offering insight into its functional
 - Yes, we have enough comments to understand what each part of our program is doing
 
 Version Control: Is the code version-controlled using Git or a comparable system?
-Yes, we have used Git/Github to do version-control. It helped us track different versions of our code and collaborate with each otehr. Since we were working on the project for a while, it helped us keep track of which chnages were made, by whom and when those changes were made.
+
+- Yes, we have used Git/GitHub to do version-control. It helped us track different versions of our code and collaborate with each other. Since we were working on the project for a while, it helped us keep track of which changes were made, by whom and when those changes were made.
 
 Object-Oriented Programming: Is Object-Oriented Programming appropriately employed where relevant?
 
@@ -146,29 +148,31 @@ Object-Oriented Programming: Is Object-Oriented Programming appropriately employ
 
 Hierarchical Modeling: Assess the quality of hierarchical modeling and the rationale behind the design approach.
 
-- Hierarchical modeling can be seen when add effects to the space ship such a flame is created which is added to the space ship. All the planets are also Hierarchical modeling as each planet in Level 2 rotates around the Sun and some planets like Earth has a moon which rotatesa round the earth.
+- Hierarchical modelling can be seen when add effects to the space ship such a flame is created which is added to the space ship. All the planets are also Hierarchical modelling as each planet in Level 2 rotates around the Sun and some planets like Earth has a moon which rotates around the earth.
 
 Modeling Explanation: Elaborate on how the world, objects, and sub-objects were modeled and the reasoning behind these choices.
 
-- All the objects were modeled based off the space theme of our game.
+- All the objects were modelled based off the space theme of our game.
 - Our main environment used is just a big sphere with
 - We used a lot of free models from sketchfab.com which are licensed under C-BY-4.0 and all credit for the used models are on our Credits page.
-  //TODO: Add more detail here
 
 Advantages and Disadvantages: Discuss the strengths and weaknesses of the chosen design approach.
+
+- Advantages: Easy to insert the sun into many levels, we can use designs from sketchfab and download them and import them into our project very easily. The models and design match the theme of our game in all regards. Our theme and aesthetic is visually appealing.
+- Disadvantages: In terms of weaknesses we limited ourselves to only using models from sketchfab and used whatever was free and available. We did tweak some of them a bit to make them our own.
 
 **Polish (10%)**
 
 Game Quality: Evaluate the overall aesthetics and user experience.
 
 - In terms of Graphics and Visuals, all our objects and well detailed, seem realistic and are visually appealing. The style of these fit the space theme we are going for.
-  We have sound for each level as well which gives intructions to each level as well as music.
+  We have sound for each level as well which gives instructions to each level as well as music.
 - The UI also has a certain theme and is easy to use. We have a storyline in a sense as well.
 - The game is overall visually appealing and sticks to a theme besides being easy to use and play.
 
 Restart Feature: Can the game be restarted without needing a page refresh?
 
-- Using the in-game pause menu, users can restart the game without refreshing the page. By clicking the "esc" key and clicking restart.The game also can be restarted when you die.
+- Using the in-game pause menu, users can restart the game without refreshing the page. By clicking the "esc" key and clicking restart. The game also can be restarted when you die.
 
 Performance: Does the game exhibit lag or performance issues?
 
@@ -191,14 +195,14 @@ Extra Features: Are there supplementary features or enhancements that elevate th
 New Ideas: Evaluate the presence of innovative concepts within the game.
 
 - Each level has a purpose and isn't meaningless.
-- We have a unique yet reaslitic design for all the objects.
+- We have a unique yet realistic design for all the objects.
 - You can also use a controller in the game.
 - We added a leaderboard with the top 5 scores, and if someone decides to decrease your score they can't as if you have the same name then the higher score is taken.
 
 Unique Elements: Assess whether the game explores novel ideas, employs custom models and textures, incorporates unconventional effects or techniques, introduces networking or multiplayer elements, and utilizes sound, efficiency, speed, or other distinctive aspects.
 
-- We have implemented a cutom model/explosion when the you crash. The Ship explodes.
-- We have a multiplayer aspects where we have a leaderboard and you enter your score after completing a level or dieing.
+- We have implemented a custom model/explosion when the you crash. The Ship explodes.
+- We have a multiplayer aspects where we have a leaderboard and you enter your score after completing a level or dying.
 - Our game loads noticeable faster than other games, which we have tested.
 - We have a song that plays as well.
 - Our game also runs at a solid frame rate so it is very much playable.
@@ -206,8 +210,8 @@ Unique Elements: Assess whether the game explores novel ideas, employs custom mo
 Memorability: Determine if the game possesses unique qualities that make it memorable and distinguish it from others.
 
 - There is story line to our game
-- We have sound of a space commander giving you the intructions to the levels.
-- We have implmented a Solar System, Death Star and other Space Themes.
+- We have sound of a space commander giving you the instructions to the levels.
+- We have implemented a Solar System, Death Star and other Space Themes.
 
 Controller Compatibility: Consider whether controller compatibility has been integrated.
 
