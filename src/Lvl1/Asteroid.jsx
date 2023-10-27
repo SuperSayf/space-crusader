@@ -6,8 +6,8 @@ import { planePosition } from "./Lvl1Spaceship";
 import { displayGameOver } from "../Completion"; // Ensure you are importing the correct component here
 import { timeAliveExternal } from "./Lvl1Spaceship";
 import { collectedObjs } from "./Targets";
-import {sphereCenter} from "./Sun"
-import {sphereRadius} from "./Sun"
+import { sphereCenter } from "./Sun";
+import { sphereRadius } from "./Sun";
 // Define a function to generate a random point within a specified scale
 function randomPoint(scale) {
   return new Vector3(
@@ -73,7 +73,7 @@ export function Asteroid() {
   // Function to calculate the player's score
   const scoreCalculator = () => {
     let TotalScore = 0;
-    let timeScore = (1 / timeAliveExternal) * 50;
+    let timeScore = (1 / timeAliveExternal) * 50000;
     let targetScore = collectedObjs * 100;
 
     TotalScore = timeScore + targetScore;
@@ -100,7 +100,7 @@ export function Asteroid() {
   useFrame(() => {
     // Update the time alive
     setTimeAlive(timeAliveExternal);
-    
+
     // Update asteroid positions and check for collisions with the player's plane and Sun
     const updatedTargets = targets.map((target) => {
       target.center.y -= 0.01;

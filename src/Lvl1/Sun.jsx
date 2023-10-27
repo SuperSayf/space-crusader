@@ -29,7 +29,7 @@ export function Sun(props) {
   // Function to calculate the player's score
   const scoreCalculator = () => {
     let TotalScore = 0;
-    let timeScore = (1 / timeAliveExternal) * 50;
+    let timeScore = (1 / timeAliveExternal) * 50000;
     let targetScore = collectedObjs * 100;
 
     TotalScore = timeScore + targetScore;
