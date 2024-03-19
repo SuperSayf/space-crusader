@@ -2,6 +2,10 @@
 
 This readme.md file outlines the team details and our contributions the evaluation criteria for a 3D game project.
 
+# Verbal demo and explanation
+
+[YouTube Video](https://www.youtube.com/watch?v=teENuXlPVGA)
+
 # Team Details and Contributions
 
 | Name, Surname, and Student Number | Contribution Split |
